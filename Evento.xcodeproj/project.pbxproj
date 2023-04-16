@@ -26,6 +26,13 @@
 		26792BF029EBE8D800294BD0 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792BE929EBE8D800294BD0 /* NetworkError.swift */; };
 		26792BF729EBE8F300294BD0 /* NewsPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792BF429EBE8F300294BD0 /* NewsPageViewModel.swift */; };
 		26792BF829EBE8F300294BD0 /* NewsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792BF629EBE8F300294BD0 /* NewsPage.swift */; };
+		26792BFB29EBEEF600294BD0 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792BFA29EBEEF600294BD0 /* Router.swift */; };
+		26792BFE29EBEF9800294BD0 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792BFD29EBEF9800294BD0 /* Typealiases.swift */; };
+		26792C0029EBFF6800294BD0 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792BFF29EBFF6800294BD0 /* UIWindow+Extensions.swift */; };
+		26792C0229EC045D00294BD0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792C0129EC045D00294BD0 /* AppCoordinator.swift */; };
+		26792C0429EC0B8400294BD0 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792C0329EC0B8400294BD0 /* OnboardingCoordinator.swift */; };
+		26792C0629EC0CB900294BD0 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792C0529EC0CB900294BD0 /* BaseCoordinator.swift */; };
+		26792C0929EC194D00294BD0 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26792C0829EC194D00294BD0 /* Application.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +76,13 @@
 		26792BE929EBE8D800294BD0 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		26792BF429EBE8F300294BD0 /* NewsPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsPageViewModel.swift; sourceTree = "<group>"; };
 		26792BF629EBE8F300294BD0 /* NewsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsPage.swift; sourceTree = "<group>"; };
+		26792BFA29EBEEF600294BD0 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		26792BFD29EBEF9800294BD0 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		26792BFF29EBFF6800294BD0 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		26792C0129EC045D00294BD0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		26792C0329EC0B8400294BD0 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		26792C0529EC0CB900294BD0 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		26792C0829EC194D00294BD0 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,9 +133,10 @@
 		2662507529EBE2C700294667 /* Evento */ = {
 			isa = PBXGroup;
 			children = (
+				26792C0729EC142800294BD0 /* Application */,
+				26792BFC29EBEF8000294BD0 /* Common */,
 				26792BF129EBE8F300294BD0 /* PresentationLayer */,
 				26792BDD29EBE8D800294BD0 /* NetworkLayer */,
-				26792BDA29EBE8A600294BD0 /* Extensions */,
 				2662507629EBE2C700294667 /* AppDelegate.swift */,
 				2662507829EBE2C700294667 /* SceneDelegate.swift */,
 				2662507A29EBE2C700294667 /* ViewController.swift */,
@@ -154,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				26792BDB29EBE8A600294BD0 /* URLRequest+Extensions.swift */,
+				26792BFF29EBFF6800294BD0 /* UIWindow+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +231,7 @@
 		26792BF129EBE8F300294BD0 /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				26792BF929EBEECA00294BD0 /* Coordinator */,
 				26792BF229EBE8F300294BD0 /* NewsPage */,
 			);
 			path = PresentationLayer;
@@ -243,6 +260,34 @@
 				26792BF629EBE8F300294BD0 /* NewsPage.swift */,
 			);
 			path = Page;
+			sourceTree = "<group>";
+		};
+		26792BF929EBEECA00294BD0 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				26792BFA29EBEEF600294BD0 /* Router.swift */,
+				26792C0129EC045D00294BD0 /* AppCoordinator.swift */,
+				26792C0329EC0B8400294BD0 /* OnboardingCoordinator.swift */,
+				26792C0529EC0CB900294BD0 /* BaseCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		26792BFC29EBEF8000294BD0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				26792BDA29EBE8A600294BD0 /* Extensions */,
+				26792BFD29EBEF9800294BD0 /* Typealiases.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		26792C0729EC142800294BD0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				26792C0829EC194D00294BD0 /* Application.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,16 +421,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26792C0929EC194D00294BD0 /* Application.swift in Sources */,
 				26792BEE29EBE8D800294BD0 /* WebService.swift in Sources */,
 				2662507B29EBE2C700294667 /* ViewController.swift in Sources */,
+				26792C0229EC045D00294BD0 /* AppCoordinator.swift in Sources */,
+				26792BFE29EBEF9800294BD0 /* Typealiases.swift in Sources */,
 				26792BEB29EBE8D800294BD0 /* SearchNewsResponseModel.swift in Sources */,
 				26792BDC29EBE8A600294BD0 /* URLRequest+Extensions.swift in Sources */,
+				26792C0029EBFF6800294BD0 /* UIWindow+Extensions.swift in Sources */,
 				26792BF729EBE8F300294BD0 /* NewsPageViewModel.swift in Sources */,
 				2662507729EBE2C700294667 /* AppDelegate.swift in Sources */,
 				26792BED29EBE8D800294BD0 /* HTTPMethod.swift in Sources */,
 				26792BEA29EBE8D800294BD0 /* NewsApiManager.swift in Sources */,
 				26792BEF29EBE8D800294BD0 /* BaseProviderType.swift in Sources */,
 				2662507929EBE2C700294667 /* SceneDelegate.swift in Sources */,
+				26792C0429EC0B8400294BD0 /* OnboardingCoordinator.swift in Sources */,
+				26792BFB29EBEEF600294BD0 /* Router.swift in Sources */,
+				26792C0629EC0CB900294BD0 /* BaseCoordinator.swift in Sources */,
 				26792BF029EBE8D800294BD0 /* NetworkError.swift in Sources */,
 				26792BF829EBE8F300294BD0 /* NewsPage.swift in Sources */,
 				26792BEC29EBE8D800294BD0 /* NewsTarget.swift in Sources */,
@@ -573,6 +625,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -601,6 +654,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
