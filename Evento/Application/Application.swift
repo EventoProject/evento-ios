@@ -9,6 +9,7 @@ import UIKit
 
 final class Application {
     static let shared = Application()
+    var appCoordinator: AppCoordinator?
     
     func presentInitialScreen(in window: UIWindow?) {
         guard let window = window else { return }
@@ -16,9 +17,9 @@ final class Application {
         let navigationController = UINavigationController()
         window.rootViewController = navigationController
         
-        let appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator = AppCoordinator(navigationController: navigationController)
         
-        appCoordinator.start()
+        appCoordinator?.start()
         window.makeKeyAndVisible()
     }
 }

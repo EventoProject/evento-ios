@@ -9,9 +9,14 @@ import UIKit
 
 final class AppCoordinator {
     var navigationController: UINavigationController
+    var onboardingCoordinator: OnboardingCoordinator?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+    }
+    
+    deinit {
+        print("deinit")
     }
     
     func start() {
@@ -19,7 +24,7 @@ final class AppCoordinator {
     }
     
     private func showAuthorizationPage() {
-        let onboardingCoordinator = OnboardingCoordinator(router: MainRouter(), navigationController: navigationController)
-        onboardingCoordinator.start()
+        onboardingCoordinator = OnboardingCoordinator(router: MainRouter(), navigationController: navigationController)
+        onboardingCoordinator?.start()
     }
 }

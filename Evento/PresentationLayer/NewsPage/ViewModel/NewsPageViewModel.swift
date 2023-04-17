@@ -9,6 +9,9 @@ import Foundation
 import Combine
 
 final class NewsPageViewModel: ObservableObject {
+    // MARK: - Callbacks
+    var showArticle: Callback<Article>?
+    
     @Published var articles: [Article] = []
     private let apiManager: NewsApiManagerProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -32,5 +35,9 @@ final class NewsPageViewModel: ObservableObject {
                 self?.articles = response.articles
             }
         ).store(in: &cancellables)
+    }
+    
+    func didTapArticle(article: Article) {
+        showArticle?(article)
     }
 }

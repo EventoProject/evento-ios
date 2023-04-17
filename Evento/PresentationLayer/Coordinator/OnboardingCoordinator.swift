@@ -18,6 +18,10 @@ final class OnboardingCoordinator: BaseCoordinator {
         router.set(navigationController: navigationController)
     }
     
+    deinit {
+        print("deinit")
+    }
+    
     func start() {
         showAuthorizationPage()
     }
@@ -27,7 +31,18 @@ private extension OnboardingCoordinator {
     func showAuthorizationPage() {
         // Need to replace with Authorization page
         let viewModel = NewsPageViewModel(apiManager: NewsApiManager())
+        
+        viewModel.showArticle = { [weak self] article in
+            guard let self = self else { return }
+            self.showArticlePage(article: article)
+        }
+        
         let page = UIHostingController(rootView: NewsPage(viewModel: viewModel))
         router.set(viewControllers: [page], animated: false)
+    }
+    
+    func showArticlePage(article: Article) {
+        let page = UIHostingController(rootView: ArticlePage(article: article))
+        router.push(viewController: page, animated: true)
     }
 }

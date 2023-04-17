@@ -13,7 +13,9 @@ struct NewsPage: View {
     
     var body: some View {
         List(viewModel.articles, id: \.self) { article in
-            Text(article.title)
+            ArticleView(article: article) {
+                viewModel.didTapArticle(article: article)
+            }
         }
         .listStyle(PlainListStyle())
     }
