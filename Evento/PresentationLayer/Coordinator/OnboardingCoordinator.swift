@@ -18,10 +18,6 @@ final class OnboardingCoordinator: BaseCoordinator {
         router.set(navigationController: navigationController)
     }
     
-    deinit {
-        print("deinit")
-    }
-    
     func start() {
         showAuthorizationPage()
     }
