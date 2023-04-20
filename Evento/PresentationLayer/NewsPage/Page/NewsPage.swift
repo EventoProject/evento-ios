@@ -18,6 +18,7 @@ struct NewsPage: View {
             }
         }
         .listStyle(PlainListStyle())
+        .navigationBarTitle("News")
     }
 }
 

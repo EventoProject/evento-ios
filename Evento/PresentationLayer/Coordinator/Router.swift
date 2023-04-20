@@ -70,6 +70,10 @@ final class MainRouter: NSObject, Router {
         onFinish: VoidCallback? = nil
     ) {
         navigationController.pushViewController(viewController, animated: animated)
+        
+        // Hides back button title
+        navigationController.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         if let onFinish = onFinish {
             completions[viewController] = onFinish
         }

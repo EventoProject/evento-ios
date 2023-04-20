@@ -15,10 +15,6 @@ final class AppCoordinator {
         self.navigationController = navigationController
     }
     
-    deinit {
-        print("deinit")
-    }
-    
     func start() {
         showAuthorizationPage()
     }
