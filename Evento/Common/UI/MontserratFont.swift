@@ -6,6 +6,7 @@
 //
 
 import UIKit.UIFont
+import SwiftUI
 
 struct MontserratFont {
     enum Weight {
@@ -16,7 +17,7 @@ struct MontserratFont {
         case thin
     }
     
-    static func createFont(weight: Weight, size: CGFloat) -> UIFont {
+    static func createUIFont(weight: Weight, size: CGFloat) -> UIFont {
         let font: UIFont?
         
         switch weight {
@@ -33,5 +34,9 @@ struct MontserratFont {
         }
         
         return font ?? UIFont.systemFont(ofSize: 12)
+    }
+    
+    static func createFont(weight: Weight, size: CGFloat) -> Font {
+        return Font(createUIFont(weight: weight, size: size))
     }
 }
