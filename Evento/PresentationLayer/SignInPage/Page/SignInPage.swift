@@ -16,10 +16,14 @@ struct SignInPage: View {
     @ObservedObject var viewModel: SignInViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             SubtitleView()
             EmailView(emailText: $viewModel.emailText)
             PasswordView(passwordText: $viewModel.passwordText)
+            ForgotPasswordView()
+            ButtonView(text: "Sign in") {
+                print("Sign in button tapped")
+            }.padding(.top, 55)
             Spacer()
         }
         .padding(.horizontal, 26)
@@ -58,6 +62,27 @@ private struct PasswordView: View {
             leftIcon: Images.key,
             isPassword: true
         ).padding(.top, 25)
+    }
+}
+
+private struct ForgotPasswordView: View {
+    var body: some View {
+        HStack {
+            HStack {
+                Text("Remember password")
+                    .font(MontserratFont.createFont(weight: .regular, size: 14))
+            }
+            
+            Spacer()
+            
+            UnderlinedTextView(
+                text: "Forgot password",
+                font: MontserratFont.createFont(weight: .regular, size: 14)
+            ) {
+                print("Forgot password tapped")
+            }
+        }
+        .padding(.top, 15)
     }
 }
 
