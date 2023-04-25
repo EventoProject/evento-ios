@@ -17,7 +17,7 @@ struct InputTextView: View {
     var body: some View {
         VStack(alignment: .leading) {
             TitleView(title: title)
-            TextFieldView(
+            InputView(
                 text: $text,
                 placeholder: placeholder,
                 leftIcon: leftIcon,
@@ -36,7 +36,7 @@ private struct TitleView: View {
     }
 }
 
-private struct TextFieldView: View {
+private struct InputView: View {
     @Binding var text: String
     let placeholder: String
     let leftIcon: UIImage
@@ -46,8 +46,7 @@ private struct TextFieldView: View {
     var body: some View {
         HStack(spacing: 14) {
             Image(uiImage: leftIcon)
-            TextField(placeholder, text: $text)
-                .padding(.vertical, 10)
+            TextFieldView(text: $text, isHiddenPassword: $isHiddenPassword, placeholder: placeholder)
             if isPassword {
                 RightIconView(isHiddenPassword: $isHiddenPassword)
             }
@@ -58,6 +57,23 @@ private struct TextFieldView: View {
         .cornerRadius(15)
     }
     
+    private struct TextFieldView: View {
+        @Binding var text: String
+        @Binding var isHiddenPassword: Bool
+        let placeholder: String
+        
+        var body: some View {
+            Group {
+                if isHiddenPassword {
+                    SecureField(placeholder, text: $text)
+                } else {
+                    TextField(placeholder, text: $text)
+                }
+            }
+            .padding(.vertical, 10)
+        }
+    }
+    
     private struct RightIconView: View {
         @Binding var isHiddenPassword: Bool
         
@@ -65,7 +81,11 @@ private struct TextFieldView: View {
             Button(action: {
                 isHiddenPassword.toggle()
             }, label: {
-                Image(uiImage: Images.closedEye)
+                if isHiddenPassword {
+                    Image(uiImage: Images.closedEye)
+                } else {
+                    Image(uiImage: Images.openEye)
+                }
             })
         }
     }
