@@ -23,6 +23,7 @@
 		39932778270BDCEAE93F585D394CD528 /* NewsApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53A74B5524DF2717EC082ECC54C6A59 /* NewsApiManager.swift */; };
 		3AABB2DC98CBD6EA0A7F171CDDA60A5F /* CustLinearGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DDEE0896F26C1829246ACBCE3FFC61 /* CustLinearGradient.swift */; };
 		3D42FC58F3790ACC52246C2B49ABF570 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0636126B6366B45825B812D529672C /* ButtonView.swift */; };
+		43C3B144CAC47677E4D4CA30A8790539 /* CustText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3212446B70D361A21416F5612B46D8D /* CustText.swift */; };
 		53B296F402B7BC7B91468950A89F1094 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE79388BE8B7987788F464CA9351B06 /* ViewController.swift */; };
 		5BBFA407ED708BDE0AFA4F135B686E83 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F336F3240FD4EC754C612BF69C26713B /* AppCoordinator.swift */; };
 		65DF252F2F376150B8DA3A58D50B139A /* MontserratFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348DA84A5823B10F6CF52ECE57FFFD03 /* MontserratFont.swift */; };
@@ -103,6 +104,7 @@
 		AA0636126B6366B45825B812D529672C /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		B06F30917DD85F9FB2CBB5A91D3015B1 /* SearchNewsResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchNewsResponseModel.swift; sourceTree = "<group>"; };
 		B75894FF1B3F3A84B590E2060C4B5D54 /* ArticlePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePage.swift; sourceTree = "<group>"; };
+		C3212446B70D361A21416F5612B46D8D /* CustText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustText.swift; sourceTree = "<group>"; };
 		C343FC44BFF38BDD7629812217A20EDF /* TitleInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleInputTextView.swift; sourceTree = "<group>"; };
 		C467DFE3617574DA1AD9C5C499C48A4E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C9DF37F25063546F30C5FA0C09EC3A1E /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
@@ -186,31 +188,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B40EFA53E95492B397ABCEEA61E631B6 /* SignInPage */ = {
-			isa = PBXGroup;
-			children = (
-				D7B8B4AEF5CA5D70F821975E574276D7 /* Page */,
-				8FEDD4195E86EA813AF39F837C1C5D06 /* View */,
-			);
-			path = SignInPage;
-			sourceTree = "<group>";
-		};
-		D7B8B4AEF5CA5D70F821975E574276D7 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				129BD0E0690518F863253B9635B9A3BA /* SignInPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		8FEDD4195E86EA813AF39F837C1C5D06 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C343FC44BFF38BDD7629812217A20EDF /* TitleInputTextView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		28F4D0957D825F9639CC9A9856313CD2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +243,14 @@
 			path = EventoUITests;
 			sourceTree = "<group>";
 		};
+		8FEDD4195E86EA813AF39F837C1C5D06 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C343FC44BFF38BDD7629812217A20EDF /* TitleInputTextView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		94886F313C001C1A544C62EDA8AC54E0 /* NewsPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +297,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		B40EFA53E95492B397ABCEEA61E631B6 /* SignInPage */ = {
+			isa = PBXGroup;
+			children = (
+				D7B8B4AEF5CA5D70F821975E574276D7 /* Page */,
+				8FEDD4195E86EA813AF39F837C1C5D06 /* View */,
+			);
+			path = SignInPage;
+			sourceTree = "<group>";
+		};
 		BF33D0D989384F27DE50DE159C49D120 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +335,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		D7B8B4AEF5CA5D70F821975E574276D7 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				129BD0E0690518F863253B9635B9A3BA /* SignInPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
 		DA493AADD6C1959E4A53180ECDC8B04C /* ArticlePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +368,7 @@
 				AA0636126B6366B45825B812D529672C /* ButtonView.swift */,
 				1694FC663B76BCAED63C6F15BB0CE6C0 /* CustColor.swift */,
 				19DDEE0896F26C1829246ACBCE3FFC61 /* CustLinearGradient.swift */,
+				C3212446B70D361A21416F5612B46D8D /* CustText.swift */,
 				876BAC662D4264DE8CD856460E303162 /* Images.swift */,
 				348DA84A5823B10F6CF52ECE57FFFD03 /* MontserratFont.swift */,
 				DA735A8E917000D4E8B54A4FB037F25B /* UnderlinedTextView.swift */,
@@ -549,6 +552,7 @@
 				3D42FC58F3790ACC52246C2B49ABF570 /* ButtonView.swift in Sources */,
 				20A279D1192903056A9EC1470A788EA4 /* CustColor.swift in Sources */,
 				3AABB2DC98CBD6EA0A7F171CDDA60A5F /* CustLinearGradient.swift in Sources */,
+				43C3B144CAC47677E4D4CA30A8790539 /* CustText.swift in Sources */,
 				788A704B4975EA87E0BCD5ABF7045EDB /* HTTPMethod.swift in Sources */,
 				ABCB3F1AB771603E69ADD954DEABDC65 /* Images.swift in Sources */,
 				65DF252F2F376150B8DA3A58D50B139A /* MontserratFont.swift in Sources */,

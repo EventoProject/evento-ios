@@ -16,7 +16,7 @@ struct InputTextView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            TitleView(title: title)
+            CustText(text: title, weight: .medium, size: 16)
             InputView(
                 text: $text,
                 placeholder: placeholder,
@@ -24,15 +24,6 @@ struct InputTextView: View {
                 isPassword: isPassword
             )
         }
-    }
-}
-
-private struct TitleView: View {
-    let title: String
-    
-    var body: some View {
-        Text(title)
-            .font(MontserratFont.createFont(weight: .medium, size: 16))
     }
 }
 
