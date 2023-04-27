@@ -7,30 +7,14 @@
 
 import SwiftUI
 
-final class SignInViewModel: ObservableObject {
-    @Published var emailText = ""
-    @Published var passwordText = ""
-    
-    var didTapForgotPassword: VoidCallback?
-    var didTapSignIn: Callback<(email: String, password: String)>?
-    var didTapRegister: VoidCallback?
-    
-    func didTapSignInButton() {
-        didTapSignIn?((emailText, passwordText))
-    }
-}
-
 struct SignInPage: View {
     @ObservedObject var viewModel: SignInViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            SubtitleView()
-            
+            PageSubtitleView("Please fill in the fields below")
             EmailView(emailText: $viewModel.emailText)
-            
             PasswordView(passwordText: $viewModel.passwordText)
-            
             ForgotPasswordView() {
                 viewModel.didTapForgotPassword?()
             }
@@ -38,42 +22,20 @@ struct SignInPage: View {
             ButtonView(text: "Sign in") {
                 viewModel.didTapSignInButton()
             }.padding(.top, 55)
-            
             NewUserView() {
                 viewModel.didTapRegister?()
             }
             
             Spacer()
+            
+            CustText(text: "Or", weight: .medium, size: 16)
+            GoogleButtonView() {
+                viewModel.didTapGoogleLogin?()
+            }
         }
         .padding(.horizontal, 26)
         .navigationBarTitle("Sign in")
         .background(CustColor.backgroundColor)
-    }
-}
-
-private struct SubtitleView: View {
-    var body: some View {
-        HStack {
-            CustText(
-                text: "Please fill in the fields below",
-                weight: .regular,
-                size: 16
-            ).foregroundColor(CustColor.lightGray)
-            
-            Spacer()
-        }
-    }
-}
-
-private struct EmailView: View {
-    @Binding var emailText: String
-    var body: some View {
-        InputTextView(
-            text: $emailText,
-            title: "Email",
-            placeholder: "Your E-mail",
-            leftIcon: Images.email
-        ).padding(.top, 32)
     }
 }
 
@@ -126,6 +88,31 @@ private struct NewUserView: View {
         }.padding(.top, 17)
     }
 }
+
+struct GoogleButtonView: View {
+    var didTap: VoidCallback
+    
+    var body: some View {
+        Button(action: didTap, label: {
+            HStack {
+                Spacer()
+                
+                HStack {
+                    Image(uiImage: Images.google)
+                    CustText(text: "Login with Google", weight: .medium, size: 16)
+                        .foregroundColor(.black)
+                }
+                
+                Spacer()
+            }
+            .padding(.vertical, 15)
+            .background(Color.white)
+            .cornerRadius(20)
+            .padding(.top, 15)
+        })
+    }
+}
+
 
 struct SignInPage_Previews: PreviewProvider {
     static var previews: some View {

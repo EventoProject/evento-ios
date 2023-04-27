@@ -19,24 +19,27 @@ final class OnboardingCoordinator: BaseCoordinator {
     }
     
     func start() {
-        showAuthorizationPage()
+        showSignInPage()
     }
 }
 
 private extension OnboardingCoordinator {
-    func showAuthorizationPage() {
-        // Need to replace with Authorization page
-//        let viewModel = NewsPageViewModel(apiManager: NewsApiManager())
-//
-//        viewModel.showArticle = { [weak self] article in
-//            guard let self = self else { return }
-//            self.showArticlePage(article: article)
-//        }
-//
-//        let page = UIHostingController(rootView: NewsPage(viewModel: viewModel))
+    func showSignInPage() {
         let viewModel = SignInViewModel()
+        
+        viewModel.didTapForgotPassword = { [weak self] in
+            self?.showForgotPasswordPage()
+        }
+        
         let page = UIHostingController(rootView: SignInPage(viewModel: viewModel))
         router.set(viewControllers: [page], animated: false)
+    }
+    
+    func showForgotPasswordPage() {
+        let viewModel = ForgotPasswordViewModel()
+        let page = UIHostingController(rootView: ForgotPasswordPage(viewModel: viewModel))
+        page.title = "Forgot password"
+        router.push(viewController: page, animated: true)
     }
     
     func showArticlePage(article: Article) {

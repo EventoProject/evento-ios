@@ -13,4 +13,5 @@ enum Images {
     static let closedEye = UIImage(named: "closed_eye") ?? UIImage()
     static let openEye = UIImage(named: "open_eye") ?? UIImage()
     static let key = UIImage(named: "key") ?? UIImage()
+    static let google = UIImage(named: "google") ?? UIImage()
 }
