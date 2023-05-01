@@ -14,6 +14,7 @@ struct SignInPage: View {
         VStack(spacing: 0) {
             PageSubtitleView("Please fill in the fields below")
             EmailView(emailText: $viewModel.emailText)
+                .padding(.top, 32)
             PasswordView(passwordText: $viewModel.passwordText)
             ForgotPasswordView() {
                 viewModel.didTapForgotPassword?()
@@ -22,7 +23,7 @@ struct SignInPage: View {
             ButtonView(text: "Sign in") {
                 viewModel.didTapSignInButton()
             }.padding(.top, 55)
-            NewUserView() {
+            EndLinkText(startText: "New user?", endLinkText: "Register now") {
                 viewModel.didTapRegister?()
             }
             
@@ -36,19 +37,6 @@ struct SignInPage: View {
         .padding(.horizontal, 26)
         .navigationBarTitle("Sign in")
         .background(CustColor.backgroundColor)
-    }
-}
-
-private struct PasswordView: View {
-    @Binding var passwordText: String
-    var body: some View {
-        InputTextView(
-            text: $passwordText,
-            title: "Password",
-            placeholder: "Enter password",
-            leftIcon: Images.key,
-            isPassword: true
-        ).padding(.top, 25)
     }
 }
 
@@ -70,22 +58,6 @@ private struct ForgotPasswordView: View {
             )
         }
         .padding(.top, 15)
-    }
-}
-
-private struct NewUserView: View {
-    var didTapRegister: VoidCallback
-    
-    var body: some View {
-        HStack {
-            CustText(text: "New user?", weight: .regular, size: 16)
-            
-            UnderlinedTextView(
-                text: "Register now",
-                font: MontserratFont.createFont(weight: .regular, size: 16),
-                didTap: didTapRegister
-            )
-        }.padding(.top, 17)
     }
 }
 

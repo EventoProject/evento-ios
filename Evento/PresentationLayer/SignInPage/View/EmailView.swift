@@ -15,6 +15,6 @@ struct EmailView: View {
             title: "Email",
             placeholder: "Your E-mail",
             leftIcon: Images.email
-        ).padding(.top, 32)
+        )
     }
 }

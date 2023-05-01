@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-final class ForgotPasswordViewModel: ObservableObject {
-    @Published var email = ""
-}
-
 struct ForgotPasswordPage: View {
     @ObservedObject var viewModel: ForgotPasswordViewModel
     
@@ -18,10 +14,23 @@ struct ForgotPasswordPage: View {
         VStack(spacing: 0) {
             PageSubtitleView("Enter your E-mail address to get the verification code")
             EmailView(emailText: $viewModel.email)
+                .padding(.top, 32)
+            ButtonView(text: "Get verification code") {
+                viewModel.getVerificationCode()
+            }.padding(.top, 28)
+            EndLinkText(startText: "The code didn't come?", endLinkText: "Send again") {
+                viewModel.getVerificationCode()
+            }
             Spacer()
         }
         .padding(.horizontal, 26)
         .navigationBarTitle("Forgot password")
         .background(CustColor.backgroundColor)
+    }
+}
+
+struct ForgotPasswordPage_Previews: PreviewProvider {
+    static var previews: some View {
+        ForgotPasswordPage(viewModel: ForgotPasswordViewModel())
     }
 }
