@@ -16,7 +16,7 @@ struct InputTextView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            TitleView(title: title)
+            CustText(text: title, weight: .medium, size: 16)
             InputView(
                 text: $text,
                 placeholder: placeholder,
@@ -24,15 +24,6 @@ struct InputTextView: View {
                 isPassword: isPassword
             )
         }
-    }
-}
-
-private struct TitleView: View {
-    let title: String
-    
-    var body: some View {
-        Text(title)
-            .font(MontserratFont.createFont(weight: .medium, size: 16))
     }
 }
 
@@ -46,7 +37,12 @@ private struct InputView: View {
     var body: some View {
         HStack(spacing: 14) {
             Image(uiImage: leftIcon)
-            TextFieldView(text: $text, isHiddenPassword: $isHiddenPassword, placeholder: placeholder)
+            TextFieldView(
+                text: $text,
+                isHiddenPassword: $isHiddenPassword,
+                placeholder: placeholder,
+                isPassword: isPassword
+            )
             if isPassword {
                 RightIconView(isHiddenPassword: $isHiddenPassword)
             }
@@ -61,16 +57,57 @@ private struct InputView: View {
         @Binding var text: String
         @Binding var isHiddenPassword: Bool
         let placeholder: String
+        let isPassword: Bool
+        @State private var isPlaceholderHidden = false
         
         var body: some View {
-            Group {
-                if isHiddenPassword {
-                    SecureField(placeholder, text: $text)
-                } else {
-                    TextField(placeholder, text: $text)
-                }
+            ZStack {
+                PlaceholderView(isHidden: $isPlaceholderHidden, placeholder: placeholder)
+                InputFieldView(
+                    text: $text,
+                    isHiddenPassword: $isHiddenPassword,
+                    isPlaceholderHidden: $isPlaceholderHidden,
+                    placeholder: placeholder,
+                    isPassword: isPassword
+                )
             }
             .padding(.vertical, 10)
+        }
+        
+        private struct PlaceholderView: View {
+            @Binding var isHidden: Bool
+            let placeholder: String
+            
+            var body: some View {
+                HStack {
+                    CustText(text: placeholder, weight: .regular, size: 16)
+                        .foregroundColor(.gray)
+                        .opacity(isHidden ? 0 : 1)
+                    
+                    Spacer()
+                }
+            }
+        }
+        
+        private struct InputFieldView: View {
+            @Binding var text: String
+            @Binding var isHiddenPassword: Bool
+            @Binding var isPlaceholderHidden: Bool
+            let placeholder: String
+            let isPassword: Bool
+            
+            var body: some View {
+                Group {
+                    if isHiddenPassword && isPassword {
+                        SecureField("", text: $text)
+                    } else {
+                        TextField("", text: $text)
+                    }
+                }
+                .onChange(of: text) { newText in
+                    isPlaceholderHidden = !newText.isEmpty
+                }
+            }
         }
     }
     

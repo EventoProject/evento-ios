@@ -16,8 +16,7 @@ struct ButtonView: View {
             HStack {
                 Spacer()
                 
-                Text(text)
-                    .font(MontserratFont.createFont(weight: .semiBold, size: 16))
+                CustText(text: text, weight: .semiBold, size: 16)
                     .foregroundColor(.white)
                 
                 Spacer()

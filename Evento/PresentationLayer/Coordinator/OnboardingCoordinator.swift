@@ -19,24 +19,50 @@ final class OnboardingCoordinator: BaseCoordinator {
     }
     
     func start() {
-        showAuthorizationPage()
+        showSignInPage()
     }
 }
 
 private extension OnboardingCoordinator {
-    func showAuthorizationPage() {
-        // Need to replace with Authorization page
-//        let viewModel = NewsPageViewModel(apiManager: NewsApiManager())
-//
-//        viewModel.showArticle = { [weak self] article in
-//            guard let self = self else { return }
-//            self.showArticlePage(article: article)
-//        }
-//
-//        let page = UIHostingController(rootView: NewsPage(viewModel: viewModel))
+    func showSignInPage() {
         let viewModel = SignInViewModel()
+        
+        viewModel.didTapForgotPassword = { [weak self] in
+            self?.showForgotPasswordPage()
+        }
+        
+        viewModel.didTapRegister = { [weak self] in
+            self?.showRegistrationPage()
+        }
+        
         let page = UIHostingController(rootView: SignInPage(viewModel: viewModel))
         router.set(viewControllers: [page], animated: false)
+    }
+    
+    func showForgotPasswordPage() {
+        let viewModel = ForgotPasswordViewModel()
+        
+        viewModel.resetPassword = { [weak self] in
+            self?.showPasswordResetPage()
+        }
+        
+        let page = UIHostingController(rootView: ForgotPasswordPage(viewModel: viewModel))
+        page.title = "Forgot password"
+        router.push(viewController: page, animated: true)
+    }
+    
+    func showPasswordResetPage() {
+        let viewModel = PasswordResetViewModel()
+        let page = UIHostingController(rootView: PasswordResetPage(viewModel: viewModel))
+        page.title = "Password Reset"
+        router.push(viewController: page, animated: true)
+    }
+    
+    func showRegistrationPage() {
+        let viewModel = RegistrationViewModel()
+        let page = UIHostingController(rootView: RegistrationPage(viewModel: viewModel))
+        page.title = "Registration"
+        router.push(viewController: page, animated: true)
     }
     
     func showArticlePage(article: Article) {
