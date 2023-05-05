@@ -8,7 +8,11 @@
 import Foundation
 import Combine
 
-class WebService {
+protocol WebServiceProtocol {
+    func request<T: Decodable>(_ endpoint: BaseProviderType) -> AnyPublisher<T, NetworkError>
+}
+
+class WebService: WebServiceProtocol {
     func request<T: Decodable>(_ endpoint: BaseProviderType) -> AnyPublisher<T, NetworkError> {
         guard var components = URLComponents(string: endpoint.baseURL + endpoint.path) else {
             return Fail(error: NetworkError.invalidURL)

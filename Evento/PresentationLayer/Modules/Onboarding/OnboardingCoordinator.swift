@@ -11,9 +11,9 @@ import SwiftUI
 final class OnboardingCoordinator: BaseCoordinator {
     private let navigationController: UINavigationController
     
-    init(router: Router, navigationController: UINavigationController) {
+    init(injection: CustInjection, router: Router, navigationController: UINavigationController) {
         self.navigationController = navigationController
-        super.init(router: router)
+        super.init(injection: injection, router: router)
         
         router.set(navigationController: navigationController)
     }
@@ -33,6 +33,10 @@ private extension OnboardingCoordinator {
         
         viewModel.didTapRegister = { [weak self] in
             self?.showRegistrationPage()
+        }
+        
+        viewModel.didTapSignIn = { [weak self] _ in
+            self?.showMainTab()
         }
         
         let page = UIHostingController(rootView: SignInPage(viewModel: viewModel))
@@ -63,6 +67,28 @@ private extension OnboardingCoordinator {
         let page = UIHostingController(rootView: RegistrationPage(viewModel: viewModel))
         page.title = "Registration"
         router.push(viewController: page, animated: true)
+    }
+    
+    func showMainTab() {
+        navigationController.setNavigationBarHidden(true, animated: false)
+        
+        let mainTabCoordinator = MainTabBarCoordinator(
+            injection: injection,
+            router: MainRouter(),
+            navigationController: navigationController
+        )
+        mainTabCoordinator.start()
+    }
+    
+    func showNewsPage() {
+        let viewModel = NewsPageViewModel(apiManager: injection.inject(NewsApiManagerProtocol.self))
+        
+        viewModel.showArticle = { [weak self] article in
+            self?.showArticlePage(article: article)
+        }
+        
+        let page = UIHostingController(rootView: NewsPage(viewModel: viewModel))
+        router.set(viewControllers: [page], animated: true)
     }
     
     func showArticlePage(article: Article) {

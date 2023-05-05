@@ -9,10 +9,12 @@ import UIKit
 
 final class AppCoordinator {
     var navigationController: UINavigationController
-    var onboardingCoordinator: OnboardingCoordinator?
+    private let injection: CustInjection
+    private var onboardingCoordinator: OnboardingCoordinator?
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, injection: CustInjection) {
         self.navigationController = navigationController
+        self.injection = injection
     }
     
     func start() {
@@ -20,7 +22,11 @@ final class AppCoordinator {
     }
     
     private func showAuthorizationPage() {
-        onboardingCoordinator = OnboardingCoordinator(router: MainRouter(), navigationController: navigationController)
+        onboardingCoordinator = OnboardingCoordinator(
+            injection: injection,
+            router: MainRouter(),
+            navigationController: navigationController
+        )
         onboardingCoordinator?.start()
     }
 }

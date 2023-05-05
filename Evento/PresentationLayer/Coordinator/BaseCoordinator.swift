@@ -8,10 +8,12 @@
 import Foundation
 
 class BaseCoordinator {
+    let injection: CustInjection
     let router: Router
     private var childCoordinators: [BaseCoordinator] = []
 
-    init(router: Router) {
+    init(injection: CustInjection, router: Router) {
+        self.injection = injection
         self.router = router
     }
 
