@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct NewsPage: View {
-    @ObservedObject var viewModel = NewsPageViewModel(apiManager: NewsApiManager())
+    @ObservedObject var viewModel: NewsPageViewModel
     
     var body: some View {
         List(viewModel.articles, id: \.self) { article in

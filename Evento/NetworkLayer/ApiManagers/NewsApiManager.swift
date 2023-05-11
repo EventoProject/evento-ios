@@ -14,7 +14,11 @@ protocol NewsApiManagerProtocol {
 }
 
 final class NewsApiManager: NewsApiManagerProtocol {
-    private let webService = WebService()
+    private let webService: WebServiceProtocol
+    
+    init(webService: WebServiceProtocol) {
+        self.webService = webService
+    }
     
     func search(serchText: String) -> AnyPublisher<SearchNewsResponseModel, NetworkError> {
         webService.request(NewsTarget.search(searchText: serchText))

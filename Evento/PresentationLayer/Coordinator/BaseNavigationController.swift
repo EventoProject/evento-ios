@@ -14,7 +14,6 @@ private enum Constants {
         .foregroundColor: UIColor.black,
         .font: titleFont
     ]
-    static let navigationBarColor = UIColor(red: 248/256, green: 248/256, blue: 248/256, alpha: 1)
 }
 
 class BaseNavigationController: UINavigationController {
@@ -31,7 +30,7 @@ class BaseNavigationController: UINavigationController {
         navigationBar.prefersLargeTitles = true
         navigationBar.largeTitleTextAttributes = Constants.titleAttributes
         navigationBar.tintColor = .black
-        navigationBar.barTintColor = Constants.navigationBarColor
+        navigationBar.barTintColor = CustColor.navigationBarColor
 
         let backImage = Images.backArrow
         navigationBar.backIndicatorImage = backImage
@@ -42,7 +41,7 @@ class BaseNavigationController: UINavigationController {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
             appearance.largeTitleTextAttributes = Constants.titleAttributes
-            appearance.backgroundColor = Constants.navigationBarColor
+            appearance.backgroundColor = CustColor.navigationBarColor
             appearance.shadowColor = nil
             appearance.setBackIndicatorImage(backImage, transitionMaskImage: backImage)
             
