@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct InputTextView: View {
+struct InputTextField: View {
     @Binding var text: String
     let title: String
     let placeholder: String
-    let leftIcon: UIImage
+    var leftIcon: UIImage? = nil
     var isPassword: Bool = false
+    var inputViewBackgroundColor = Color.white
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,7 +22,8 @@ struct InputTextView: View {
                 text: $text,
                 placeholder: placeholder,
                 leftIcon: leftIcon,
-                isPassword: isPassword
+                isPassword: isPassword,
+                backgroundColor: inputViewBackgroundColor
             )
         }
     }
@@ -30,13 +32,16 @@ struct InputTextView: View {
 private struct InputView: View {
     @Binding var text: String
     let placeholder: String
-    let leftIcon: UIImage
+    let leftIcon: UIImage?
     var isPassword: Bool = false
     @State private var isHiddenPassword = true
+    var backgroundColor: Color
     
     var body: some View {
         HStack(spacing: 14) {
-            Image(uiImage: leftIcon)
+            if let leftIcon {
+                Image(uiImage: leftIcon)
+            }
             TextFieldView(
                 text: $text,
                 isHiddenPassword: $isHiddenPassword,
@@ -49,7 +54,7 @@ private struct InputView: View {
         }
         .padding(.horizontal, 15)
         .padding(.vertical, 5)
-        .background(Color.white)
+        .background(backgroundColor)
         .cornerRadius(15)
     }
     
@@ -104,6 +109,7 @@ private struct InputView: View {
                         TextField("", text: $text)
                     }
                 }
+                .font(MontserratFont.createFont(weight: .regular, size: 16))
                 .onChange(of: text) { newText in
                     isPlaceholderHidden = !newText.isEmpty
                 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct EmailView: View {
     @Binding var emailText: String
     var body: some View {
-        InputTextView(
+        InputTextField(
             text: $emailText,
             title: "Email",
             placeholder: "Your E-mail",

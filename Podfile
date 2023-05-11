@@ -13,6 +13,9 @@ target 'Evento' do
   # Security
   pod 'KeychainSwift', '~> 20.0'
 
+  # UI
+  pod 'SnapKit', '~> 5.6.0'
+
   target 'EventoTests' do
     inherit! :search_paths
     # Pods for testing

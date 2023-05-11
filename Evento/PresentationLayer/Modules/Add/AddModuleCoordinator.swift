@@ -20,6 +20,7 @@ final class AddModuleCoordinator: BaseCoordinator {
 
 private extension AddModuleCoordinator {
     func showAddPage() {
-        
+        let page = AddContainerPage(injection: injection)
+        router.set(viewControllers: [page], animated: true)
     }
 }

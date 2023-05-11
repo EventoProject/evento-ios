@@ -146,6 +146,11 @@ private extension MainTabBarController {
         tabBar.unselectedItemTintColor = .gray
         tabBar.isTranslucent = false
         view.backgroundColor = .white
+        
+        // Setup tab items fonts
+        if let customFont = UIFont(name: "Montserrat-Regular", size: 12) {
+            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: customFont], for: .normal)
+        }
     }
     
     func getCoordinator(index: Int) -> BaseCoordinator? {

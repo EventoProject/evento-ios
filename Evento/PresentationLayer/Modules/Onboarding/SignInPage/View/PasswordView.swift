@@ -13,7 +13,7 @@ struct PasswordView: View {
     var placeholder = "Enter password"
     
     var body: some View {
-        InputTextView(
+        InputTextField(
             text: $passwordText,
             title: title,
             placeholder: placeholder,

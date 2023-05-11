@@ -23,7 +23,7 @@ struct RegistrationPage: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            PageSubtitleView("Please fill in the fields below to create a new account")
+            OnboardingPageSubtitleView("Please fill in the fields below to create a new account")
             FullNameView(fullName: $viewModel.fullName)
             EmailView(emailText: $viewModel.email)
                 .padding(.top, 25)
@@ -48,7 +48,7 @@ private struct FullNameView: View {
     @Binding var fullName: String
     
     var body: some View {
-        InputTextView(
+        InputTextField(
             text: $fullName,
             title: "Full Name",
             placeholder: "Your Full Name",

@@ -12,7 +12,7 @@ struct PasswordResetPage: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            PageSubtitleView("Please fill in the fields below to Reset Password ")
+            OnboardingPageSubtitleView("Please fill in the fields below to Reset Password ")
             VerificationCodeView(verificationCode: $viewModel.verificationCode)
             PasswordView(
                 passwordText: $viewModel.newPassword,
@@ -40,7 +40,7 @@ private struct VerificationCodeView: View {
     @Binding var verificationCode: String
     
     var body: some View {
-        InputTextView(
+        InputTextField(
             text: $verificationCode,
             title: "Verification code",
             placeholder: "Verification code",

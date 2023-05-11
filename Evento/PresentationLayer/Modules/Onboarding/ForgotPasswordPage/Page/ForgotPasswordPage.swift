@@ -12,7 +12,7 @@ struct ForgotPasswordPage: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            PageSubtitleView("Enter your E-mail address to get the verification code")
+            OnboardingPageSubtitleView("Enter your E-mail address to get the verification code")
             EmailView(emailText: $viewModel.email)
                 .padding(.top, 32)
             ButtonView(text: "Get verification code") {

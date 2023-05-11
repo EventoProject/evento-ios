@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PageSubtitleView: View {
+struct OnboardingPageSubtitleView: View {
     let text: String
     
     init(_ text: String) {

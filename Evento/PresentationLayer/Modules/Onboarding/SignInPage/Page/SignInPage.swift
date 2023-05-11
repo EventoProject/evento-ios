@@ -12,7 +12,7 @@ struct SignInPage: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            PageSubtitleView("Please fill in the fields below")
+            OnboardingPageSubtitleView("Please fill in the fields below")
             EmailView(emailText: $viewModel.emailText)
                 .padding(.top, 32)
             PasswordView(passwordText: $viewModel.passwordText)

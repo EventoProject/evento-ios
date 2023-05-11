@@ -16,17 +16,19 @@ final class EventsHostingController: UIHostingController<EventsPage> {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
+        let custCgColor = CustColor.purple.cgColor ?? UIColor.purple.cgColor
+        navigationController?.navigationBar.tintColor = UIColor(cgColor: custCgColor)
         
         // Set up the search bar
         searchBar.placeholder = "Search"
         searchBar.delegate = self
         
         // Set up the filter button
-        filterButton.setImage(UIImage(systemName: "line.horizontal.3.decrease.circle"), for: .normal)
+        filterButton.setImage(Images.filter, for: .normal)
         filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         
         // Set up the bell button
-        bellButton.setImage(UIImage(systemName: "bell"), for: .normal)
+        bellButton.setImage(Images.bellWithBadge, for: .normal)
         bellButton.addTarget(self, action: #selector(bellButtonTapped), for: .touchUpInside)
         
         // Set the search bar as the title view of the navigation controller
