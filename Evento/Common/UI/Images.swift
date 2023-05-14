@@ -27,6 +27,7 @@ enum Images {
     static let profileTabItemSelected = UIImage(named: "profile_tab_item_selected") ?? UIImage()
     static let custGradientImage = UIImage(named: "cust_gradient_image") ?? UIImage()
     static let bellWithBadge = UIImage(named: "bell_with_badge") ?? UIImage()
+    static let settingImage = UIImage(named: "setting") ?? UIImage()
     static let filter = UIImage(named: "filter") ?? UIImage()
     static let uploadImagePlaceholder = UIImage(named: "upload_image_placeholder") ?? UIImage()
 }

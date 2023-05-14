@@ -20,6 +20,7 @@ final class ProfileModuleCoordinator: BaseCoordinator {
 
 private extension ProfileModuleCoordinator {
     func showProfilePage() {
-        
+        let page = ProfileHostingController(rootView: ProfilePage())
+        router.set(viewControllers: [page], animated: true)
     }
 }

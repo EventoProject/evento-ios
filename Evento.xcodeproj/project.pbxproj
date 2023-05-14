@@ -85,6 +85,8 @@
 		F2CA3DC965CDA4BDF9C220F0EF1FE8CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 009A2F8FA810F43B1D4727F18AC10D8F /* LaunchScreen.storyboard */; };
 		F58BD6CB3F62DFAA8B76BBCE20A3E72C /* CustInject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B246D21EFADC45E8CFD1AD392B8DE72 /* CustInject.swift */; };
 		FAD88A7881A89A0897910D4C6695E9ED /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A6C42F7E1CBD0F238181AE3710FC2779 /* Montserrat-Bold.otf */; };
+		FADFB6182A11219E009ED3D2 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADFB6172A11219E009ED3D2 /* ProfilePage.swift */; };
+		FADFB61A2A112290009ED3D2 /* ProfileHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADFB6192A112290009ED3D2 /* ProfileHostingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +192,8 @@
 		F53A74B5524DF2717EC082ECC54C6A59 /* NewsApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsApiManager.swift; sourceTree = "<group>"; };
 		F6423DEE11A8583EDFCF4DD115C94001 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		FA2B86847E9BFAED6D3CDC006EEF39DA /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		FADFB6172A11219E009ED3D2 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
+		FADFB6192A112290009ED3D2 /* ProfileHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHostingController.swift; sourceTree = "<group>"; };
 		FB6CB45F08415F80EE5351A8C72B3006 /* EventoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventoUITests.swift; sourceTree = "<group>"; };
 		FBEEEFFE413688EC2AE98FF94841ED07 /* Pods-Evento.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Evento.debug.xcconfig"; path = "Target Support Files/Pods-Evento/Pods-Evento.debug.xcconfig"; sourceTree = "<group>"; };
 		FC2DD77D5604967609661A64CEB76878 /* Pods-Evento-EventoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Evento-EventoUITests.release.xcconfig"; path = "Target Support Files/Pods-Evento-EventoUITests/Pods-Evento-EventoUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -618,6 +622,7 @@
 		BB95A7D89608012A2C97D10512E10A44 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				FADFB6142A111F07009ED3D2 /* ProfilePage */,
 				EDEBEE09886C4B5442B9514F896AA6FF /* ProfileModuleCoordinator.swift */,
 			);
 			path = Profile;
@@ -779,6 +784,15 @@
 				C44762810E620EC18A4249F50F57A24F /* EventsModuleCoordinator.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		FADFB6142A111F07009ED3D2 /* ProfilePage */ = {
+			isa = PBXGroup;
+			children = (
+				FADFB6172A11219E009ED3D2 /* ProfilePage.swift */,
+				FADFB6192A112290009ED3D2 /* ProfileHostingController.swift */,
+			);
+			path = ProfilePage;
 			sourceTree = "<group>";
 		};
 		FC02EFCC0BF0EC471D81DCC49245A411 /* Favorites */ = {
@@ -1035,6 +1049,7 @@
 			files = (
 				3EA5B5BE46E973493FA5237495679D25 /* AddModuleCoordinator.swift in Sources */,
 				5BBFA407ED708BDE0AFA4F135B686E83 /* AppCoordinator.swift in Sources */,
+				FADFB6182A11219E009ED3D2 /* ProfilePage.swift in Sources */,
 				2687713F2A08EC9100210AAC /* AddFirstStepViewModel.swift in Sources */,
 				0CB1001DE7DCA0DC18971226EAFBC2E3 /* AppDelegate.swift in Sources */,
 				8D27956DE7C31D7E8D9F4DB0680FE5A0 /* Application.swift in Sources */,
@@ -1058,6 +1073,7 @@
 				84D38FFDAFC4DEF4362C35D759946D94 /* EmailView.swift in Sources */,
 				B9995CF27D8A049BB58E351E63B1CD12 /* EndLinkText.swift in Sources */,
 				268771302A0657AB00210AAC /* AddCoordinator.swift in Sources */,
+				FADFB61A2A112290009ED3D2 /* ProfileHostingController.swift in Sources */,
 				BEDFAFA31C436904FB23FD39AEA7FABF /* EventsHostingController.swift in Sources */,
 				9517411725F7356E66FAD430A5C4876A /* EventsModuleCoordinator.swift in Sources */,
 				024E508F998E6172AC0440CBA454E9AC /* EventsPage.swift in Sources */,
