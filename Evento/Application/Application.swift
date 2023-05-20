@@ -9,7 +9,9 @@ import UIKit
 
 final class Application {
     static let shared = Application()
-    var appCoordinator: AppCoordinator?
+    
+    private var appCoordinator: AppCoordinator?
+    private let injection: CustInjection = CustInject.depContainer
     
     func presentInitialScreen(in window: UIWindow?) {
         guard let window = window else { return }
@@ -17,7 +19,7 @@ final class Application {
         let navigationController = BaseNavigationController()
         window.rootViewController = navigationController
         
-        appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator = AppCoordinator(navigationController: navigationController, injection: injection)
         
         appCoordinator?.start()
         window.makeKeyAndVisible()
