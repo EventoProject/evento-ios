@@ -12,6 +12,7 @@ final class AddSecondStepViewModel: ObservableObject {
     var didTapContinue: VoidCallback?
     
     @Published var addFlowModel: AddFlowModel
+    @Published var isLoading = false
     let categories: [String] = [
         "Business",
         "Sport",

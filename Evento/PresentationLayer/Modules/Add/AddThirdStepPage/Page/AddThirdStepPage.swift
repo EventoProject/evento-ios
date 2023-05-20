@@ -7,23 +7,11 @@
 
 import SwiftUI
 
-final class AddThirdStepViewModel: ObservableObject {
-    // MARK: - Callbacks
-    var didTapContinue: VoidCallback?
-    
-    @Published var addFlowModel: AddFlowModel
-    
-    init(addFlowModel: AddFlowModel) {
-        self.addFlowModel = addFlowModel
-    }
-}
-
 struct AddThirdStepPage: View {
     @ObservedObject var viewModel: AddThirdStepViewModel
     
     init(viewModel: AddThirdStepViewModel) {
         self.viewModel = viewModel
-        UITextView.appearance().backgroundColor = .clear
     }
     
     var body: some View {
@@ -32,11 +20,11 @@ struct AddThirdStepPage: View {
             AddStepIndicatorView(stepNumber: 3)
                 .padding(.bottom, 30)
             DescriptionField(text: $viewModel.addFlowModel.description)
-            WebsiteLinkField(link: $viewModel.addFlowModel.webSiteLink)
+            WebsiteLinkField(inputModel: $viewModel.webSiteModel, flowModel: $viewModel.addFlowModel)
             
             Spacer()
             
-            ButtonView(text: "Continue") {
+            ButtonView(text: "Continue", isLoading: $viewModel.isLoadingContinue) {
                 viewModel.didTapContinue?()
             }.padding(.bottom, 20)
         }.padding(.horizontal, 20)
@@ -57,15 +45,19 @@ private struct DescriptionField: View {
 }
 
 private struct WebsiteLinkField: View {
-    @Binding var link: String
+    @Binding var inputModel: InputViewModel
+    @Binding var flowModel: AddFlowModel
     
     var body: some View {
         InputTextField(
-            text: $link,
+            model: $inputModel,
             title: "Paste a link to the website:",
             placeholder: "https://",
             inputViewBackgroundColor: CustColor.backgroundColor
         )
+        .onChange(of: inputModel) {
+            flowModel.webSiteLink = $0.text
+        }
     }
 }
 

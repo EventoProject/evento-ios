@@ -22,7 +22,7 @@ struct AddSecondStepPage: View {
             
             Spacer()
             
-            ButtonView(text: "Continue") {
+            ButtonView(text: "Continue", isLoading: $viewModel.isLoading) {
                 viewModel.didTapContinue?()
             }.padding(.bottom, 20)
         }.padding(.horizontal, 20)

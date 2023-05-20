@@ -56,7 +56,19 @@ private extension AddCoordinator {
     
     func showThirdStepPage(addFlowModel: AddFlowModel) {
         let viewModel = AddThirdStepViewModel(addFlowModel: addFlowModel)
+        
+        viewModel.didTapContinue = { [weak self] in
+            self?.showForthStepPage(addFlowModel: addFlowModel)
+        }
+        
         let page = UIHostingController(rootView: AddThirdStepPage(viewModel: viewModel))
+        router.push(viewController: page, animated: true)
+    }
+    
+    func showForthStepPage(addFlowModel: AddFlowModel) {
+        let viewModel = AddForthStepViewModel(addFlowModel: addFlowModel)
+        
+        let page = UIHostingController(rootView: AddForthStepPage(viewModel: viewModel))
         router.push(viewController: page, animated: true)
     }
 }

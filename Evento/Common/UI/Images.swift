@@ -29,4 +29,6 @@ enum Images {
     static let bellWithBadge = UIImage(named: "bell_with_badge") ?? UIImage()
     static let filter = UIImage(named: "filter") ?? UIImage()
     static let uploadImagePlaceholder = UIImage(named: "upload_image_placeholder") ?? UIImage()
+    static let downArrowInCircle = UIImage(named: "down_arrow_in_circle") ?? UIImage()
+    static let errorIcon = UIImage(named: "error_icon") ?? UIImage()
 }

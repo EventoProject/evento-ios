@@ -7,7 +7,12 @@
 
 import SwiftUI
 
+final class EventsViewModel: ObservableObject {
+}
+
 struct EventsPage: View {
+    @ObservedObject var viewModel: EventsViewModel
+    
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
@@ -15,6 +20,6 @@ struct EventsPage: View {
 
 struct EventsPage_Previews: PreviewProvider {
     static var previews: some View {
-        EventsPage()
+        EventsPage(viewModel: EventsViewModel())
     }
 }

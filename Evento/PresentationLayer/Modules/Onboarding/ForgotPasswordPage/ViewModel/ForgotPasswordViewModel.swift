@@ -8,7 +8,8 @@
 import Foundation
 
 final class ForgotPasswordViewModel: ObservableObject {
-    @Published var email = ""
+    @Published var emailModel = InputViewModel()
+    @Published var isLoadingButton = false
     
     // MARK: - Callbacks
     var resetPassword: VoidCallback?

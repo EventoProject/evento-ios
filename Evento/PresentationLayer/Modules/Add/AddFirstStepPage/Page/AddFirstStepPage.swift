@@ -15,7 +15,7 @@ struct AddFirstStepPage: View {
             AddStepPageTitleView("Event name and poster")
             AddStepIndicatorView(stepNumber: 1)
                 .padding(.bottom, 36)
-            NameInputView(text: $viewModel.addFlowModel.eventName)
+            NameInputView(inputModel: $viewModel.eventNameModel, flowModel: $viewModel.addFlowModel)
             UploadPosterView(posterImage: $viewModel.addFlowModel.posterImage) {
                 viewModel.didTapUploadPoster()
             }
@@ -30,15 +30,19 @@ struct AddFirstStepPage: View {
 }
 
 private struct NameInputView: View {
-    @Binding var text: String
+    @Binding var inputModel: InputViewModel
+    @Binding var flowModel: AddFlowModel
     
     var body: some View {
         InputTextField(
-            text: $text,
+            model: $inputModel,
             title: "Come up with the name of the event:",
             placeholder: "Enter event name",
             inputViewBackgroundColor: CustColor.backgroundColor
         ).padding(.bottom, 32)
+            .onChange(of: inputModel) {
+                flowModel.eventName = $0.text
+            }
     }
 }
 

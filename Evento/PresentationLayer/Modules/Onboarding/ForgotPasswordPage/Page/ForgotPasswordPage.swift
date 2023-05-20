@@ -13,9 +13,9 @@ struct ForgotPasswordPage: View {
     var body: some View {
         VStack(spacing: 0) {
             OnboardingPageSubtitleView("Enter your E-mail address to get the verification code")
-            EmailView(emailText: $viewModel.email)
+            EmailView(model: $viewModel.emailModel)
                 .padding(.top, 32)
-            ButtonView(text: "Get verification code") {
+            ButtonView(text: "Get verification code", isLoading: $viewModel.isLoadingButton) {
                 viewModel.getVerificationCode()
             }.padding(.top, 28)
             EndLinkText(startText: "The code didn't come?", endLinkText: "Send again") {

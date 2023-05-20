@@ -9,37 +9,80 @@ import Foundation
 import Combine
 
 protocol WebServiceProtocol {
-    func request<T: Decodable>(_ endpoint: BaseProviderType) -> AnyPublisher<T, NetworkError>
+    func request<T: Decodable>(_ endpoint: EndpointProtocol) -> AnyPublisher<T, NetworkError>
+    func flushToken()
+    func set(accessToken: String)
 }
 
 class WebService: WebServiceProtocol {
-    func request<T: Decodable>(_ endpoint: BaseProviderType) -> AnyPublisher<T, NetworkError> {
+    private var isTokenExpired = false
+    private let keychainManager: KeychainManagerProtocol
+    
+    init(keychainManager: KeychainManagerProtocol) {
+        self.keychainManager = keychainManager
+    }
+    
+    func request<T: Decodable>(_ endpoint: EndpointProtocol) -> AnyPublisher<T, NetworkError> {
         guard var components = URLComponents(string: endpoint.baseURL + endpoint.path) else {
             return Fail(error: NetworkError.invalidURL)
                 .eraseToAnyPublisher()
         }
-        
-        if let queryParameters = endpoint.parameters {
-            components.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+
+        var request = URLRequest(url: URL(string: endpoint.baseURL)!)
+        switch endpoint.task {
+        case .request:
+            break // Do nothing
+        case .requestParameters(let bodyParameters, let urlParameters):
+            if let queryParameters = urlParameters {
+                components.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+            }
+            if let body = bodyParameters {
+                request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            }
+        case .multipartFormData(let bodyParameters, let urlParameters):
+            if let queryParameters = urlParameters {
+                components.queryItems = queryParameters.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+            }
+            let boundary = UUID().uuidString
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            if let body = bodyParameters {
+                request.httpBody = createBody(parameters: body, boundary: boundary)
+            }
+        case .requestJSONEncodable(let encodable):
+            do {
+                request.httpBody = try JSONEncoder().encode(encodable)
+            } catch {
+                return Fail(error: NetworkError.encodingFailed)
+                    .eraseToAnyPublisher()
+            }
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
-        
+
         guard let url = components.url else {
             return Fail(error: NetworkError.invalidURL)
                 .eraseToAnyPublisher()
         }
-        
-        var request = URLRequest(url: url)
+
+        request.url = url
         request.httpMethod = endpoint.method.rawValue
-        request.allHTTPHeaderFields = endpoint.headers
-        request.httpBody = endpoint.body
-        print(request) // For printing curl
-        
+        request.allHTTPHeaderFields = endpoint.headers ?? [:]
+        if let token = keychainManager.getString(type: .accessToken) {
+            request.allHTTPHeaderFields?["Authorization"] = "Bearer \(token)"
+        }
+        print(request.description) // For printing curl
+
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { data, response -> Data in
                 guard let httpResponse = response as? HTTPURLResponse else {
                     throw NetworkError.invalidResponse
                 }
                 guard 200..<300 ~= httpResponse.statusCode else {
+                    if httpResponse.statusCode == 401 {
+                        if !self.isTokenExpired {
+                            self.isTokenExpired = true
+                            self.handleSessionExpiration()
+                        }
+                    }
                     throw NetworkError.requestFailed
                 }
                 return data
@@ -52,7 +95,7 @@ class WebService: WebServiceProtocol {
                     print("Received Response (JSON):")
                     print(jsonString)
                 }
-                
+
                 return Just(data)
                     .decode(type: T.self, decoder: JSONDecoder())
                     .eraseToAnyPublisher()
@@ -69,5 +112,75 @@ class WebService: WebServiceProtocol {
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+    
+    func flushToken() {
+        keychainManager.delete(type: .accessToken)
+    }
+    
+    func set(accessToken: String) {
+        keychainManager.set(value: accessToken, type: .accessToken)
+    }
+}
+
+private extension WebService {
+    func handleSessionExpiration() {
+        Application.shared.reauthorize()
+    }
+    
+    func createBody(parameters: [String: Any]?, boundary: String) -> Data {
+        let body = NSMutableData()
+        guard let parameters else { return body as Data }
+        for (key, value) in parameters {
+            if let dict = value as? NSDictionary {
+                for (multiFileKey, multiFileValue) in dict {
+                    if let data = multiFileValue as? Data {
+                        let mimeTypeLocal = mimeType(for: data)
+                        body.append(Data("--\(boundary)\r\n".utf8))
+                        body.append(Data("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(multiFileKey).jpeg\"\r\n".utf8))
+                        body.append(Data("Content-Type: \(mimeTypeLocal)\r\n\r\n".utf8))
+                        body.append(data)
+                        body.append(Data("\r\n".utf8))
+                    }
+                }
+            } else if let data = value as? Data {
+                let mimeTypeLocal = mimeType(for: data)
+                body.append(Data("--\(boundary)\r\n".utf8))
+                body.append(Data("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(value).jpeg\"\r\n".utf8))
+                body.append(Data("Content-Type: \(mimeTypeLocal)\r\n\r\n".utf8))
+                body.append(data)
+                body.append(Data("\r\n".utf8))
+            } else {
+                body.append(Data("--\(boundary)\r\n".utf8))
+                body.append(Data("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".utf8))
+                body.append(Data("\(value)\r\n".utf8))
+            }
+        }
+        body.append(Data("--\(boundary)--\r\n".utf8))
+        
+        return body as Data
+    }
+    
+    func mimeType(for data: Data) -> String {
+        var b: UInt8 = 0
+        data.copyBytes(to: &b, count: 1)
+        switch b {
+        case 0xFF:
+            return "image/jpeg"
+        case 0x89:
+            return "image/png"
+        case 0x47:
+            return "image/gif"
+        case 0x4D, 0x49:
+            return "image/tiff"
+        case 0x25:
+            return "application/pdf"
+        case 0xD0:
+            return "application/vnd"
+        case 0x46:
+            return "text/plain"
+        default:
+            return "application/octet-stream"
+        }
     }
 }

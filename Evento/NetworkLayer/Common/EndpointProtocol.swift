@@ -7,11 +7,10 @@
 
 import Foundation
 
-protocol BaseProviderType {
+protocol EndpointProtocol {
     var baseURL: String { get }
     var path: String { get }
     var method: HttpMethod { get }
     var headers: [String: String]? { get }
-    var body: Data? { get }
-    var parameters: [String: Any]? { get }
+    var task: HTTPTask { get }
 }

@@ -20,7 +20,7 @@ final class EventsModuleCoordinator: BaseCoordinator {
 
 private extension EventsModuleCoordinator {
     func showEventsPage() {
-        let page = EventsHostingController(rootView: EventsPage())
+        let page = EventsHostingController(rootView: EventsPage(viewModel: EventsViewModel()))
         router.set(viewControllers: [page], animated: true)
     }
 }

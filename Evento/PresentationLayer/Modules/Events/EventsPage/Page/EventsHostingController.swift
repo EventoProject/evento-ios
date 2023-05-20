@@ -24,7 +24,7 @@ final class EventsHostingController: UIHostingController<EventsPage> {
         searchBar.delegate = self
         
         // Set up the filter button
-        filterButton.setImage(Images.filter, for: .normal)
+        filterButton.setImage(Images.filter.resize(to: CGSize(width: 28, height: 28)), for: .normal)
         filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
         
         // Set up the bell button

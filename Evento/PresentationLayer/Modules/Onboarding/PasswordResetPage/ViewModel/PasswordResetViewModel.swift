@@ -8,9 +8,10 @@
 import SwiftUI
 
 final class PasswordResetViewModel: ObservableObject {
-    @Published var verificationCode = ""
-    @Published var newPassword = ""
-    @Published var confirmPassword = ""
+    @Published var verificationCodeModel = InputViewModel()
+    @Published var newPasswordModel = InputViewModel()
+    @Published var confirmPasswordModel = InputViewModel()
+    @Published var isLoadingButton = false
     
     func savePassword() {
         print("Did tap save password")

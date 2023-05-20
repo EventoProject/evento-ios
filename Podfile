@@ -10,11 +10,9 @@ target 'Evento' do
   # Dependency injection
   pod 'Swinject', '~> 2.7.1'
 
-  # Security
-  pod 'KeychainSwift', '~> 20.0'
-
   # UI
   pod 'SnapKit', '~> 5.6.0'
+  pod 'SwiftEntryKit', '0.8.2'
 
   target 'EventoTests' do
     inherit! :search_paths
