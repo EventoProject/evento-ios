@@ -16,7 +16,7 @@ enum NewsTarget {
     case topHeadlines
 }
 
-extension NewsTarget: BaseProviderType {
+extension NewsTarget: EndpointProtocol {
     var baseURL: String {
         return "https://newsapi.org/v2/"
     }
@@ -41,11 +41,7 @@ extension NewsTarget: BaseProviderType {
         nil
     }
     
-    var body: Data? {
-        nil
-    }
-    
-    var parameters: [String : Any]? {
+    var task: HTTPTask {
         switch self {
         case let .search(searchText):
             let parameters: [String: Any] = [
@@ -53,12 +49,12 @@ extension NewsTarget: BaseProviderType {
                 "q": searchText,
                 "page": 2
             ]
-            return parameters
+            return .requestParameters(bodyParameters: nil, urlParameters: parameters)
         case .topHeadlines:
             let parameters: [String: Any] = [
                 "apiKey": Constants.apiKey
             ]
-            return parameters
+            return .requestParameters(bodyParameters: nil, urlParameters: parameters)
         }
     }
 }

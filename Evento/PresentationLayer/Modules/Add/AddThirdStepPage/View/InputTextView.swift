@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InputTextView: View {
-    @Binding var text: String
+    @Binding var model: InputViewModel
     let title: String
     let placeholder: String
     let limit: Int
@@ -18,17 +18,21 @@ struct InputTextView: View {
         VStack(alignment: .leading) {
             CustText(text: title, weight: .medium, size: 16)
             MultilineInputView(
-                text: $text,
+                model: $model,
                 placeholder: placeholder,
                 limit: limit,
                 minNumberOfLines: minNumberOfLines
             )
+            
+            if case let .error(text) = model.state {
+                ErrorTextView(text: text)
+            }
         }
     }
 }
 
 private struct MultilineInputView: View {
-    @Binding var text: String
+    @Binding var model: InputViewModel
     let placeholder: String
     let limit: Int
     let minNumberOfLines: Int
@@ -36,7 +40,7 @@ private struct MultilineInputView: View {
     var body: some View {
         TextField(
             "free_form",
-            text: $text,
+            text: $model.text,
             prompt: Text(placeholder),
             axis: .vertical
         )
@@ -45,19 +49,26 @@ private struct MultilineInputView: View {
         .lineLimit(minNumberOfLines...)
         .padding([.top, .horizontal], 16)
         .padding(.bottom, 25)
-        .background(CustColor.backgroundColor)
+        .background(
+            RoundedRectangle(cornerRadius: 15)
+                .strokeBorder(model.state == .default ? CustColor.backgroundColor : CustColor.errorColor , lineWidth: 1)
+                .background(CustColor.backgroundColor)
+        )
         .cornerRadius(16)
         .overlay(
-            Text(String(text.count) + "/" + String(limit))
+            Text(String(model.text.count) + "/" + String(limit))
                 .foregroundColor(.secondary)
                 .font(MontserratFont.createFont(weight: .regular, size: 12))
                 .padding(4)
                 .offset(x: -5, y: -5),
             alignment: .bottomTrailing
         )
-        .onChange(of: text) { newValue in
+        .onChange(of: model.text) { newValue in
             if newValue.count > limit {
-                text = String(newValue.prefix(limit))
+                model.text = String(newValue.prefix(limit))
+            }
+            if !newValue.isEmpty {
+                model.state = .default
             }
         }
     }

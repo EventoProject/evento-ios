@@ -16,22 +16,18 @@ struct AddSecondStepPage: View {
             AddStepIndicatorView(stepNumber: 2)
                 .padding(.bottom, 10)
             
-            CategoriesView(categories: viewModel.categories) { category in
+            CategoriesView(categories: $viewModel.categories) { category in
                 viewModel.didSelectCategory(category: category)
             }
             
             Spacer()
-            
-            ButtonView(text: "Continue") {
-                viewModel.didTapContinue?()
-            }.padding(.bottom, 20)
         }.padding(.horizontal, 20)
     }
 }
 
 private struct CategoriesView: View {
-    let categories: [String]
-    let didSelectCategory: Callback<String>
+    @Binding var categories: [CategoryModel]
+    let didSelectCategory: Callback<CategoryModel>
     
     var body: some View {
         List(categories, id: \.self) { category in
@@ -45,7 +41,7 @@ private struct CategoriesView: View {
 }
 
 private struct CategoryView: View {
-    let category: String
+    let category: CategoryModel
     let didTap: VoidCallback
     
     var body: some View {
@@ -53,7 +49,7 @@ private struct CategoryView: View {
             action: didTap,
             label: {
                 HStack {
-                    CustText(text: category, weight: .regular, size: 16)
+                    CustText(text: category.name, weight: .regular, size: 16)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .foregroundColor(.gray)
@@ -66,6 +62,13 @@ private struct CategoryView: View {
 
 struct AddSecondStepPage_Previews: PreviewProvider {
     static var previews: some View {
-        AddSecondStepPage(viewModel: AddSecondStepViewModel(addFlowModel: AddFlowModel()))
+        AddSecondStepPage(viewModel: AddSecondStepViewModel(
+            addFlowModel: AddFlowModel(),
+            apiManager: AddApiManager(
+                webService: WebService(
+                    keychainManager: KeychainManager()
+                )
+            )
+        ))
     }
 }

@@ -7,33 +7,22 @@
 
 import SwiftUI
 
-final class RegistrationViewModel: ObservableObject {
-    @Published var fullName = ""
-    @Published var email = ""
-    @Published var password = ""
-    @Published var confirmPassword = ""
-    
-    func createAccount() {
-        print("Did tap create account")
-    }
-}
-
 struct RegistrationPage: View {
     @ObservedObject var viewModel: RegistrationViewModel
     
     var body: some View {
         VStack(spacing: 0) {
             OnboardingPageSubtitleView("Please fill in the fields below to create a new account")
-            FullNameView(fullName: $viewModel.fullName)
-            EmailView(emailText: $viewModel.email)
+            FullNameView(model: $viewModel.fullNameModel)
+            EmailView(model: $viewModel.emailModel)
                 .padding(.top, 25)
-            PasswordView(passwordText: $viewModel.password, placeholder: "New password")
+            PasswordView(model: $viewModel.passwordModel, placeholder: "New password")
             PasswordView(
-                passwordText: $viewModel.confirmPassword,
+                model: $viewModel.confirmPasswordModel,
                 title: "Confirm password",
                 placeholder: "Confirm password"
             )
-            ButtonView(text: "Create an account") {
+            ButtonView(text: "Create an account", isLoading: $viewModel.isLoadingButton) {
                 viewModel.createAccount()
             }.padding(.top, 43)
             Spacer()
@@ -45,11 +34,11 @@ struct RegistrationPage: View {
 }
 
 private struct FullNameView: View {
-    @Binding var fullName: String
+    @Binding var model: InputViewModel
     
     var body: some View {
         InputTextField(
-            text: $fullName,
+            model: $model,
             title: "Full Name",
             placeholder: "Your Full Name",
             leftIcon: Images.personCircle
@@ -59,6 +48,12 @@ private struct FullNameView: View {
 
 struct RegistrationPage_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrationPage(viewModel: RegistrationViewModel())
+        RegistrationPage(viewModel: RegistrationViewModel(
+            apiManager: OnboardingApiManager(
+                webService: WebService(
+                    keychainManager: KeychainManager()
+                )
+            )
+        ))
     }
 }

@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct EmailView: View {
-    @Binding var emailText: String
+    @Binding var model: InputViewModel
     var body: some View {
         InputTextField(
-            text: $emailText,
+            model: $model,
             title: "Email",
             placeholder: "Your E-mail",
             leftIcon: Images.email
         )
+        .keyboardType(.emailAddress)
     }
 }

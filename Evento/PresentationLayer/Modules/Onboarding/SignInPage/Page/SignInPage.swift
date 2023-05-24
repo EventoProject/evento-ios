@@ -13,14 +13,14 @@ struct SignInPage: View {
     var body: some View {
         VStack(spacing: 0) {
             OnboardingPageSubtitleView("Please fill in the fields below")
-            EmailView(emailText: $viewModel.emailText)
+            EmailView(model: $viewModel.emailModel)
                 .padding(.top, 32)
-            PasswordView(passwordText: $viewModel.passwordText)
+            PasswordView(model: $viewModel.passwordModel)
             ForgotPasswordView() {
                 viewModel.didTapForgotPassword?()
             }
             
-            ButtonView(text: "Sign in") {
+            ButtonView(text: "Sign in", isLoading: $viewModel.isLoadingButton) {
                 viewModel.didTapSignInButton()
             }.padding(.top, 55)
             EndLinkText(startText: "New user?", endLinkText: "Register now") {
@@ -87,7 +87,12 @@ struct GoogleButtonView: View {
 
 
 struct SignInPage_Previews: PreviewProvider {
+    static let webService = WebService(keychainManager: KeychainManager())
     static var previews: some View {
-        SignInPage(viewModel: SignInViewModel())
+        SignInPage(viewModel: SignInViewModel(
+            apiManager: OnboardingApiManager(webService: webService),
+            webService: webService,
+            keychainManager: KeychainManager()
+        ))
     }
 }

@@ -25,7 +25,6 @@ final class MainTabBarController: UITabBarController, UITabBarControllerDelegate
 
     private var tabBarNavigationControllers = [UINavigationController]()
     private let customTabBar = RoundedTabBar()
-    private lazy var router = injection.inject(Router.self)
     
     init(injection: CustInjection) {
         self.injection = injection
@@ -60,7 +59,7 @@ private extension MainTabBarController {
         let navigationController = BaseNavigationController()
         eventsCoordinator = EventsModuleCoordinator(
             injection: injection,
-            router: router,
+            router: MainRouter(),
             navigationController: navigationController
         )
         eventsCoordinator?.start()
@@ -77,7 +76,7 @@ private extension MainTabBarController {
         let navigationController = BaseNavigationController()
         favoritesCoordinator = FavoritesModuleCoordinator(
             injection: injection,
-            router: router,
+            router: MainRouter(),
             navigationController: navigationController
         )
         favoritesCoordinator?.start()
@@ -94,9 +93,12 @@ private extension MainTabBarController {
         let navigationController = BaseNavigationController()
         addCoordinator = AddModuleCoordinator(
             injection: injection,
-            router: router,
+            router: MainRouter(),
             navigationController: navigationController
         )
+        addCoordinator?.openEventsModule = { [weak self] in
+            self?.selectedIndex = TabBarList.events.rawValue
+        }
         addCoordinator?.start()
         navigationController.tabBarItem = UITabBarItem(
             title: "Add",
@@ -110,7 +112,7 @@ private extension MainTabBarController {
         let navigationController = BaseNavigationController()
         chatCoordinator = ChatModuleCoordinator(
             injection: injection,
-            router: router,
+            router: MainRouter(),
             navigationController: navigationController
         )
         chatCoordinator?.start()
@@ -127,7 +129,7 @@ private extension MainTabBarController {
         let navigationController = BaseNavigationController()
         profileCoordinator = ProfileModuleCoordinator(
             injection: injection,
-            router: router,
+            router: MainRouter(),
             navigationController: navigationController
         )
         profileCoordinator?.start()

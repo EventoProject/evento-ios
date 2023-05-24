@@ -15,41 +15,54 @@ struct AddFirstStepPage: View {
             AddStepPageTitleView("Event name and poster")
             AddStepIndicatorView(stepNumber: 1)
                 .padding(.bottom, 36)
-            NameInputView(text: $viewModel.addFlowModel.eventName)
-            UploadPosterView(posterImage: $viewModel.addFlowModel.posterImage) {
+            NameInputView(inputModel: $viewModel.eventNameModel, flowModel: $viewModel.addFlowModel)
+            UploadPosterView(imageModel: $viewModel.imageModel, flowModel: $viewModel.addFlowModel) {
                 viewModel.didTapUploadPoster()
             }
             
             Spacer()
             
             ButtonView(text: "Continue") {
-                viewModel.didTapContinue?()
+                viewModel.didTapContinue()
             }.padding(.bottom, 40)
         }.padding(.horizontal, 20)
     }
 }
 
 private struct NameInputView: View {
-    @Binding var text: String
+    @Binding var inputModel: InputViewModel
+    @Binding var flowModel: AddFlowModel
     
     var body: some View {
         InputTextField(
-            text: $text,
+            model: $inputModel,
             title: "Come up with the name of the event:",
             placeholder: "Enter event name",
             inputViewBackgroundColor: CustColor.backgroundColor
         ).padding(.bottom, 32)
+            .onChange(of: inputModel) {
+                flowModel.eventName = $0.text
+            }
     }
 }
 
 private struct UploadPosterView: View {
-    @Binding var posterImage: UIImage?
+    @Binding var imageModel: ImageModel
+    @Binding var flowModel: AddFlowModel
     var didTap: VoidCallback
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             SubtitleView()
-            PosterImageView(posterImage: $posterImage, didTap: didTap)
+            PosterImageView(
+                imageModel: $imageModel,
+                flowModel: $flowModel,
+                didTap: didTap
+            )
+            
+            if case let .error(text) = imageModel.state {
+                ErrorTextView(text: text)
+            }
         }
     }
     
@@ -67,23 +80,34 @@ private struct UploadPosterView: View {
     }
     
     struct PosterImageView: View {
-        @Binding var posterImage: UIImage?
+        @Binding var imageModel: ImageModel
+        @Binding var flowModel: AddFlowModel
         var didTap: VoidCallback
         
         var body: some View {
             Button(
                 action: didTap,
                 label: {
-                    if let posterImage {
-                        SelectedImageView(image: posterImage)
-                    } else {
-                        PlaceholderImageView()
+                    Group {
+                        if let posterImage = imageModel.image {
+                            SelectedImageView(image: posterImage)
+                        } else {
+                            PlaceholderImageView(state: $imageModel.state)
+                        }
+                    }
+                    .onChange(of: imageModel.image) { image in
+                        if image != nil {
+                            imageModel.state = .default
+                        }
+                        flowModel.image = image
                     }
                 }
             )
         }
         
         struct PlaceholderImageView: View {
+            @Binding var state: InputViewState
+            
             var body: some View {
                 HStack {
                     Spacer()
@@ -93,6 +117,10 @@ private struct UploadPosterView: View {
                 .padding(.vertical, 60)
                 .background(CustColor.backgroundColor)
                 .cornerRadius(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .strokeBorder(state == .default ? .clear : CustColor.errorColor , lineWidth: 1)
+                )
             }
         }
         

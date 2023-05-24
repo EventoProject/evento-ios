@@ -1,24 +1,28 @@
 PODS:
-  - KeychainSwift (20.0.0)
+  - QuickLayout (2.1.1)
   - SnapKit (5.6.0)
+  - SwiftEntryKit (0.8.2):
+    - QuickLayout (= 2.1.1)
   - Swinject (2.7.1)
 
 DEPENDENCIES:
-  - KeychainSwift (~> 20.0)
   - SnapKit (~> 5.6.0)
+  - SwiftEntryKit (= 0.8.2)
   - Swinject (~> 2.7.1)
 
 SPEC REPOS:
   trunk:
-    - KeychainSwift
+    - QuickLayout
     - SnapKit
+    - SwiftEntryKit
     - Swinject
 
 SPEC CHECKSUMS:
-  KeychainSwift: 0ce6a4d13f7228054d1a71bb1b500448fb2ab837
+  QuickLayout: 9af2b7fd89a6552828f51a5aba28d1bcdb8b340c
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftEntryKit: c3782ddda1ccbd35899d5f9bfad1c3ab9c823e2a
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
 
-PODFILE CHECKSUM: a4dbc8f8d02749ab0d1e4a1fde51ee28626d2978
+PODFILE CHECKSUM: dbad02f1d279502b4b44e547afb13a1a6ca57383
 
 COCOAPODS: 1.11.3

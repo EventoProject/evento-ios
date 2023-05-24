@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PasswordView: View {
-    @Binding var passwordText: String
+    @Binding var model: InputViewModel
     var title = "Password"
     var placeholder = "Enter password"
     
     var body: some View {
         InputTextField(
-            text: $passwordText,
+            model: $model,
             title: title,
             placeholder: placeholder,
             leftIcon: Images.key,

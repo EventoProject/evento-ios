@@ -10,6 +10,7 @@ import Combine
 enum NetworkError: Error {
     case invalidURL
     case invalidResponse
-    case requestFailed
+    case requestFailed(errorText: String)
     case incorrectJSON
+    case encodingFailed
 }

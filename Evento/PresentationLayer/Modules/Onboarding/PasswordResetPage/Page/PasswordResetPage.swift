@@ -13,19 +13,19 @@ struct PasswordResetPage: View {
     var body: some View {
         VStack(spacing: 0) {
             OnboardingPageSubtitleView("Please fill in the fields below to Reset Password ")
-            VerificationCodeView(verificationCode: $viewModel.verificationCode)
+            VerificationCodeView(model: $viewModel.verificationCodeModel)
             PasswordView(
-                passwordText: $viewModel.newPassword,
+                model: $viewModel.newPasswordModel,
                 title: "New password",
                 placeholder: "New password"
             )
             PasswordView(
-                passwordText: $viewModel.confirmPassword,
+                model: $viewModel.confirmPasswordModel,
                 title: "Confirm password",
                 placeholder: "Confirm password"
             )
             RememberPasswordView()
-            ButtonView(text: "Save password") {
+            ButtonView(text: "Save password", isLoading: $viewModel.isLoadingButton) {
                 viewModel.savePassword()
             }.padding(.top, 48)
             Spacer()
@@ -37,11 +37,11 @@ struct PasswordResetPage: View {
 }
 
 private struct VerificationCodeView: View {
-    @Binding var verificationCode: String
+    @Binding var model: InputViewModel
     
     var body: some View {
         InputTextField(
-            text: $verificationCode,
+            model: $model,
             title: "Verification code",
             placeholder: "Verification code",
             leftIcon: Images.email

@@ -21,6 +21,22 @@ extension Container {
             NewsApiManager(webService: res.resolve(WebServiceProtocol.self)!)
         }
         
+        register(OnboardingApiManagerProtocol.self) { res in
+            OnboardingApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
+        register(ProfileApiManagerProtocol.self) { res in
+            ProfileApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
+        register(AddApiManagerProtocol.self) { res in
+            AddApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
+        register(EventsApiManagerProtocol.self) { res in
+            EventsApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
         return self
     }
     
@@ -29,8 +45,12 @@ extension Container {
             MainRouter()
         }
         
+        register(KeychainManagerProtocol.self) { res in
+            KeychainManager()
+        }
+        
         register(WebServiceProtocol.self) { res in
-            WebService()
+            WebService(keychainManager: res.resolve(KeychainManagerProtocol.self)!)
         }.inObjectScope(.container)
     }
     

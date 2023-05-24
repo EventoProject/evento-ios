@@ -20,12 +20,17 @@ final class OnboardingCoordinator: BaseCoordinator {
     
     func start() {
         showSignInPage()
+//        showNewsPage()
     }
 }
 
 private extension OnboardingCoordinator {
     func showSignInPage() {
-        let viewModel = SignInViewModel()
+        let viewModel = SignInViewModel(
+            apiManager: injection.inject(OnboardingApiManagerProtocol.self),
+            webService: injection.inject(WebServiceProtocol.self),
+            keychainManager: injection.inject(KeychainManagerProtocol.self)
+        )
         
         viewModel.didTapForgotPassword = { [weak self] in
             self?.showForgotPasswordPage()
@@ -35,7 +40,7 @@ private extension OnboardingCoordinator {
             self?.showRegistrationPage()
         }
         
-        viewModel.didTapSignIn = { [weak self] _ in
+        viewModel.didTapSignIn = { [weak self] in
             self?.showMainTab()
         }
         
@@ -63,7 +68,12 @@ private extension OnboardingCoordinator {
     }
     
     func showRegistrationPage() {
-        let viewModel = RegistrationViewModel()
+        let viewModel = RegistrationViewModel(apiManager: injection.inject(OnboardingApiManagerProtocol.self))
+        
+        viewModel.showSignInPage = { [weak self] in
+            self?.showSignInPage()
+        }
+        
         let page = UIHostingController(rootView: RegistrationPage(viewModel: viewModel))
         page.title = "Registration"
         router.push(viewController: page, animated: true)
