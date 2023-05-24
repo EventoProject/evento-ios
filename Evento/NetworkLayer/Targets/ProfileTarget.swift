@@ -40,9 +40,9 @@ extension ProfileTarget: EndpointProtocol {
     var task: HTTPTask {
         switch self {
         case let .uploadProfileImage(image, hasImage):
-            var bodyParams: [String: Any] = [
+            let bodyParams: [String: Any] = [
                 "has_image": hasImage,
-                "image_base64": image.convertToBase64String()
+                "image_base64": image.toBase64String()
             ]
             return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
         }

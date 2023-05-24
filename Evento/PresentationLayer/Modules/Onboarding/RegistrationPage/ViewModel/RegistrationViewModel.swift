@@ -28,6 +28,8 @@ final class RegistrationViewModel: ObservableObject {
     }
     
     func createAccount() {
+        guard isValid() else { return }
+        
         let registrationPayload = RegisterPayload(
             email: emailModel.text,
             password: passwordModel.text,
@@ -35,15 +37,49 @@ final class RegistrationViewModel: ObservableObject {
             isCommercial: false
         )
         
-        apiManager.register(payload: registrationPayload).sink(
-            receiveCompletion: { completion in
-                if case let .failure(error) = completion {
-                    print(error)
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.apiManager.register(payload: registrationPayload).sink(
+                receiveCompletion: { completion in
+                    if case let .failure(error) = completion {
+                        print(error)
+                    }
+                },
+                receiveValue: { [weak self] _ in
+                    self?.showSignInPage?()
                 }
-            },
-            receiveValue: { [weak self] _ in
-                self?.showSignInPage?()
-            }
-        ).store(in: &cancellables)
+            ).store(in: &self.cancellables)
+        }
+    }
+}
+
+private extension RegistrationViewModel {
+    func isValid() -> Bool {
+        var isValid = true
+        isValid = isValidModel(&fullNameModel) && isValid
+        isValid = isValidModel(&emailModel) && isValid
+        isValid = isValidModel(&passwordModel) && isValid
+        isValid = isValidConfirmPassword() && isValid
+        return isValid
+    }
+    
+    func isValidModel(_ model: inout InputViewModel) -> Bool {
+        if model.text.isEmpty {
+            model.state = .error(text: "Required field")
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func isValidConfirmPassword() -> Bool {
+        guard isValidModel(&confirmPasswordModel) else { return false }
+        
+        if confirmPasswordModel.text == passwordModel.text {
+            return true
+        } else {
+            confirmPasswordModel.state = .error(text: "Passwords do not match")
+            return false
+        }
     }
 }

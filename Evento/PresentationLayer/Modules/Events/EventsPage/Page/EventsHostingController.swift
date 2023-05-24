@@ -8,13 +8,40 @@
 import SwiftUI
 
 final class EventsHostingController: UIHostingController<EventsPage> {
-    
     let searchBar = UISearchBar()
     let filterButton = UIButton(type: .system)
     let bellButton = UIButton(type: .system)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setup()
+    }
+}
+
+extension EventsHostingController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+        searchBar.searchTextField.rightViewMode = .never
+        navigationItem.rightBarButtonItem = nil
+    }
+        
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.searchTextField.rightViewMode = .always
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bellButton)
+    }
+        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
+
+private extension EventsHostingController {
+    func setup() {
         navigationController?.navigationBar.prefersLargeTitles = false
         let custCgColor = CustColor.purple.cgColor ?? UIColor.purple.cgColor
         navigationController?.navigationBar.tintColor = UIColor(cgColor: custCgColor)
@@ -42,33 +69,11 @@ final class EventsHostingController: UIHostingController<EventsPage> {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bellButton)
     }
     
-    @objc private func filterButtonTapped() {
+    @objc func filterButtonTapped() {
         // Handle filter button tapped
     }
     
-    @objc private func bellButtonTapped() {
+    @objc func bellButtonTapped() {
         // Handle bell button tapped
-    }
-}
-
-extension EventsHostingController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-        searchBar.searchTextField.rightViewMode = .never
-        navigationItem.rightBarButtonItem = nil
-    }
-        
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        searchBar.searchTextField.rightViewMode = .always
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: bellButton)
-    }
-        
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-        
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
     }
 }

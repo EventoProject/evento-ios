@@ -35,6 +35,27 @@
 		268338BE2A17480300B18C7F /* ProfileTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338BD2A17480300B18C7F /* ProfileTarget.swift */; };
 		268338C02A17506A00B18C7F /* ProfileApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338BF2A17506A00B18C7F /* ProfileApiManager.swift */; };
 		268338C32A1750FF00B18C7F /* UploadProfileImageResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338C22A1750FF00B18C7F /* UploadProfileImageResponseModel.swift */; };
+		268338C52A18800400B18C7F /* RoundedBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338C42A18800400B18C7F /* RoundedBorderButton.swift */; };
+		268338C92A189C8200B18C7F /* AddSuccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338C82A189C8200B18C7F /* AddSuccessViewModel.swift */; };
+		268338CE2A189D4B00B18C7F /* AddSuccessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338CD2A189D4B00B18C7F /* AddSuccessPage.swift */; };
+		268338D02A18A1EB00B18C7F /* AddSuccessHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338CF2A18A1EB00B18C7F /* AddSuccessHostingController.swift */; };
+		268338D22A1B2A8800B18C7F /* ErrorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338D12A1B2A8800B18C7F /* ErrorTextView.swift */; };
+		268338D52A1B714C00B18C7F /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338D42A1B714C00B18C7F /* CategoryModel.swift */; };
+		268338D72A1B719600B18C7F /* AddTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338D62A1B719600B18C7F /* AddTarget.swift */; };
+		268338D92A1B733800B18C7F /* AddApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338D82A1B733800B18C7F /* AddApiManager.swift */; };
+		268338DC2A1B742A00B18C7F /* CategoriesResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338DB2A1B742A00B18C7F /* CategoriesResponseModel.swift */; };
+		268338DE2A1B868000B18C7F /* CreateEventPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338DD2A1B868000B18C7F /* CreateEventPayload.swift */; };
+		268338E02A1B8A3200B18C7F /* EventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338DF2A1B8A3100B18C7F /* EventDataModel.swift */; };
+		268338E32A1C6EC600B18C7F /* ErrorResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338E22A1C6EC600B18C7F /* ErrorResponseModel.swift */; };
+		268338E52A1CED9500B18C7F /* EventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338E42A1CED9500B18C7F /* EventsViewModel.swift */; };
+		268338E82A1CEE5900B18C7F /* EventsTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338E72A1CEE5900B18C7F /* EventsTarget.swift */; };
+		268338EA2A1CEEDC00B18C7F /* EventsApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338E92A1CEEDC00B18C7F /* EventsApiManager.swift */; };
+		268338EC2A1D05A900B18C7F /* EventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338EB2A1D05A900B18C7F /* EventsResponseModel.swift */; };
+		268338EE2A1D095C00B18C7F /* EventItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338ED2A1D095B00B18C7F /* EventItemModel.swift */; };
+		268338F02A1DB13200B18C7F /* UIScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338EF2A1DB13200B18C7F /* UIScreen+Extensions.swift */; };
+		268338F42A1DDE9200B18C7F /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338F32A1DDE9200B18C7F /* EventViewModel.swift */; };
+		268338F72A1DDF4100B18C7F /* EventPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338F62A1DDF4100B18C7F /* EventPage.swift */; };
+		268338F92A1DE06F00B18C7F /* EventHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268338F82A1DE06F00B18C7F /* EventHostingController.swift */; };
 		2687712A2A0640B100210AAC /* AddContainerPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268771292A0640B100210AAC /* AddContainerPage.swift */; };
 		2687712E2A06571F00210AAC /* AddFirstStepPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687712D2A06571F00210AAC /* AddFirstStepPage.swift */; };
 		268771302A0657AB00210AAC /* AddCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687712F2A0657AB00210AAC /* AddCoordinator.swift */; };
@@ -48,7 +69,6 @@
 		268771492A0A830D00210AAC /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268771482A0A830D00210AAC /* InputTextView.swift */; };
 		26EA68162A0E449F0014EE94 /* AddForthStepPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA68152A0E449F0014EE94 /* AddForthStepPage.swift */; };
 		26EA68182A0E606C0014EE94 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA68172A0E606C0014EE94 /* InputView.swift */; };
-		26EA681B2A0F38330014EE94 /* RoundedBorderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EA681A2A0F38330014EE94 /* RoundedBorderText.swift */; };
 		2819515E08A0452E2BF17F7E4B29DCF4 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C111061604C981EE5F2B9605BBCFD8A /* SignInViewModel.swift */; };
 		2BAEBCBF809C35FC9F100CDA9E9BF1F4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805B978881C4D499F22C8DBB9F9A6EBC /* MainTabBarController.swift */; };
 		2D2BB89B1B4406A987A145AC0213CA58 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9DF37F25063546F30C5FA0C09EC3A1E /* Montserrat-Regular.otf */; };
@@ -152,6 +172,27 @@
 		268338BD2A17480300B18C7F /* ProfileTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTarget.swift; sourceTree = "<group>"; };
 		268338BF2A17506A00B18C7F /* ProfileApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileApiManager.swift; sourceTree = "<group>"; };
 		268338C22A1750FF00B18C7F /* UploadProfileImageResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileImageResponseModel.swift; sourceTree = "<group>"; };
+		268338C42A18800400B18C7F /* RoundedBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBorderButton.swift; sourceTree = "<group>"; };
+		268338C82A189C8200B18C7F /* AddSuccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSuccessViewModel.swift; sourceTree = "<group>"; };
+		268338CD2A189D4B00B18C7F /* AddSuccessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSuccessPage.swift; sourceTree = "<group>"; };
+		268338CF2A18A1EB00B18C7F /* AddSuccessHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSuccessHostingController.swift; sourceTree = "<group>"; };
+		268338D12A1B2A8800B18C7F /* ErrorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTextView.swift; sourceTree = "<group>"; };
+		268338D42A1B714C00B18C7F /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		268338D62A1B719600B18C7F /* AddTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTarget.swift; sourceTree = "<group>"; };
+		268338D82A1B733800B18C7F /* AddApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddApiManager.swift; sourceTree = "<group>"; };
+		268338DB2A1B742A00B18C7F /* CategoriesResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesResponseModel.swift; sourceTree = "<group>"; };
+		268338DD2A1B868000B18C7F /* CreateEventPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventPayload.swift; sourceTree = "<group>"; };
+		268338DF2A1B8A3100B18C7F /* EventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataModel.swift; sourceTree = "<group>"; };
+		268338E22A1C6EC600B18C7F /* ErrorResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponseModel.swift; sourceTree = "<group>"; };
+		268338E42A1CED9500B18C7F /* EventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewModel.swift; sourceTree = "<group>"; };
+		268338E72A1CEE5900B18C7F /* EventsTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTarget.swift; sourceTree = "<group>"; };
+		268338E92A1CEEDC00B18C7F /* EventsApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsApiManager.swift; sourceTree = "<group>"; };
+		268338EB2A1D05A900B18C7F /* EventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsResponseModel.swift; sourceTree = "<group>"; };
+		268338ED2A1D095B00B18C7F /* EventItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemModel.swift; sourceTree = "<group>"; };
+		268338EF2A1DB13200B18C7F /* UIScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extensions.swift"; sourceTree = "<group>"; };
+		268338F32A1DDE9200B18C7F /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		268338F62A1DDF4100B18C7F /* EventPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPage.swift; sourceTree = "<group>"; };
+		268338F82A1DE06F00B18C7F /* EventHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHostingController.swift; sourceTree = "<group>"; };
 		268771292A0640B100210AAC /* AddContainerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContainerPage.swift; sourceTree = "<group>"; };
 		2687712D2A06571F00210AAC /* AddFirstStepPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFirstStepPage.swift; sourceTree = "<group>"; };
 		2687712F2A0657AB00210AAC /* AddCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoordinator.swift; sourceTree = "<group>"; };
@@ -165,7 +206,6 @@
 		268771482A0A830D00210AAC /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		26EA68152A0E449F0014EE94 /* AddForthStepPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddForthStepPage.swift; sourceTree = "<group>"; };
 		26EA68172A0E606C0014EE94 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
-		26EA681A2A0F38330014EE94 /* RoundedBorderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedBorderText.swift; sourceTree = "<group>"; };
 		28320F047CA0F13ECB3522CF1E51FC01 /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		2875996481865A7E43C318F181ACB569 /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
 		28F329E3BD46B990E40A88D9ED781E64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -298,6 +338,7 @@
 		0CBBAFF41B68A5A25974C81871F5E8F7 /* Add */ = {
 			isa = PBXGroup;
 			children = (
+				268338C62A189BD300B18C7F /* AddSuccessPage */,
 				26EA68132A0E44560014EE94 /* AddForthStepPage */,
 				268771432A0A60DF00210AAC /* AddThirdStepPage */,
 				268771392A080C4C00210AAC /* AddSecondStepPage */,
@@ -315,6 +356,8 @@
 				4DFAA5824D6158AD9A5DC71BE2C18EA0 /* NewsTarget.swift */,
 				268338A62A0FEE4000B18C7F /* OnboardingTarget.swift */,
 				268338BD2A17480300B18C7F /* ProfileTarget.swift */,
+				268338D62A1B719600B18C7F /* AddTarget.swift */,
+				268338E72A1CEE5900B18C7F /* EventsTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -377,6 +420,86 @@
 				268338C22A1750FF00B18C7F /* UploadProfileImageResponseModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		268338C62A189BD300B18C7F /* AddSuccessPage */ = {
+			isa = PBXGroup;
+			children = (
+				268338CA2A189D0D00B18C7F /* Page */,
+				268338C72A189C3B00B18C7F /* ViewModel */,
+			);
+			path = AddSuccessPage;
+			sourceTree = "<group>";
+		};
+		268338C72A189C3B00B18C7F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				268338C82A189C8200B18C7F /* AddSuccessViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		268338CA2A189D0D00B18C7F /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				268338CD2A189D4B00B18C7F /* AddSuccessPage.swift */,
+				268338CF2A18A1EB00B18C7F /* AddSuccessHostingController.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		268338D32A1B711800B18C7F /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				268338D42A1B714C00B18C7F /* CategoryModel.swift */,
+				268338DB2A1B742A00B18C7F /* CategoriesResponseModel.swift */,
+				268338DD2A1B868000B18C7F /* CreateEventPayload.swift */,
+				268338DF2A1B8A3100B18C7F /* EventDataModel.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		268338E12A1C6EAE00B18C7F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				268338E22A1C6EC600B18C7F /* ErrorResponseModel.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		268338E62A1CEDC000B18C7F /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				268338EB2A1D05A900B18C7F /* EventsResponseModel.swift */,
+				268338ED2A1D095B00B18C7F /* EventItemModel.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		268338F12A1DDDC700B18C7F /* EventPage */ = {
+			isa = PBXGroup;
+			children = (
+				268338F52A1DDF2600B18C7F /* Page */,
+				268338F22A1DDE8200B18C7F /* ViewModel */,
+			);
+			path = EventPage;
+			sourceTree = "<group>";
+		};
+		268338F22A1DDE8200B18C7F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				268338F32A1DDE9200B18C7F /* EventViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		268338F52A1DDF2600B18C7F /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				268338F62A1DDF4100B18C7F /* EventPage.swift */,
+				268338F82A1DE06F00B18C7F /* EventHostingController.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		2687712B2A06568B00210AAC /* AddFirstStepPage */ = {
@@ -487,7 +610,7 @@
 		26EA68192A0F381A0014EE94 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				26EA681A2A0F38330014EE94 /* RoundedBorderText.swift */,
+				268338C42A18800400B18C7F /* RoundedBorderButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -550,6 +673,8 @@
 				F53A74B5524DF2717EC082ECC54C6A59 /* NewsApiManager.swift */,
 				268338A82A0FEFCF00B18C7F /* OnboardingApiManager.swift */,
 				268338BF2A17506A00B18C7F /* ProfileApiManager.swift */,
+				268338D82A1B733800B18C7F /* AddApiManager.swift */,
+				268338E92A1CEEDC00B18C7F /* EventsApiManager.swift */,
 			);
 			path = ApiManagers;
 			sourceTree = "<group>";
@@ -658,6 +783,7 @@
 		8EC813677EA12897F42EE66BC2AF91B9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				268338E42A1CED9500B18C7F /* EventsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -697,6 +823,7 @@
 				F6423DEE11A8583EDFCF4DD115C94001 /* PasswordView.swift */,
 				7550EBD206FDAAE8DDD95AB4385A9C7C /* TitleInputTextView.swift */,
 				26EA68172A0E606C0014EE94 /* InputView.swift */,
+				268338D12A1B2A8800B18C7F /* ErrorTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -887,6 +1014,7 @@
 				2683389C2A0F807500B18C7F /* Date+Format.swift */,
 				268338A42A0FB29B00B18C7F /* UIImage+Extensions.swift */,
 				268338B22A11E51500B18C7F /* UIViewController+Extensions.swift */,
+				268338EF2A1DB13200B18C7F /* UIScreen+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -894,6 +1022,9 @@
 		EFADCAB735CB90D300085D8D4C757480 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				268338E62A1CEDC000B18C7F /* Events */,
+				268338E12A1C6EAE00B18C7F /* Common */,
+				268338D32A1B711800B18C7F /* Add */,
 				268338C12A1750D700B18C7F /* Profile */,
 				268338AA2A10959500B18C7F /* Onboarding */,
 				CCA50540956F4C4B814052935D566E2C /* News */,
@@ -904,6 +1035,7 @@
 		F8C479039D99D5593A611AD4AEEDE1DD /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				268338F12A1DDDC700B18C7F /* EventPage */,
 				718C113073D34B938929C3BC6B3C0624 /* EventsPage */,
 				C44762810E620EC18A4249F50F57A24F /* EventsModuleCoordinator.swift */,
 			);
@@ -1167,11 +1299,14 @@
 				2687713F2A08EC9100210AAC /* AddFirstStepViewModel.swift in Sources */,
 				268338C32A1750FF00B18C7F /* UploadProfileImageResponseModel.swift in Sources */,
 				0CB1001DE7DCA0DC18971226EAFBC2E3 /* AppDelegate.swift in Sources */,
+				268338EE2A1D095C00B18C7F /* EventItemModel.swift in Sources */,
 				268338BE2A17480300B18C7F /* ProfileTarget.swift in Sources */,
 				268338AF2A10D6D500B18C7F /* KeychainManager.swift in Sources */,
 				8D27956DE7C31D7E8D9F4DB0680FE5A0 /* Application.swift in Sources */,
+				268338CE2A189D4B00B18C7F /* AddSuccessPage.swift in Sources */,
 				8562A858FD9168751F8526FC3AF5B6FD /* ArticlePage.swift in Sources */,
 				310ED455BF5654B6060F9AF88519900D /* ArticleView.swift in Sources */,
+				268338DC2A1B742A00B18C7F /* CategoriesResponseModel.swift in Sources */,
 				1BF1D31960FBE4BE46BC5358CE786F30 /* BaseCoordinator.swift in Sources */,
 				268771422A0A609100210AAC /* AddSecondStepViewModel.swift in Sources */,
 				185E393CC5A1F4CBC739DC9CCACCD00E /* BaseNavigationController.swift in Sources */,
@@ -1183,25 +1318,33 @@
 				268771352A07AFDE00210AAC /* AddStepIndicatorView.swift in Sources */,
 				268338B32A11E51500B18C7F /* UIViewController+Extensions.swift in Sources */,
 				20A279D1192903056A9EC1470A788EA4 /* CustColor.swift in Sources */,
+				268338E32A1C6EC600B18C7F /* ErrorResponseModel.swift in Sources */,
+				268338E02A1B8A3200B18C7F /* EventDataModel.swift in Sources */,
 				268771372A07F5E800210AAC /* ImagePickerPage.swift in Sources */,
 				F58BD6CB3F62DFAA8B76BBCE20A3E72C /* CustInject.swift in Sources */,
 				268338A32A0F91B600B18C7F /* AddThirdStepViewModel.swift in Sources */,
 				46C9FB4F1414FEECDECB107A4E79A5B0 /* CustInjection.swift in Sources */,
 				3AABB2DC98CBD6EA0A7F171CDDA60A5F /* CustLinearGradient.swift in Sources */,
 				43C3B144CAC47677E4D4CA30A8790539 /* CustText.swift in Sources */,
+				268338C52A18800400B18C7F /* RoundedBorderButton.swift in Sources */,
+				268338D52A1B714C00B18C7F /* CategoryModel.swift in Sources */,
 				2687712E2A06571F00210AAC /* AddFirstStepPage.swift in Sources */,
-				26EA681B2A0F38330014EE94 /* RoundedBorderText.swift in Sources */,
 				84D38FFDAFC4DEF4362C35D759946D94 /* EmailView.swift in Sources */,
 				B9995CF27D8A049BB58E351E63B1CD12 /* EndLinkText.swift in Sources */,
+				268338F02A1DB13200B18C7F /* UIScreen+Extensions.swift in Sources */,
 				268771302A0657AB00210AAC /* AddCoordinator.swift in Sources */,
 				BEDFAFA31C436904FB23FD39AEA7FABF /* EventsHostingController.swift in Sources */,
 				9517411725F7356E66FAD430A5C4876A /* EventsModuleCoordinator.swift in Sources */,
+				268338F42A1DDE9200B18C7F /* EventViewModel.swift in Sources */,
 				024E508F998E6172AC0440CBA454E9AC /* EventsPage.swift in Sources */,
+				268338F72A1DDF4100B18C7F /* EventPage.swift in Sources */,
 				268338A52A0FB29B00B18C7F /* UIImage+Extensions.swift in Sources */,
+				268338E82A1CEE5900B18C7F /* EventsTarget.swift in Sources */,
 				268338AC2A1095E100B18C7F /* LoginResponseModel.swift in Sources */,
 				59CA8E6D9D38C77F9788AE903B45859D /* FavoritesModuleCoordinator.swift in Sources */,
 				71A2B3381ADD760A37D5592D2FC0C828 /* ForgotPasswordPage.swift in Sources */,
 				268771332A07AE1000210AAC /* AddStepPageTitleView.swift in Sources */,
+				268338F92A1DE06F00B18C7F /* EventHostingController.swift in Sources */,
 				3A771B97825168E60B32E216229998F9 /* ForgotPasswordViewModel.swift in Sources */,
 				788A704B4975EA87E0BCD5ABF7045EDB /* HTTPMethod.swift in Sources */,
 				ABCB3F1AB771603E69ADD954DEABDC65 /* Images.swift in Sources */,
@@ -1211,19 +1354,24 @@
 				65DF252F2F376150B8DA3A58D50B139A /* MontserratFont.swift in Sources */,
 				268338BC2A1335E000B18C7F /* RegistrationViewModel.swift in Sources */,
 				7769F66D079D473FF0C0B2C0F305E4B2 /* NetworkError.swift in Sources */,
+				268338D22A1B2A8800B18C7F /* ErrorTextView.swift in Sources */,
 				268338B12A11CC4D00B18C7F /* HTTPTask.swift in Sources */,
 				39932778270BDCEAE93F585D394CD528 /* NewsApiManager.swift in Sources */,
 				19ED0A8E8FA548238545E1B45A786E5A /* NewsPage.swift in Sources */,
+				268338EC2A1D05A900B18C7F /* EventsResponseModel.swift in Sources */,
 				97C7B98D2EE4D65F7DB652FDC8F23225 /* NewsPageViewModel.swift in Sources */,
 				268771462A0A61D400210AAC /* AddThirdStepPage.swift in Sources */,
 				F1228887AE0FB7F32950FBFB9BA09A12 /* NewsTarget.swift in Sources */,
 				01E37350136049AC35A5A9CF2B2A6C0F /* OnboardingCoordinator.swift in Sources */,
 				EF39980131F1B0C63B3C61EF911710D3 /* OnboardingPageSubtitleView.swift in Sources */,
+				268338D02A18A1EB00B18C7F /* AddSuccessHostingController.swift in Sources */,
 				3B421B51AC5B288AE6B23ED0D2EA9870 /* PasswordResetPage.swift in Sources */,
 				82C36C0D4BDFFE011DE55BE2F77645CC /* PasswordResetViewModel.swift in Sources */,
 				BCD14BD4441C43D2914C2D7F2325694C /* PasswordView.swift in Sources */,
 				268338C02A17506A00B18C7F /* ProfileApiManager.swift in Sources */,
 				A88E0BF0664F5ED6F850A477C7C39E19 /* ProfileModuleCoordinator.swift in Sources */,
+				268338EA2A1CEEDC00B18C7F /* EventsApiManager.swift in Sources */,
+				268338C92A189C8200B18C7F /* AddSuccessViewModel.swift in Sources */,
 				612AEB1994ABD9E4FB61490319232435 /* RegistrationPage.swift in Sources */,
 				2683389D2A0F807500B18C7F /* Date+Format.swift in Sources */,
 				1066FEA5B76BB10E2F3FFF86340E8C47 /* Router.swift in Sources */,
@@ -1235,15 +1383,19 @@
 				2819515E08A0452E2BF17F7E4B29DCF4 /* SignInViewModel.swift in Sources */,
 				CDE0126A266C629554D93147210C82F9 /* TitleInputTextView.swift in Sources */,
 				23CBB11DD8E17E00E0A2562E7C49853F /* Typealiases.swift in Sources */,
+				268338DE2A1B868000B18C7F /* CreateEventPayload.swift in Sources */,
 				CC78BB92F62D5818D89E6FD5563776CB /* UIWindow+Extensions.swift in Sources */,
 				268338B72A1331EF00B18C7F /* RegisterPayload.swift in Sources */,
 				8CEF37576F9C1C4E8B9CEEBB364BC6C8 /* URLRequest+Extensions.swift in Sources */,
+				268338E52A1CED9500B18C7F /* EventsViewModel.swift in Sources */,
 				2687713C2A080D1A00210AAC /* AddSecondStepPage.swift in Sources */,
 				25C2DBF1A5BF02A2A892A96937A968C0 /* UnderlinedTextView.swift in Sources */,
 				53B296F402B7BC7B91468950A89F1094 /* ViewController.swift in Sources */,
 				26EA68182A0E606C0014EE94 /* InputView.swift in Sources */,
+				268338D72A1B719600B18C7F /* AddTarget.swift in Sources */,
 				268771492A0A830D00210AAC /* InputTextView.swift in Sources */,
 				268338A02A0F916800B18C7F /* AddForthStepViewModel.swift in Sources */,
+				268338D92A1B733800B18C7F /* AddApiManager.swift in Sources */,
 				B4DB0B4A889D3D57F4ED42209A4378AF /* WebService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,7 +15,7 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext() ?? self
     }
     
-    func convertToBase64String() -> String {
+    func toBase64String() -> String {
         return self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
     }
 }

@@ -16,5 +16,6 @@ struct EmailView: View {
             placeholder: "Your E-mail",
             leftIcon: Images.email
         )
+        .keyboardType(.emailAddress)
     }
 }

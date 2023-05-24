@@ -83,7 +83,9 @@ class WebService: WebServiceProtocol {
                             self.handleSessionExpiration()
                         }
                     }
-                    throw NetworkError.requestFailed
+                    
+                    self.printErrorResponse(data: data)
+                    throw NetworkError.requestFailed(errorText: self.getErrorText(data: data))
                 }
                 return data
             }
@@ -181,6 +183,23 @@ private extension WebService {
             return "text/plain"
         default:
             return "application/octet-stream"
+        }
+    }
+    
+    func printErrorResponse(data: Data) {
+        // Print error response if available
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("Received Error Response (JSON):")
+            print(jsonString)
+        }
+    }
+    
+    func getErrorText(data: Data) -> String {
+        // Decode error
+        if let errorModel = try? JSONDecoder().decode(ErrorResponseModel.self, from: data) {
+            return errorModel.error
+        } else {
+            return "Something went wrong"
         }
     }
 }

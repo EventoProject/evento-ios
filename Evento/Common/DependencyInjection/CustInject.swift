@@ -29,6 +29,14 @@ extension Container {
             ProfileApiManager(webService: res.resolve(WebServiceProtocol.self)!)
         }
         
+        register(AddApiManagerProtocol.self) { res in
+            AddApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
+        register(EventsApiManagerProtocol.self) { res in
+            EventsApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
         return self
     }
     

@@ -8,6 +8,9 @@
 import UIKit
 
 final class AddModuleCoordinator: BaseCoordinator {
+    // MARK: - Callbacks
+    var openEventsModule: VoidCallback?
+    
     init(injection: CustInjection, router: Router, navigationController: UINavigationController) {
         super.init(injection: injection, router: router)
         router.set(navigationController: navigationController)
@@ -21,6 +24,7 @@ final class AddModuleCoordinator: BaseCoordinator {
 private extension AddModuleCoordinator {
     func showAddPage() {
         let page = AddContainerPage(injection: injection)
+        page.openEventsModule = openEventsModule
         router.set(viewControllers: [page], animated: true)
     }
 }

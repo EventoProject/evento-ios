@@ -76,6 +76,9 @@ private struct InputFieldView: View {
                 .background(backgroundColor)
         )
         .cornerRadius(15)
+        .onChange(of: model.text) { _ in
+            model.state = .default
+        }
     }
 }
 
@@ -151,17 +154,5 @@ private struct RightIconView: View {
                 Image(uiImage: Images.openEye)
             }
         })
-    }
-}
-
-private struct ErrorTextView: View {
-    let text: String
-    
-    var body: some View {
-        HStack(spacing: 3) {
-            Image(uiImage: Images.errorIcon)
-            CustText(text: text, weight: .regular, size: 12)
-                .foregroundColor(CustColor.errorColor)
-        }
     }
 }

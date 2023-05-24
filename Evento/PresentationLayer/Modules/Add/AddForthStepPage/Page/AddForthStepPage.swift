@@ -20,23 +20,28 @@ struct AddForthStepPage: View {
             AddStepIndicatorView(stepNumber: 4)
                 .padding(.bottom, 30)
             
-            FormatsView(selecetdFormat: $viewModel.selectedFormat, formats: viewModel.formats) { format in
+            FormatsView(
+                selecetedFormatModel: $viewModel.selectedFormatModel,
+                flowModel: $viewModel.addFlowModel,
+                formats: viewModel.formats
+            ) { format in
                 viewModel.didSelectFormat(format: format)
             }
             PriceMainView(inputModel: $viewModel.priceModel, flowModel: $viewModel.addFlowModel)
             DateAndTimePicker(addFlowModel: $viewModel.addFlowModel)
-            LocationView(inputModel: $viewModel.locationModel, flowModel: $viewModel.addFlowModel)
+            AddressView(inputModel: $viewModel.addressModel, flowModel: $viewModel.addFlowModel)
             Spacer()
             
             ButtonView(text: "Publish an event", isLoading: $viewModel.isLoadingButton) {
-                viewModel.didTapPublishEvent?()
+                viewModel.didTapPublishEvent()
             }.padding(.bottom, 20)
         }.padding(.horizontal, 20)
     }
 }
 
 private struct FormatsView: View {
-    @Binding var selecetdFormat: String?
+    @Binding var selecetedFormatModel: InputViewModel
+    @Binding var flowModel: AddFlowModel
     let formats: [String]
     let didSelectFormat: Callback<String>
     
@@ -45,57 +50,70 @@ private struct FormatsView: View {
             VStack(alignment: .leading) {
                 CustText(text: "Format:", weight: .medium, size: 16)
                 FormatButtonsView(
-                    selecetedFormat: $selecetdFormat,
+                    selecetedFormatModel: $selecetedFormatModel,
                     formats: formats,
                     didSelectFormat: didSelectFormat
                 )
+                if case let .error(text) = selecetedFormatModel.state {
+                    ErrorTextView(text: text)
+                }
             }
             Spacer()
         }.padding(.bottom, 26)
+        .onChange(of: selecetedFormatModel) {
+            flowModel.format = $0.text
+        }
     }
     
     private struct FormatButtonsView: View {
-        @Binding var selecetedFormat: String?
+        @Binding var selecetedFormatModel: InputViewModel
         let formats: [String]
         let didSelectFormat: Callback<String>
         
         var body: some View {
             HStack(spacing: 13) {
                 ForEach(formats, id: \.self) { format in
-                    
-                    let isSelected = Binding<Bool> (
-                        get: {
-                            selecetedFormat == format
-                        },
-                        set: { _ in
-                            print("Error: trying to set binding property value")
-                        }
+                    FormatRoundedButton(
+                        selectedFormatModel: $selecetedFormatModel,
+                        format: format,
+                        didSelectFormat: didSelectFormat
                     )
-                    
-                    RoundedBorderButton(
-                        isSelected: isSelected,
-                        text: format
-                    ) {
-                        didSelectFormat(format)
-                    }
                 }
             }
         }
     }
-}
-
-private struct RoundedBorderButton: View {
-    @Binding var isSelected: Bool
-    let text: String
-    let didTap: VoidCallback
     
-    var body: some View {
-        Button(
-            action: didTap,
-            label: {
-                RoundedBorderText(isSelected: $isSelected, text: text)
+    private struct FormatRoundedButton: View {
+        @Binding var selectedFormatModel: InputViewModel
+        let format: String
+        let didSelectFormat: Callback<String>
+        @State private var isSelected: Bool
+        
+        init(
+            selectedFormatModel: Binding<InputViewModel>,
+            format: String,
+            didSelectFormat: @escaping Callback<String>
+        ) {
+            self._selectedFormatModel = selectedFormatModel
+            self.format = format
+            self.didSelectFormat = didSelectFormat
+            self.isSelected = selectedFormatModel.wrappedValue.text == format
+        }
+        
+        var body: some View {
+            RoundedBorderButton(
+                isSelected: $isSelected,
+                text: format
+            ) {
+                didSelectFormat(format)
             }
-        )
+            .onChange(of: selectedFormatModel.text) {
+                isSelected = format == $0
+                if isSelected {
+                    selectedFormatModel.state = .default
+                }
+            }
+        }
     }
 }
 
@@ -123,14 +141,22 @@ private struct PriceMainView: View {
     
     private struct FreeView: View {
         @Binding var inputModel: InputViewModel
+        @State private var isSelected: Bool
+        
+        init(inputModel: Binding<InputViewModel>) {
+            self._inputModel = inputModel
+            isSelected = Int(inputModel.wrappedValue.text) ?? 0 == 0
+        }
         
         var body: some View {
-            HStack {
-                Image(uiImage: Images.downArrowInCircle)
-                
-                CustText(text: "Free", weight: .regular, size: 16)
+            RoundedBorderButton(
+                isSelected: $isSelected,
+                text: "Free",
+                didTap: {}
+            )
+            .onChange(of: inputModel) {
+                isSelected = Int($0.text) ?? 0 == 0
             }
-            .background(Int(inputModel.text) ?? 0 > 0 ? Color.white : Color.yellow)
         }
     }
 }
@@ -142,7 +168,7 @@ private struct DateAndTimePicker: View {
     var body: some View {
         DatePicker(selection: $selectedDate,
                    label: {
-            CustText(text: "Select date:", weight: .medium, size: 16)
+            CustText(text: "Date and time:", weight: .medium, size: 16)
         }
         )
         .environment(\.locale, Locale(identifier: "kz"))
@@ -156,25 +182,32 @@ private struct DateAndTimePicker: View {
     }
 }
 
-private struct LocationView: View {
+private struct AddressView: View {
     @Binding var inputModel: InputViewModel
     @Binding var flowModel: AddFlowModel
     
     var body: some View {
         InputTextField(
             model: $inputModel,
-            title: "Location:",
-            placeholder: "Enter the address",
+            title: "Address:",
+            placeholder: "Enter the full address",
             inputViewBackgroundColor: CustColor.backgroundColor
         )
         .onChange(of: inputModel) {
-            flowModel.location = $0.text
+            flowModel.fullAddress = $0.text
         }
     }
 }
 
 struct AddForthStepPage_Previews: PreviewProvider {
     static var previews: some View {
-        AddForthStepPage(viewModel: AddForthStepViewModel(addFlowModel: AddFlowModel()))
+        AddForthStepPage(viewModel: AddForthStepViewModel(
+            addFlowModel: AddFlowModel(),
+            apiManager: AddApiManager(
+                webService: WebService(
+                    keychainManager: KeychainManager()
+                )
+            )
+        ))
     }
 }

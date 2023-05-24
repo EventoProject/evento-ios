@@ -15,6 +15,18 @@ final class ForgotPasswordViewModel: ObservableObject {
     var resetPassword: VoidCallback?
     
     func getVerificationCode() {
+        guard isValidModel(&emailModel) else { return }
         resetPassword?()
+    }
+}
+
+private extension ForgotPasswordViewModel {
+    func isValidModel(_ model: inout InputViewModel) -> Bool {
+        if model.text.isEmpty {
+            model.state = .error(text: "Required field")
+            return false
+        } else {
+            return true
+        }
     }
 }

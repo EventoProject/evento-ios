@@ -31,4 +31,7 @@ enum Images {
     static let uploadImagePlaceholder = UIImage(named: "upload_image_placeholder") ?? UIImage()
     static let downArrowInCircle = UIImage(named: "down_arrow_in_circle") ?? UIImage()
     static let errorIcon = UIImage(named: "error_icon") ?? UIImage()
+    static let logoSmileGradient = UIImage(named: "logo_smile_gradient") ?? UIImage()
+    static let like = UIImage(named: "like") ?? UIImage()
+    static let likeFilled = UIImage(named: "like_filled") ?? UIImage()
 }

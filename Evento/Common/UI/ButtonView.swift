@@ -50,5 +50,8 @@ struct ButtonView: View {
                 CustLinearGradient
             ).cornerRadius(20)
         })
+        .onChange(of: isLoading) {
+            print($0)
+        }
     }
 }

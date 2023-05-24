@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 final class AddContainerPage: UIViewController {
+    // MARK: - Callbacks
+    var openEventsModule: VoidCallback?
+    
     private let injection: CustInjection
     private var addCoordinator: AddCoordinator?
     private lazy var router = injection.inject(Router.self)
@@ -21,7 +24,7 @@ final class AddContainerPage: UIViewController {
         navigationController.navigationBar.backIndicatorImage = backImage
         navigationController.navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationController.view.layer.cornerRadius = 30
-        navigationController.view.layer.masksToBounds = true
+        navigationController.view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return navigationController
     }()
     
@@ -61,6 +64,12 @@ private extension AddContainerPage {
             router: router,
             navigationController: addNavigationController
         )
+        
+        addCoordinator?.isParentNavBarHidden = { [weak self] hidden in
+            self?.navigationItem.title = hidden ? "" : "Create your own event"
+        }
+        addCoordinator?.openEventsModule = openEventsModule
+        
         addCoordinator?.start()
     }
 }

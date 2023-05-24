@@ -40,18 +40,24 @@ final class SignInViewModel: ObservableObject {
         guard isValid() else { return }
         
         isLoadingButton = true
-        apiManager.login(email: emailModel.text, password: passwordModel.text).sink(
-            receiveCompletion: { [weak self] completion in
-                if case let .failure(error) = completion {
-                    print(error)
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.apiManager.login(
+                email: self.emailModel.text,
+                password: self.passwordModel.text
+            ).sink(
+                receiveCompletion: { [weak self] completion in
+                    if case let .failure(error) = completion {
+                        print(error)
+                    }
+                    self?.isLoadingButton = false
+                }, receiveValue: { [weak self] responseModel in
+                    guard let self else { return }
+                    self.save(accessToken: responseModel.accessToken)
+                    self.didTapSignIn?()
                 }
-                self?.isLoadingButton = false
-            }, receiveValue: { [weak self] responseModel in
-                guard let self else { return }
-                self.save(accessToken: responseModel.accessToken)
-                self.didTapSignIn?()
-            }
-        ).store(in: &cancellables)
+            ).store(in: &self.cancellables)
+        }
     }
 }
 
