@@ -9,6 +9,7 @@ import UIKit
 
 enum ProfileTarget {
     case uploadProfileImage(image: UIImage, hasImage: Bool)
+    case getProfile
 }
 
 extension ProfileTarget: EndpointProtocol {
@@ -20,6 +21,8 @@ extension ProfileTarget: EndpointProtocol {
         switch self {
         case .uploadProfileImage:
             return "auth/profile/upload-image"
+        case .getProfile:
+            return "auth/profile"
         }
     }
     
@@ -27,6 +30,8 @@ extension ProfileTarget: EndpointProtocol {
         switch self {
         case .uploadProfileImage:
             return .post
+        case .getProfile:
+            return .get
         }
     }
     
@@ -45,6 +50,8 @@ extension ProfileTarget: EndpointProtocol {
                 "image_base64": image.toBase64String()
             ]
             return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
+        default :
+            return .request
         }
     }
 }

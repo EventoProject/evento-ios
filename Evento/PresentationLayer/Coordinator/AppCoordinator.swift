@@ -30,7 +30,7 @@ final class AppCoordinator {
     
     func reauthorize() {
         showAuthorizationPage()
-        navigationController.showAlert(message: "Your session has expired please relogin")
+//        navigationController.showAlert(message: "Your session has expired please relogin")
     }
 }
 

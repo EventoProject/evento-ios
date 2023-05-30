@@ -49,7 +49,7 @@ private extension EventsHostingController {
         // Set up the search bar
         searchBar.placeholder = "Search"
         searchBar.delegate = self
-        
+                
         // Set up the filter button
         filterButton.setImage(Images.filter.resize(to: CGSize(width: 28, height: 28)), for: .normal)
         filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)

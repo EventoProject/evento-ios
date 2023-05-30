@@ -34,4 +34,5 @@ enum Images {
     static let logoSmileGradient = UIImage(named: "logo_smile_gradient") ?? UIImage()
     static let like = UIImage(named: "like") ?? UIImage()
     static let likeFilled = UIImage(named: "like_filled") ?? UIImage()
+    static let settingImage = UIImage(named: "setting") ?? UIImage()
 }

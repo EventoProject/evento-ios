@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserModel: Decodable, Hashable {
+    let imageLink: String
     let email: String
     let passwordChangedAt: String
     let isCommercial: Bool
@@ -15,6 +16,7 @@ struct UserModel: Decodable, Hashable {
     let createdAt: String
     
     enum CodingKeys: String, CodingKey {
+        case imageLink = "image_link"
         case email
         case passwordChangedAt = "password_changed_at"
         case isCommercial = "is_commercial"

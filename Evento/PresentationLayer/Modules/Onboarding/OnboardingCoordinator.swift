@@ -20,7 +20,6 @@ final class OnboardingCoordinator: BaseCoordinator {
     
     func start() {
         showSignInPage()
-//        showNewsPage()
     }
 }
 
@@ -43,7 +42,7 @@ private extension OnboardingCoordinator {
         viewModel.didTapSignIn = { [weak self] in
             self?.showMainTab()
         }
-        
+
         let page = UIHostingController(rootView: SignInPage(viewModel: viewModel))
         router.set(viewControllers: [page], animated: false)
     }

@@ -10,6 +10,7 @@ import Combine
 
 protocol ProfileApiManagerProtocol {
     func uploadProfileImage(image: UIImage, hasImage: Bool) -> AnyPublisher<UploadProfileImageResponseModel, NetworkError>
+    func getProfile() -> AnyPublisher<UserModel, NetworkError>
 }
 
 final class ProfileApiManager: ProfileApiManagerProtocol {
@@ -22,4 +23,8 @@ final class ProfileApiManager: ProfileApiManagerProtocol {
     func uploadProfileImage(image: UIImage, hasImage: Bool) -> AnyPublisher<UploadProfileImageResponseModel, NetworkError> {
         webService.request(ProfileTarget.uploadProfileImage(image: image, hasImage: hasImage))
     }
+    func getProfile() -> AnyPublisher<UserModel, NetworkError> {
+        webService.request(ProfileTarget.getProfile)
+    }
 }
+
