@@ -14,13 +14,12 @@ final class AddForthStepViewModel: ObservableObject {
     
     // MARK: - Published parameters
     @Published var addFlowModel: AddFlowModel
-    @Published var selectedFormatModel = InputViewModel()
     @Published var priceModel = InputViewModel()
     @Published var addressModel = InputViewModel()
     @Published var isLoadingButton = false
     
     // MARK: - Public parameters
-    let formats = ["Offline", "Online"]
+    var formats = ["Offline", "Online"]
     
     // MARK: - Private parameters
     private let apiManager: AddApiManagerProtocol
@@ -29,10 +28,6 @@ final class AddForthStepViewModel: ObservableObject {
     init(addFlowModel: AddFlowModel, apiManager: AddApiManagerProtocol) {
         self.addFlowModel = addFlowModel
         self.apiManager = apiManager
-    }
-    
-    func didSelectFormat(format: String) {
-        selectedFormatModel.text = format
     }
     
     func didTapPublishEvent() {
@@ -45,7 +40,6 @@ private extension AddForthStepViewModel {
     // MARK: - Validation
     func isValid() -> Bool {
         var isValid = true
-        isValid = isValidSelectedFormat() && isValid
         isValid = isValidModel(&addressModel) && isValid
         return isValid
     }
@@ -59,27 +53,23 @@ private extension AddForthStepViewModel {
         }
     }
     
-    func isValidSelectedFormat() -> Bool {
-        if selectedFormatModel.text.isEmpty {
-            selectedFormatModel.state = .error(text: "Need to choose")
-            return false
-        } else {
-            return true
-        }
-    }
-    
     // MARK: - Api methods
     func createEvent() {
-        guard let imageBase64 = addFlowModel.image?.toBase64String() else { return }
+        guard
+            let imageBase64 = addFlowModel.image?.toBase64String(),
+            let category = addFlowModel.selectedCategory
+        else { return }
         
         let payload = CreateEventPayload(
             name: addFlowModel.eventName,
             description: addFlowModel.description,
+            category: category.name,
             format: addFlowModel.format,
-            cost: "Free",
+            cost: getCostText(),
             date: addFlowModel.selectedDate,
             duration: "2 hours",
-            ageLimit: "16+",
+            ageLimit: addFlowModel.ageLimit,
+            websiteLink: addFlowModel.webSiteLink,
             imageBase64: imageBase64
         )
         
@@ -97,6 +87,15 @@ private extension AddForthStepViewModel {
                     self?.showSuccessPage?()
                 }
             ).store(in: &self.cancellables)
+        }
+    }
+    
+    func getCostText() -> String {
+        guard let cost = Int(addFlowModel.priceText) else { return "Free" }
+        if cost == 0 {
+            return "Free"
+        } else {
+            return "\(cost)"
         }
     }
 }

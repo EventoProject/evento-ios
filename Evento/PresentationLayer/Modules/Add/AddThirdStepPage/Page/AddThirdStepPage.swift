@@ -39,7 +39,7 @@ private struct DescriptionField: View {
         InputTextView(
             model: $inputModel,
             title: "Enter a description of the event:",
-            placeholder: "Minimum 150 words ...",
+            placeholder: "Minimum 100 symbols ...",
             limit: 1000
         ).padding(.bottom, 25)
             .onChange(of: inputModel) {

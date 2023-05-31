@@ -14,6 +14,7 @@ struct RegistrationPage: View {
         VStack(spacing: 0) {
             OnboardingPageSubtitleView("Please fill in the fields below to create a new account")
             FullNameView(model: $viewModel.fullNameModel)
+            NicknameView(model: $viewModel.usernameModel)
             EmailView(model: $viewModel.emailModel)
                 .padding(.top, 25)
             PasswordView(model: $viewModel.passwordModel, placeholder: "New password")
@@ -43,6 +44,19 @@ private struct FullNameView: View {
             placeholder: "Your Full Name",
             leftIcon: Images.personCircle
         ).padding(.top, 35)
+    }
+}
+
+private struct NicknameView: View {
+    @Binding var model: InputViewModel
+    
+    var body: some View {
+        InputTextField(
+            model: $model,
+            title: "Nickname",
+            placeholder: "Your nickname",
+            leftIcon: Images.personCircle
+        ).padding(.top, 25)
     }
 }
 

@@ -35,4 +35,9 @@ enum Images {
     static let like = UIImage(named: "like") ?? UIImage()
     static let likeFilled = UIImage(named: "like_filled") ?? UIImage()
     static let settingImage = UIImage(named: "setting") ?? UIImage()
+    static let menuDownArrow = UIImage(named: "menu_down_arow") ?? UIImage()
+    static let save = UIImage(named: "save") ?? UIImage()
+    static let saveFilled = UIImage(named: "save_filled") ?? UIImage()
+    static let share = UIImage(named: "share") ?? UIImage()
+    static let send = UIImage(named: "send") ?? UIImage()
 }

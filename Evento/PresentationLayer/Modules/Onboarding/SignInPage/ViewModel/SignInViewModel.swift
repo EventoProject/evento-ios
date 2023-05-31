@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
+private enum Constants {
+    static let avatarImageUrlKey = "avatarImageUrlKey"
+}
+
 final class SignInViewModel: ObservableObject {
     // MARK: - Published parameters
     @Published var emailModel = InputViewModel()
@@ -54,6 +58,7 @@ final class SignInViewModel: ObservableObject {
                 }, receiveValue: { [weak self] responseModel in
                     guard let self else { return }
                     self.save(accessToken: responseModel.accessToken)
+                    self.saveImageUrl(responseModel.user.imageLink)
                     self.didTapSignIn?()
                 }
             ).store(in: &self.cancellables)
@@ -64,6 +69,10 @@ final class SignInViewModel: ObservableObject {
 private extension SignInViewModel {
     func save(accessToken: String) {
         webService.set(accessToken: accessToken)
+    }
+    
+    func saveImageUrl(_ url: String) {
+        UserDefaults.standard.set(url, forKey: Constants.avatarImageUrlKey)
     }
     
     func isValid() -> Bool {

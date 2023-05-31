@@ -12,6 +12,7 @@ final class RegistrationViewModel: ObservableObject {
     // MARK: - Published parameters
     @Published var fullNameModel = InputViewModel()
     @Published var emailModel = InputViewModel()
+    @Published var usernameModel = InputViewModel()
     @Published var passwordModel = InputViewModel()
     @Published var confirmPasswordModel = InputViewModel()
     @Published var isLoadingButton = false
@@ -31,6 +32,7 @@ final class RegistrationViewModel: ObservableObject {
         guard isValid() else { return }
         
         let registrationPayload = RegisterPayload(
+            username: usernameModel.text,
             email: emailModel.text,
             password: passwordModel.text,
             name: fullNameModel.text,
@@ -57,6 +59,7 @@ private extension RegistrationViewModel {
     func isValid() -> Bool {
         var isValid = true
         isValid = isValidModel(&fullNameModel) && isValid
+        isValid = isValidModel(&usernameModel) && isValid
         isValid = isValidModel(&emailModel) && isValid
         isValid = isValidModel(&passwordModel) && isValid
         isValid = isValidConfirmPassword() && isValid

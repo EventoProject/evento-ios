@@ -8,7 +8,12 @@
 import SwiftUI
 
 private enum Constants {
-    static let titleFont = MontserratFont.createUIFont(weight: .semiBold, size: 23)
+    static let largeTitleFont = MontserratFont.createUIFont(weight: .semiBold, size: 23)
+    static let titleFont = MontserratFont.createUIFont(weight: .semiBold, size: 20)
+    static let largeTitleAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: UIColor.black,
+        .font: largeTitleFont
+    ]
     static let titleAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: UIColor.black,
         .font: titleFont
@@ -16,16 +21,22 @@ private enum Constants {
 }
 
 final class EventHostingController: UIHostingController<EventPage> {
+    private let navBarTitleView: UILabel = {
+        let label = UILabel()
+        label.font = MontserratFont.createUIFont(weight: .semiBold, size: 20)
+        label.text = "Event"
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
-        title = "Event"
     }
     
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = Constants.titleAttributes
+        navigationController?.navigationBar.largeTitleTextAttributes = Constants.largeTitleAttributes
+        navigationController?.navigationBar.titleTextAttributes = Constants.titleAttributes
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.barTintColor = CustColor.navigationBarColor
 
