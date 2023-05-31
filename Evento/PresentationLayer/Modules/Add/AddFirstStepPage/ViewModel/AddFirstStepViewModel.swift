@@ -16,8 +16,9 @@ struct AddFlowModel {
     var priceText = ""
     var selectedDate = ""
     var fullAddress = ""
-    var format = ""
+    var format = "Offline"
     var image: UIImage?
+    var ageLimit = "0+"
 }
 
 struct ImageModel: Hashable {

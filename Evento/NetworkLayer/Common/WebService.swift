@@ -127,7 +127,9 @@ class WebService: WebServiceProtocol {
 
 private extension WebService {
     func handleSessionExpiration() {
-        Application.shared.reauthorize()
+        DispatchQueue.main.async {
+            Application.shared.reauthorize()
+        }
     }
     
     func createBody(parameters: [String: Any]?, boundary: String) -> Data {

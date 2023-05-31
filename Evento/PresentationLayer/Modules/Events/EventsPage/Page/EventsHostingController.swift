@@ -8,9 +8,35 @@
 import SwiftUI
 
 final class EventsHostingController: UIHostingController<EventsPage> {
-    let searchBar = UISearchBar()
-    let filterButton = UIButton(type: .system)
-    let bellButton = UIButton(type: .system)
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Search"
+        searchBar.delegate = self
+        searchBar.searchTextField.rightView = filterButton
+        return searchBar
+    }()
+    private lazy var filterButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(Images.filter.resize(to: CGSize(width: 28, height: 28)), for: .normal)
+        button.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    private lazy var bellButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(Images.bellWithBadge, for: .normal)
+        button.addTarget(self, action: #selector(bellButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    private let viewModel: EventsViewModel
+    
+    init(viewModel: EventsViewModel) {
+        self.viewModel = viewModel
+        super.init(rootView: EventsPage(viewModel: viewModel))
+    }
+    
+    @MainActor required dynamic init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,23 +72,10 @@ private extension EventsHostingController {
         let custCgColor = CustColor.purple.cgColor ?? UIColor.purple.cgColor
         navigationController?.navigationBar.tintColor = UIColor(cgColor: custCgColor)
         
-        // Set up the search bar
-        searchBar.placeholder = "Search"
-        searchBar.delegate = self
-        
-        // Set up the filter button
-        filterButton.setImage(Images.filter.resize(to: CGSize(width: 28, height: 28)), for: .normal)
-        filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
-        
-        // Set up the bell button
-        bellButton.setImage(Images.bellWithBadge, for: .normal)
-        bellButton.addTarget(self, action: #selector(bellButtonTapped), for: .touchUpInside)
-        
         // Set the search bar as the title view of the navigation controller
         navigationItem.titleView = searchBar
         
-        // Set the filter button as the right navigation bar button item of the search bar
-        searchBar.searchTextField.rightView = filterButton
+        // For showing filter button
         searchBar.searchTextField.rightViewMode = .always
         
         // Set the bell button as the right navigation bar button item of the navigation controller
@@ -70,7 +83,7 @@ private extension EventsHostingController {
     }
     
     @objc func filterButtonTapped() {
-        // Handle filter button tapped
+        viewModel.didTapFilter?()
     }
     
     @objc func bellButtonTapped() {

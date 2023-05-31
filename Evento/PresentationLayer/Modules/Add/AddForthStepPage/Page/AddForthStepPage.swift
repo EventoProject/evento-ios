@@ -20,13 +20,7 @@ struct AddForthStepPage: View {
             AddStepIndicatorView(stepNumber: 4)
                 .padding(.bottom, 30)
             
-            FormatsView(
-                selecetedFormatModel: $viewModel.selectedFormatModel,
-                flowModel: $viewModel.addFlowModel,
-                formats: viewModel.formats
-            ) { format in
-                viewModel.didSelectFormat(format: format)
-            }
+            formatAgeLimitView
             PriceMainView(inputModel: $viewModel.priceModel, flowModel: $viewModel.addFlowModel)
             DateAndTimePicker(addFlowModel: $viewModel.addFlowModel)
             AddressView(inputModel: $viewModel.addressModel, flowModel: $viewModel.addFlowModel)
@@ -37,83 +31,19 @@ struct AddForthStepPage: View {
             }.padding(.bottom, 20)
         }.padding(.horizontal, 20)
     }
-}
-
-private struct FormatsView: View {
-    @Binding var selecetedFormatModel: InputViewModel
-    @Binding var flowModel: AddFlowModel
-    let formats: [String]
-    let didSelectFormat: Callback<String>
     
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                CustText(text: "Format:", weight: .medium, size: 16)
-                FormatButtonsView(
-                    selecetedFormatModel: $selecetedFormatModel,
-                    formats: formats,
-                    didSelectFormat: didSelectFormat
-                )
-                if case let .error(text) = selecetedFormatModel.state {
-                    ErrorTextView(text: text)
-                }
-            }
-            Spacer()
-        }.padding(.bottom, 26)
-        .onChange(of: selecetedFormatModel) {
-            flowModel.format = $0.text
+    private var formatAgeLimitView: some View {
+        HStack(spacing: 25) {
+            CustMenuView(
+                selectedItem: $viewModel.addFlowModel.format,
+                type: .format
+            )
+            CustMenuView(
+                selectedItem: $viewModel.addFlowModel.ageLimit,
+                type: .ageLimit
+            )
         }
-    }
-    
-    private struct FormatButtonsView: View {
-        @Binding var selecetedFormatModel: InputViewModel
-        let formats: [String]
-        let didSelectFormat: Callback<String>
-        
-        var body: some View {
-            HStack(spacing: 13) {
-                ForEach(formats, id: \.self) { format in
-                    FormatRoundedButton(
-                        selectedFormatModel: $selecetedFormatModel,
-                        format: format,
-                        didSelectFormat: didSelectFormat
-                    )
-                }
-            }
-        }
-    }
-    
-    private struct FormatRoundedButton: View {
-        @Binding var selectedFormatModel: InputViewModel
-        let format: String
-        let didSelectFormat: Callback<String>
-        @State private var isSelected: Bool
-        
-        init(
-            selectedFormatModel: Binding<InputViewModel>,
-            format: String,
-            didSelectFormat: @escaping Callback<String>
-        ) {
-            self._selectedFormatModel = selectedFormatModel
-            self.format = format
-            self.didSelectFormat = didSelectFormat
-            self.isSelected = selectedFormatModel.wrappedValue.text == format
-        }
-        
-        var body: some View {
-            RoundedBorderButton(
-                isSelected: $isSelected,
-                text: format
-            ) {
-                didSelectFormat(format)
-            }
-            .onChange(of: selectedFormatModel.text) {
-                isSelected = format == $0
-                if isSelected {
-                    selectedFormatModel.state = .default
-                }
-            }
-        }
+        .padding(.bottom, 15)
     }
 }
 

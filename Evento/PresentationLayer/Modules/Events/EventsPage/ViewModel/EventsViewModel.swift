@@ -14,6 +14,7 @@ final class EventsViewModel: ObservableObject {
     
     // MARK: - Callbacks
     var showEventDetailPage: Callback<EventItemModel>?
+    var didTapFilter: VoidCallback?
     
     // MARK: - Private parameters
     private let apiManager: EventsApiManagerProtocol

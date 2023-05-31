@@ -24,7 +24,7 @@ extension AddTarget: EndpointProtocol {
         case .categories:
             return "categories"
         case .createEvent:
-            return "event"
+            return "auth/event"
         }
     }
     
