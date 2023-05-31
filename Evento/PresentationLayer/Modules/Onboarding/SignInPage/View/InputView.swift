@@ -22,8 +22,10 @@ struct InputView: View {
     @Binding var model: InputViewModel
     let placeholder: String
     var leftIcon: UIImage?
+    var rightIcon: UIImage?
     var isPassword: Bool = false
     var backgroundColor: Color
+    var didTapRightIcon: VoidCallback?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,8 +33,10 @@ struct InputView: View {
                 model: $model,
                 placeholder: placeholder,
                 leftIcon: leftIcon,
+                rightIcon: rightIcon,
                 isPassword: isPassword,
-                backgroundColor: backgroundColor
+                backgroundColor: backgroundColor,
+                didTapRightIcon: didTapRightIcon
             )
             
             if case let .error(text) = model.state {
@@ -47,8 +51,10 @@ private struct InputFieldView: View {
     @Binding var model: InputViewModel
     let placeholder: String
     var leftIcon: UIImage?
+    var rightIcon: UIImage?
     var isPassword: Bool = false
     var backgroundColor: Color
+    var didTapRightIcon: VoidCallback?
     
     // MARK: - Private parameters
     @State private var isHiddenPassword = true
@@ -66,6 +72,8 @@ private struct InputFieldView: View {
             )
             if isPassword {
                 RightIconView(isHiddenPassword: $isHiddenPassword)
+            } else if let rightIcon {
+                rightIconButton(rightIcon)
             }
         }
         .padding(.horizontal, 15)
@@ -79,6 +87,20 @@ private struct InputFieldView: View {
         .onChange(of: model.text) { _ in
             model.state = .default
         }
+    }
+    
+    @ViewBuilder
+    private func rightIconButton(_ icon: UIImage) -> some View {
+        Button(
+            action: {
+                didTapRightIcon?()
+            }, label: {
+                Image(uiImage: icon)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 30, height: 30)
+            }
+        )
     }
 }
 

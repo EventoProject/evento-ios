@@ -8,7 +8,7 @@
 import SwiftUI
 
 private enum Constants {
-    static let descriptionMinSymbolsCount = 1
+    static let descriptionMinSymbolsCount = 100
 }
 
 final class AddThirdStepViewModel: ObservableObject {

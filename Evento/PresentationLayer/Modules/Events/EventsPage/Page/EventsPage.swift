@@ -41,6 +41,7 @@ private struct EventItemView: View {
             label: {
                 VStack(alignment: .leading, spacing: 0) {
                     EventItemImage(imageUrl: event.imageLink.string)
+                        .padding(.bottom, 8)
                     CustText(text: event.name, weight: .medium, size: 17)
                     LikeStackView(event: event, didTapLike: didTapLike)
                     CustText(text: event.description, weight: .regular, size: 14)
@@ -51,37 +52,6 @@ private struct EventItemView: View {
                 .cornerRadius(20)
             }
         )
-    }
-    
-    private struct EventItemImage: View {
-        let imageUrl: String
-        private let imageWidth = UIScreen.screenWidth - 94
-        private let imageHeight = 0.6 * (UIScreen.screenWidth - 94)
-        
-        var body: some View {
-            AsyncImage(
-                url: URL(string: imageUrl),
-                content: { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(
-                            width: imageWidth,
-                            height: imageHeight
-                        )
-                        .cornerRadius(20)
-                },
-                placeholder: {
-                    CustColor.backgroundColor
-                        .frame(
-                            width: imageWidth,
-                            height: imageHeight
-                        )
-                        .cornerRadius(20)
-                }
-            )
-            .padding(.bottom, 8)
-        }
     }
     
     private struct LikeStackView: View {
@@ -104,22 +74,7 @@ private struct EventItemView: View {
                 )
                 .foregroundColor(CustColor.lightGray)
                 Spacer()
-                Button(
-                    action: {
-                        isLiked.toggle()
-                        didTapLike(isLiked)
-                    },
-                    label: {
-                        Group {
-                            if isLiked {
-                                Image(uiImage: Images.likeFilled)
-                            } else {
-                                Image(uiImage: Images.like)
-                            }
-                        }
-                        .frame(width: 25, height: 25)
-                    }
-                )
+                LikeButton(isLiked: $isLiked, didTapLike: didTapLike)
             }
             .padding(.bottom, 10)
         }

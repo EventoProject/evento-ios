@@ -13,6 +13,7 @@ struct UserModel: Decodable, Hashable {
     let isCommercial: Bool
     let name: String
     let createdAt: String
+    let imageLink: String
     
     enum CodingKeys: String, CodingKey {
         case email
@@ -20,5 +21,6 @@ struct UserModel: Decodable, Hashable {
         case isCommercial = "is_commercial"
         case name
         case createdAt = "created_at"
+        case imageLink = "image_link"
     }
 }

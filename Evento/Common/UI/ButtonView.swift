@@ -7,13 +7,31 @@
 
 import SwiftUI
 
+enum ButtonViewType {
+    case small
+    case big
+}
+
 struct ButtonView: View {
     let text: String
+    let type: ButtonViewType
+    let isFilled: Bool
     @Binding var isLoading: Bool
     var didTap: VoidCallback
+    private var cornerRadius: CGFloat {
+        type == .big ? 20 : 11
+    }
     
-    init(text: String, isLoading: Binding<Bool>? = nil, didTap: @escaping VoidCallback) {
+    init(
+        text: String,
+        isLoading: Binding<Bool>? = nil,
+        type: ButtonViewType = .big,
+        isFilled: Bool = true,
+        didTap: @escaping VoidCallback
+    ) {
         self.text = text
+        self.type = type
+        self.isFilled = isFilled
         self.didTap = didTap
         if let isLoading {
             self._isLoading = isLoading
@@ -39,19 +57,50 @@ struct ButtonView: View {
                     ProgressView()
                         .tint(.white)
                 } else {
-                    CustText(text: text, weight: .semiBold, size: 16)
-                        .foregroundColor(.white)
+                    buttonText
                 }
                 
                 Spacer()
             }
-            .padding(.vertical, 18)
-            .background(
-                CustLinearGradient
-            ).cornerRadius(20)
+            .padding(.vertical, type == .big ? 18 : 11)
+            .background {
+                if isFilled {
+                    CustLinearGradient
+                } else {
+                    Color.white
+                }
+            }.cornerRadius(cornerRadius)
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(CustLinearGradient, lineWidth: 1)
+            )
         })
         .onChange(of: isLoading) {
             print($0)
+        }
+    }
+    
+    private var buttonText: some View {
+        Group {
+            if isFilled {
+                CustText(text: text, weight: .semiBold, size: 16)
+                    .foregroundColor(.white)
+            } else {
+                CustText(text: text, weight: .semiBold, size: 16)
+                    .foregroundGradient()
+            }
+        }
+    }
+}
+
+extension CustText {
+    public func foregroundGradient() -> some View
+    {
+        self.overlay {
+            CustLinearGradient
+            .mask(
+                self
+            )
         }
     }
 }
