@@ -201,7 +201,7 @@ private struct LikesCountButton: View {
     }
 }
 
-private struct AddCommentView: View {
+struct AddCommentView: View {
     @Binding var commentModel: InputViewModel
     let avatarImageUrl: String
     var didTapSend: VoidCallback?

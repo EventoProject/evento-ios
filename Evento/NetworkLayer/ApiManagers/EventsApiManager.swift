@@ -18,6 +18,7 @@ protocol EventsApiManagerProtocol {
     func share(isShare: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func sendComment(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError>
+    func deleteComment(commentId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
 }
 
 final class EventsApiManager: EventsApiManagerProtocol {
@@ -61,5 +62,9 @@ final class EventsApiManager: EventsApiManagerProtocol {
     
     func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError> {
         webService.request(EventsTarget.comments(eventId: eventId))
+    }
+    
+    func deleteComment(commentId: Int) -> AnyPublisher<ResultResponseModel, NetworkError> {
+        webService.request(EventsTarget.deleteComment(commentId: commentId))
     }
 }

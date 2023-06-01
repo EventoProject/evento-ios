@@ -33,6 +33,10 @@ final class EventsViewModel: ObservableObject {
         showEventDetailPage?(event)
     }
     
+    func refresh() {
+        getEvents()
+    }
+    
     private func getEvents() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }

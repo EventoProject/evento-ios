@@ -17,6 +17,7 @@ enum EventsTarget {
     case share(isShare: Bool, eventId: Int)
     case sendComment(text: String, eventId: Int)
     case comments(eventId: Int)
+    case deleteComment(commentId: Int)
 }
 
 extension EventsTarget: EndpointProtocol {
@@ -31,7 +32,7 @@ extension EventsTarget: EndpointProtocol {
         case let .event(id):
             return "auth/event/\(id)"
         case let .likes(eventId):
-            return "event/\(eventId)/likes"
+            return "auth/event/\(eventId)/likes"
         case let .follow(isFollow, userId):
             return "auth/\(isFollow ? "follow" : "unfollow")/\(userId)"
         case let .like(_, eventId):
@@ -44,6 +45,8 @@ extension EventsTarget: EndpointProtocol {
             return "auth/comment/\(eventId)"
         case let .comments(eventId):
             return "event/\(eventId)/comments"
+        case let .deleteComment(commentId):
+            return "auth/comment/\(commentId)"
         }
     }
     
@@ -59,6 +62,8 @@ extension EventsTarget: EndpointProtocol {
             return isSave ? .post : .delete
         case let .share(isShare, _):
             return isShare ? .post : .delete
+        case .deleteComment:
+            return .delete
         }
     }
     

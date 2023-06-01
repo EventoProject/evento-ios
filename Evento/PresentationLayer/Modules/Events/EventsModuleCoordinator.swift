@@ -71,7 +71,8 @@ private extension EventsModuleCoordinator {
     func showCommentsPage(eventId: Int) {
         let viewModel = CommentsViewModel(
             eventId: eventId,
-            apiManager: injection.inject(EventsApiManagerProtocol.self)
+            apiManager: injection.inject(EventsApiManagerProtocol.self),
+            keychainManager: injection.inject(KeychainManagerProtocol.self)
         )
         let page = UIHostingController(rootView: CommentsPage(viewModel: viewModel))
         page.title = "Comments"
