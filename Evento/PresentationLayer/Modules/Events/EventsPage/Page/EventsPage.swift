@@ -27,6 +27,9 @@ struct EventsPage: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(CustColor.backgroundColor)
+        .refreshable {
+            viewModel.refresh()
+        }
     }
 }
 
@@ -59,6 +62,14 @@ private struct EventItemView: View {
         @State var isLiked: Bool
         let didTapLike: Callback<Bool>
         
+        private var eventCostText: String {
+            if event.cost == "Free" {
+                return "Free"
+            } else {
+                return "\(event.cost) tg"
+            }
+        }
+        
         init(event: EventItemModel, didTapLike: @escaping Callback<Bool>) {
             self.event = event
             isLiked = false
@@ -68,7 +79,7 @@ private struct EventItemView: View {
         var body: some View {
             HStack {
                 CustText(
-                    text: "\(event.format) - \(event.cost) - \(event.date)",
+                    text: "\(event.format) - \(eventCostText) - \(event.date)",
                     weight: .regular,
                     size: 14
                 )

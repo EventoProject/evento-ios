@@ -29,7 +29,7 @@ private struct LikeView: View {
     init(_ like: LikeItemModel, didTapFollow: @escaping Callback<Bool>) {
         self.like = like
         self.didTapFollow = didTapFollow
-        isFollowing = like.id == 3
+        isFollowing = like.isFollowing
     }
     
     var body: some View {
@@ -50,7 +50,11 @@ private struct LikeView: View {
     }
     
     private var followButton: some View {
-        ButtonView(text: "Follow", type: .small, isFilled: !isFollowing) {
+        ButtonView(
+            text: isFollowing ? "Following" : "Follow",
+            type: .small,
+            isFilled: !isFollowing
+        ) {
             isFollowing.toggle()
             didTapFollow(isFollowing)
         }.frame(width: 115)

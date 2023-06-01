@@ -57,8 +57,10 @@ final class SignInViewModel: ObservableObject {
                     self?.isLoadingButton = false
                 }, receiveValue: { [weak self] responseModel in
                     guard let self else { return }
+                    let user = responseModel.user
                     self.save(accessToken: responseModel.accessToken)
-                    self.saveImageUrl(responseModel.user.imageLink)
+                    self.save(imageUrl: user.imageLink)
+                    self.save(userId: user.id)
                     self.didTapSignIn?()
                 }
             ).store(in: &self.cancellables)
@@ -71,8 +73,12 @@ private extension SignInViewModel {
         webService.set(accessToken: accessToken)
     }
     
-    func saveImageUrl(_ url: String) {
-        UserDefaults.standard.set(url, forKey: Constants.avatarImageUrlKey)
+    func save(imageUrl: String) {
+        UserDefaults.standard.set(imageUrl, forKey: Constants.avatarImageUrlKey)
+    }
+    
+    func save(userId: Int) {
+        keychainManager.set(value: "\(userId)", type: .userId)
     }
     
     func isValid() -> Bool {
