@@ -12,6 +12,7 @@ import Combine
 final class ProfileHostingController: UIHostingController<ProfilePage> {
     var didBell: VoidCallback?
     let settingButton = UIButton(type: .system)
+    let saveButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +24,17 @@ final class ProfileHostingController: UIHostingController<ProfilePage> {
         let custCgColor = CustColor.purple.cgColor ?? UIColor.purple.cgColor
         navigationController?.navigationBar.tintColor = UIColor(cgColor: custCgColor)
         settingButton.setImage(Images.settingImage, for: .normal)
+        saveButton.setImage(Images.save, for: .normal)
+        
         settingButton.addTarget(self, action: #selector(settingButtonTapped), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: settingButton)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: saveButton), UIBarButtonItem(customView: settingButton)]
     }
     @objc private func settingButtonTapped() {
         self.didBell?()
+    }
+    @objc private func saveButtonTapped() {
+//        self.didBell?()
+        print("save button tapped")
     }
 }

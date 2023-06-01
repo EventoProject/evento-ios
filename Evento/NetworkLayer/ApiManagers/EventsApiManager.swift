@@ -18,9 +18,15 @@ protocol EventsApiManagerProtocol {
     func share(isShare: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func sendComment(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError>
+    func getMyEvents() -> AnyPublisher<MyEventsResponseModel, NetworkError>
+    
 }
 
 final class EventsApiManager: EventsApiManagerProtocol {
+    func getMyEvents() -> AnyPublisher<MyEventsResponseModel, NetworkError> {
+        webService.request(EventsTarget.myEvents)
+    }
+    
     private let webService: WebServiceProtocol
     
     init(webService: WebServiceProtocol) {

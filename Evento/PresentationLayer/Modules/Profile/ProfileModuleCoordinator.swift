@@ -24,8 +24,8 @@ final class ProfileModuleCoordinator: BaseCoordinator {
 
 private extension ProfileModuleCoordinator {
     func showProfilePage() {
-        let viewModel = ProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self))
-        let page = ProfileHostingController(rootView: ProfilePage(viewModel: viewModel))
+        let profileViewModel = ProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self),eventApiManager: injection.inject(EventsApiManagerProtocol.self))
+        let page = ProfileHostingController(rootView: ProfilePage(profileViewModel: profileViewModel))
         page.didBell = {[weak self] in
             self?.showSettingPage()
         }

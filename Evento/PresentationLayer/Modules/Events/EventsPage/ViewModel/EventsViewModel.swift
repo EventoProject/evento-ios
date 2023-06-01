@@ -11,7 +11,7 @@ import Combine
 final class EventsViewModel: ObservableObject {
     // MARK: - Published parameters
     @Published var events: [EventItemModel] = []
-    
+
     // MARK: - Callbacks
     var showEventDetailPage: Callback<EventItemModel>?
     var didTapFilter: VoidCallback?

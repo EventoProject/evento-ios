@@ -18,6 +18,18 @@ struct ProfileSetPage: View {
                 placeholder: "Your Full Name",
                 leftIcon: Images.personCircle
             ).padding(.top, 35)
+            InputTextField(
+                model: $viewModel.fullName,
+                title: "Nick Name",
+                placeholder: "Your nickname",
+                leftIcon: Images.personCircle
+            ).padding(.top, 35)
+            InputTextField(
+                model: $viewModel.fullName,
+                title: "Password",
+                placeholder: "Password",
+                leftIcon: Images.key
+            ).padding(.top, 35)
             ButtonView(text: "Save") {
                 viewModel.setAccount()
             }

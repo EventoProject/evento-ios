@@ -38,6 +38,7 @@
 		2D2BB89B1B4406A987A145AC0213CA58 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9DF37F25063546F30C5FA0C09EC3A1E /* Montserrat-Regular.otf */; };
 		2FC49A64BA94EDB4E95375C92265146F /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4233560DD67A61F0F621497ACFA45 /* CategoryModel.swift */; };
 		2FDC3CDE507F497A5C359F5F51826A8B /* EventoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6CB45F08415F80EE5351A8C72B3006 /* EventoUITests.swift */; };
+		302BCC142A27B0F3001C1F8B /* MyEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302BCC132A27B0F3001C1F8B /* MyEventsResponseModel.swift */; };
 		3067EC5C2A23B91400B6F26B /* CustomSegmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3067EC5B2A23B91400B6F26B /* CustomSegmentController.swift */; };
 		306EC25F2A236544007E5BFF /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306EC25E2A236544007E5BFF /* ProfilePage.swift */; };
 		306EC2622A236593007E5BFF /* ProfileHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306EC2612A236593007E5BFF /* ProfileHostingController.swift */; };
@@ -194,6 +195,10 @@
 		2A1449BFFE0433D5614FACF94DF6DFB5 /* AddForthStepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddForthStepViewModel.swift; sourceTree = "<group>"; };
 		2A70A48F3A5A591FD4DA2CA5BD27F001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BA3E1DB4A6D73801C6F83F769CFE8D8 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		2E323A3CE86A3B3E5980DAB84B8301A7 /* AddContainerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContainerPage.swift; sourceTree = "<group>"; };
+		30127C5E0B9D95579E2788AD99DE9A6F /* AddApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddApiManager.swift; sourceTree = "<group>"; };
+		302BCC132A27B0F3001C1F8B /* MyEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsResponseModel.swift; sourceTree = "<group>"; };
+		304EE2EC06D1E307A779570FA9981C9B /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		3067EC5B2A23B91400B6F26B /* CustomSegmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentController.swift; sourceTree = "<group>"; };
 		306EC25E2A236544007E5BFF /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		306EC2612A236593007E5BFF /* ProfileHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHostingController.swift; sourceTree = "<group>"; };
@@ -203,9 +208,6 @@
 		306EC26B2A2366DA007E5BFF /* SettingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPage.swift; sourceTree = "<group>"; };
 		306EC26D2A2366F6007E5BFF /* GeneralPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralPage.swift; sourceTree = "<group>"; };
 		306EC26F2A23670B007E5BFF /* ProfileSetPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetPage.swift; sourceTree = "<group>"; };
-		2E323A3CE86A3B3E5980DAB84B8301A7 /* AddContainerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContainerPage.swift; sourceTree = "<group>"; };
-		30127C5E0B9D95579E2788AD99DE9A6F /* AddApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddApiManager.swift; sourceTree = "<group>"; };
-		304EE2EC06D1E307A779570FA9981C9B /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		32D48663D21B128F09B3F18CD0F145D2 /* Pods_Evento_EventoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Evento_EventoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3322C1362735A235C59E60B8FC429C56 /* EventItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventItemModel.swift; sourceTree = "<group>"; };
 		332B7155232E088376E8B32C54A65DDF /* EndLinkText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndLinkText.swift; sourceTree = "<group>"; };
@@ -359,6 +361,22 @@
 			path = EventoTests;
 			sourceTree = "<group>";
 		};
+		0106F0847B06C0EA67EC573CFA7D0BF1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8DF3470A12311B518EB015C02CBED405 /* AddFirstStepViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		017B5C0D6A510C8B813FF2A2C6FE5F35 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B6FCE1F3E11A9251213139EC50247204 /* UploadProfileImageResponseModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		08CE8D25897B3460B3413F568A576B5B /* Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +418,32 @@
 			path = Add;
 			sourceTree = "<group>";
 		};
+		17957364FBD5E8B17E88F7EF9A24BDC9 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				55E8139197B2E4ECC917237F32B45CBC /* AddSuccessHostingController.swift */,
+				F4DB0AE3F60D2B167763010A06470310 /* AddSuccessPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		19E9DC7444B42A17401815A0576A1CC4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C992AB304978B9B1D37E8B6435CD433 /* AsyncAvatarImage.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1C0FEEF1A55C7B6C998AD22B6674A78A /* AddSecondStepPage */ = {
+			isa = PBXGroup;
+			children = (
+				9CBB8954EC248342B4200504FDE8C4A5 /* Page */,
+				DAC4C7407EBF7FE942B1BB0C7A42DBD6 /* ViewModel */,
+			);
+			path = AddSecondStepPage;
+			sourceTree = "<group>";
+		};
 		1FC329E822C54849387D0D0A4F007401 /* Targets */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,199 +466,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		81519F70AC2CBD17A9F27C562083066A /* FilterPage */ = {
-			isa = PBXGroup;
-			children = (
-				991C72F3E749257A37A18F6D07FC2184 /* Page */,
-				9630C282AE30B0D96E3214677B30447C /* ViewModel */,
-			);
-			path = FilterPage;
-			sourceTree = "<group>";
-		};
-		9630C282AE30B0D96E3214677B30447C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				98EFFD6D0CF515D8CAE5BAFD6A53B88B /* FilterViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		991C72F3E749257A37A18F6D07FC2184 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				23A45CC8ECEAD3A7C19DA9BA5214C057 /* FilterHostingController.swift */,
-				7E983E9582380A7719E84E32642492EC /* FilterPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		9C60967B2A8AA9BC404B854594376595 /* LikesPage */ = {
-			isa = PBXGroup;
-			children = (
-				692366D21A7994FF9EDD5899E4F4959B /* Page */,
-				19E9DC7444B42A17401815A0576A1CC4 /* View */,
-				AD793DD5FD7A7C12006DA9D3F3B74D38 /* ViewModel */,
-			);
-			path = LikesPage;
-			sourceTree = "<group>";
-		};
-		AD793DD5FD7A7C12006DA9D3F3B74D38 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				1FB8A95AA8A9FE9015C527C1F9E1D29A /* LikesViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		692366D21A7994FF9EDD5899E4F4959B /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				F8B07215FF773DDE0381219E2C647F69 /* LikesPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		19E9DC7444B42A17401815A0576A1CC4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5C992AB304978B9B1D37E8B6435CD433 /* AsyncAvatarImage.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		8D2DD4F6799EDBC52893E8F6DAF0128C /* CommentsPage */ = {
-			isa = PBXGroup;
-			children = (
-				FB94FFB833133B3EC39751EF5ACAE00A /* Page */,
-				604791FA634A3528644F4F853DD2A30F /* ViewModel */,
-			);
-			path = CommentsPage;
-			sourceTree = "<group>";
-		};
-		604791FA634A3528644F4F853DD2A30F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				C221438F8E61155D26D15186FDC67E82 /* CommentsViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		FB94FFB833133B3EC39751EF5ACAE00A /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				F21EB4F0DAFD05305FCB28F548E4B40E /* CommentsPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		F437D7A50CA598B7DF66DE0776FA5E2E /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				2A1449BFFE0433D5614FACF94DF6DFB5 /* AddForthStepViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		7BCDBCC4F76ABD5CE5182BFD57FA408D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				94DABC1224D05B4B0DB8BDF9429539A7 /* AddThirdStepViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		5F9157036CFEA972B20172F653FED8FD /* Onboarding */ = {
-			isa = PBXGroup;
-			children = (
-				0495C61A8AD8CD72DBFFA3B4DD22E16E /* LoginResponseModel.swift */,
-				0C99B53D933F166DB2DB25E12B86F06E /* RegisterPayload.swift */,
-				08F79E27F477DD50860C0B78B2CCC567 /* UserModel.swift */,
-			);
-			path = Onboarding;
-			sourceTree = "<group>";
-		};
-		E4ACF5E934221FCDCC71D95470B89510 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				155DAE8DDC79FF33185119CC24E8183F /* KeychainManager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
-		6EAA68A50EEE43D2FA2760D79ACC651C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				1AA2C28EBB9B12B23299CE2158DFF00C /* RegistrationViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		017B5C0D6A510C8B813FF2A2C6FE5F35 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				B6FCE1F3E11A9251213139EC50247204 /* UploadProfileImageResponseModel.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		2E8505C6D1289A262D9EC76254EAE93D /* AddSuccessPage */ = {
-			isa = PBXGroup;
-			children = (
-				17957364FBD5E8B17E88F7EF9A24BDC9 /* Page */,
-				EF97E131FE99B54018E41C7286F1AAA6 /* ViewModel */,
-			);
-			path = AddSuccessPage;
-			sourceTree = "<group>";
-		};
-		EF97E131FE99B54018E41C7286F1AAA6 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				933859DACDC040DA32C69B2766A7DF2D /* AddSuccessViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		17957364FBD5E8B17E88F7EF9A24BDC9 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				55E8139197B2E4ECC917237F32B45CBC /* AddSuccessHostingController.swift */,
-				F4DB0AE3F60D2B167763010A06470310 /* AddSuccessPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		AC21776911E168F88F3D8FC16A8331F6 /* Add */ = {
-			isa = PBXGroup;
-			children = (
-				85F281EE7C1538BCEC0BF05EB8CED9DF /* CategoriesResponseModel.swift */,
-				BED4233560DD67A61F0F621497ACFA45 /* CategoryModel.swift */,
-				D105B1783703132E6DFB97B5506C6DFD /* CreateEventPayload.swift */,
-				1E93E0CF99E18886F6566763615E8E9D /* EventDataModel.swift */,
-			);
-			path = Add;
-			sourceTree = "<group>";
-		};
-		8C9B7B810FFB49F249FD397835378D19 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				D673AF09885512AA9098FB3CB1BC700B /* ErrorResponseModel.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		A48C4BA03038F09B880DE5A59115FFAA /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				E508976D51B5346DF637B02DAF684FED /* CommentsResponseModel.swift */,
-				3322C1362735A235C59E60B8FC429C56 /* EventItemModel.swift */,
-				7008E966E55CFE9B075A30E7EE5D0EDB /* EventResponseModel.swift */,
-				03273E0EE08CCA76AE5518769D9A51EA /* EventsResponseModel.swift */,
-				52F4D3AAB32CA95EEFE80C2DA30E3BC7 /* LikesResponseModel.swift */,
-				BB5F5C37701A802A1BEB0444531CFC7A /* ResultResponseModel.swift */,
-			);
-			path = Events;
-			sourceTree = "<group>";
-		};
 		275D6C0AC8DC0C1F986D38E8CB1AFA15 /* EventPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,146 +473,6 @@
 				6EB19BA9E6ACC74329EE12B169254772 /* ViewModel */,
 			);
 			path = EventPage;
-			sourceTree = "<group>";
-		};
-		6EB19BA9E6ACC74329EE12B169254772 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				849AC3F4173D4C5ED0C6569A7B1B35FF /* EventViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		59DA1855F680D24754BABBDE3CC398F6 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				F4BF6D04B9DB58E895B52C12EB8EB1C1 /* EventHostingController.swift */,
-				7784DD328F424A98C761A1E43BCBDDCA /* EventPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		31ED84FEBF8EEAD46C4FBA908F7E2CD0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				799428231D44C832E3015C3CE6BF7051 /* EventItemImage.swift */,
-				C48ACA722DAB6DDB8FEA394253D8D45E /* LikeButton.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		98079CE480050527C4B33BA3BEAD1023 /* AddFirstStepPage */ = {
-			isa = PBXGroup;
-			children = (
-				8161A2F636C54D3C526D959CCCDF33A9 /* Page */,
-				64E56BA16FF7B4D7B75566C82A708FB1 /* View */,
-				0106F0847B06C0EA67EC573CFA7D0BF1 /* ViewModel */,
-			);
-			path = AddFirstStepPage;
-			sourceTree = "<group>";
-		};
-		8161A2F636C54D3C526D959CCCDF33A9 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				6B9A5890F67D314CBFF5F179336B58FF /* AddFirstStepPage.swift */,
-				4A3C055F4141E7F0EEF0A8DA734D0ECC /* ImagePickerPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		64E56BA16FF7B4D7B75566C82A708FB1 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8FA8AA665590FEC59380EBBB00CF0DF6 /* AddStepIndicatorView.swift */,
-				63EB9053C11FEDEC64A2A73DEC9BEF82 /* AddStepPageTitleView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		1C0FEEF1A55C7B6C998AD22B6674A78A /* AddSecondStepPage */ = {
-			isa = PBXGroup;
-			children = (
-				9CBB8954EC248342B4200504FDE8C4A5 /* Page */,
-				DAC4C7407EBF7FE942B1BB0C7A42DBD6 /* ViewModel */,
-			);
-			path = AddSecondStepPage;
-			sourceTree = "<group>";
-		};
-		9CBB8954EC248342B4200504FDE8C4A5 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				FD4E8284E1DBED7D9718B320DFAC137F /* AddSecondStepPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		0106F0847B06C0EA67EC573CFA7D0BF1 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8DF3470A12311B518EB015C02CBED405 /* AddFirstStepViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		DAC4C7407EBF7FE942B1BB0C7A42DBD6 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				5B0A36B5750626F1B7EFF37F2967043B /* AddSecondStepViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		55C3C3662B7C49916FC644C7DE6444B0 /* AddThirdStepPage */ = {
-			isa = PBXGroup;
-			children = (
-				51E6F7A106926546CC45B39511672995 /* Page */,
-				9D7228B90F971932A3C5075884EC0648 /* View */,
-				7BCDBCC4F76ABD5CE5182BFD57FA408D /* ViewModel */,
-			);
-			path = AddThirdStepPage;
-			sourceTree = "<group>";
-		};
-		51E6F7A106926546CC45B39511672995 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				B437CFD0E87281F527954F0BAE0C1D9E /* AddThirdStepPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		9D7228B90F971932A3C5075884EC0648 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				304EE2EC06D1E307A779570FA9981C9B /* InputTextView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		674D6EC9E6032E7312006A1900A2496D /* AddForthStepPage */ = {
-			isa = PBXGroup;
-			children = (
-				82E216EC2583A05E5CB1C859B56C0D5D /* Page */,
-				934D3B921E129F3EAF4C69E82F1D294A /* View */,
-				F437D7A50CA598B7DF66DE0776FA5E2E /* ViewModel */,
-			);
-			path = AddForthStepPage;
-			sourceTree = "<group>";
-		};
-		82E216EC2583A05E5CB1C859B56C0D5D /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				3801D53292DF6534688E59D332357D41 /* AddForthStepPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		934D3B921E129F3EAF4C69E82F1D294A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C99C10A047FD98D2A648A80805C0626F /* CustMenuView.swift */,
-				EA5D22066AF74C6F5EE1AE7FADDC60A4 /* RoundedBorderButton.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		28F4D0957D825F9639CC9A9856313CD2 /* Application */ = {
@@ -782,6 +493,15 @@
 				1C5A005C20DFA05610350C90575F5EA3 /* OnboardingCoordinator.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		2E8505C6D1289A262D9EC76254EAE93D /* AddSuccessPage */ = {
+			isa = PBXGroup;
+			children = (
+				17957364FBD5E8B17E88F7EF9A24BDC9 /* Page */,
+				EF97E131FE99B54018E41C7286F1AAA6 /* ViewModel */,
+			);
+			path = AddSuccessPage;
 			sourceTree = "<group>";
 		};
 		3067EC5D2A23B94E00B6F26B /* View */ = {
@@ -829,6 +549,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		31ED84FEBF8EEAD46C4FBA908F7E2CD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				799428231D44C832E3015C3CE6BF7051 /* EventItemImage.swift */,
+				C48ACA722DAB6DDB8FEA394253D8D45E /* LikeButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		367CA338F9A82BA73977E8C3DAABBB9F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,22 +572,30 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		A3DCF47192BE285652DDCC8CE1AE11D9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5F39093E698DB597FB2704D7A5FB9412 /* Pods_Evento.framework */,
-				34BB5B1F22161C8FC59FA0E6C9814EB9 /* Pods_EventoTests.framework */,
-				32D48663D21B128F09B3F18CD0F145D2 /* Pods_Evento_EventoUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		50B01632BB41D8FCE4E29F169A274CC7 /* Page */ = {
 			isa = PBXGroup;
 			children = (
 				5F9857945BF2A075B21CAB82F33C6375 /* PasswordResetPage.swift */,
 			);
 			path = Page;
+			sourceTree = "<group>";
+		};
+		51E6F7A106926546CC45B39511672995 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				B437CFD0E87281F527954F0BAE0C1D9E /* AddThirdStepPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		55C3C3662B7C49916FC644C7DE6444B0 /* AddThirdStepPage */ = {
+			isa = PBXGroup;
+			children = (
+				51E6F7A106926546CC45B39511672995 /* Page */,
+				9D7228B90F971932A3C5075884EC0648 /* View */,
+				7BCDBCC4F76ABD5CE5182BFD57FA408D /* ViewModel */,
+			);
+			path = AddThirdStepPage;
 			sourceTree = "<group>";
 		};
 		578F431665F80543279FE0CBA509ABC6 /* ApiManagers */ = {
@@ -871,6 +608,15 @@
 				E3436699EBEFF5ED646F6E0C1B2ED455 /* ProfileApiManager.swift */,
 			);
 			path = ApiManagers;
+			sourceTree = "<group>";
+		};
+		59DA1855F680D24754BABBDE3CC398F6 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				F4BF6D04B9DB58E895B52C12EB8EB1C1 /* EventHostingController.swift */,
+				7784DD328F424A98C761A1E43BCBDDCA /* EventPage.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		5E54F8214639F84F3CADF0C7F38AF6F6 /* Page */ = {
@@ -891,6 +637,24 @@
 			path = DependencyInjection;
 			sourceTree = "<group>";
 		};
+		5F9157036CFEA972B20172F653FED8FD /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				0495C61A8AD8CD72DBFFA3B4DD22E16E /* LoginResponseModel.swift */,
+				0C99B53D933F166DB2DB25E12B86F06E /* RegisterPayload.swift */,
+				08F79E27F477DD50860C0B78B2CCC567 /* UserModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		604791FA634A3528644F4F853DD2A30F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C221438F8E61155D26D15186FDC67E82 /* CommentsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		60E77C4BDEE9A2E745B313C790857A09 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -903,6 +667,33 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		64E56BA16FF7B4D7B75566C82A708FB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8FA8AA665590FEC59380EBBB00CF0DF6 /* AddStepIndicatorView.swift */,
+				63EB9053C11FEDEC64A2A73DEC9BEF82 /* AddStepPageTitleView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		674D6EC9E6032E7312006A1900A2496D /* AddForthStepPage */ = {
+			isa = PBXGroup;
+			children = (
+				82E216EC2583A05E5CB1C859B56C0D5D /* Page */,
+				934D3B921E129F3EAF4C69E82F1D294A /* View */,
+				F437D7A50CA598B7DF66DE0776FA5E2E /* ViewModel */,
+			);
+			path = AddForthStepPage;
+			sourceTree = "<group>";
+		};
+		692366D21A7994FF9EDD5899E4F4959B /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				F8B07215FF773DDE0381219E2C647F69 /* LikesPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
 		6B40EC2C425CD909B1AC625008599E4F /* ForgotPasswordPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +701,22 @@
 				C01335D15D1E805C23ED3722A0EC23D9 /* ViewModel */,
 			);
 			path = ForgotPasswordPage;
+			sourceTree = "<group>";
+		};
+		6EAA68A50EEE43D2FA2760D79ACC651C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1AA2C28EBB9B12B23299CE2158DFF00C /* RegistrationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6EB19BA9E6ACC74329EE12B169254772 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				849AC3F4173D4C5ED0C6569A7B1B35FF /* EventViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		718C113073D34B938929C3BC6B3C0624 /* EventsPage */ = {
@@ -928,6 +735,14 @@
 				9C0896D76A4534639D6C3F6FFFD2694E /* SignInPage.swift */,
 			);
 			path = Page;
+			sourceTree = "<group>";
+		};
+		7BCDBCC4F76ABD5CE5182BFD57FA408D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				94DABC1224D05B4B0DB8BDF9429539A7 /* AddThirdStepViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		7C7AC6D2458F537FD2A51F974C3465D8 /* Chat */ = {
@@ -950,6 +765,32 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		81519F70AC2CBD17A9F27C562083066A /* FilterPage */ = {
+			isa = PBXGroup;
+			children = (
+				991C72F3E749257A37A18F6D07FC2184 /* Page */,
+				9630C282AE30B0D96E3214677B30447C /* ViewModel */,
+			);
+			path = FilterPage;
+			sourceTree = "<group>";
+		};
+		8161A2F636C54D3C526D959CCCDF33A9 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				6B9A5890F67D314CBFF5F179336B58FF /* AddFirstStepPage.swift */,
+				4A3C055F4141E7F0EEF0A8DA734D0ECC /* ImagePickerPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		82E216EC2583A05E5CB1C859B56C0D5D /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				3801D53292DF6534688E59D332357D41 /* AddForthStepPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
 		835A9C010E53777540428CCB90CB529D /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -966,6 +807,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		8C9B7B810FFB49F249FD397835378D19 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				D673AF09885512AA9098FB3CB1BC700B /* ErrorResponseModel.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		8C9DD58085939CCFDE4DA79E879C74D6 /* EventoUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -975,12 +824,30 @@
 			path = EventoUITests;
 			sourceTree = "<group>";
 		};
+		8D2DD4F6799EDBC52893E8F6DAF0128C /* CommentsPage */ = {
+			isa = PBXGroup;
+			children = (
+				FB94FFB833133B3EC39751EF5ACAE00A /* Page */,
+				604791FA634A3528644F4F853DD2A30F /* ViewModel */,
+			);
+			path = CommentsPage;
+			sourceTree = "<group>";
+		};
 		8EC813677EA12897F42EE66BC2AF91B9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				798FC4CF71E0E99BED2E1F337711E94E /* EventsViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		934D3B921E129F3EAF4C69E82F1D294A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C99C10A047FD98D2A648A80805C0626F /* CustMenuView.swift */,
+				EA5D22066AF74C6F5EE1AE7FADDC60A4 /* RoundedBorderButton.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		94886F313C001C1A544C62EDA8AC54E0 /* NewsPage */ = {
@@ -993,10 +860,37 @@
 			path = NewsPage;
 			sourceTree = "<group>";
 		};
+		9630C282AE30B0D96E3214677B30447C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				98EFFD6D0CF515D8CAE5BAFD6A53B88B /* FilterViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		969194606DD4906713F500D84FF82921 /* Page */ = {
 			isa = PBXGroup;
 			children = (
 				33B857582F77CC317B3BBEB361974B25 /* RegistrationPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		98079CE480050527C4B33BA3BEAD1023 /* AddFirstStepPage */ = {
+			isa = PBXGroup;
+			children = (
+				8161A2F636C54D3C526D959CCCDF33A9 /* Page */,
+				64E56BA16FF7B4D7B75566C82A708FB1 /* View */,
+				0106F0847B06C0EA67EC573CFA7D0BF1 /* ViewModel */,
+			);
+			path = AddFirstStepPage;
+			sourceTree = "<group>";
+		};
+		991C72F3E749257A37A18F6D07FC2184 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				23A45CC8ECEAD3A7C19DA9BA5214C057 /* FilterHostingController.swift */,
+				7E983E9582380A7719E84E32642492EC /* FilterPage.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -1023,12 +917,81 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9C60967B2A8AA9BC404B854594376595 /* LikesPage */ = {
+			isa = PBXGroup;
+			children = (
+				692366D21A7994FF9EDD5899E4F4959B /* Page */,
+				19E9DC7444B42A17401815A0576A1CC4 /* View */,
+				AD793DD5FD7A7C12006DA9D3F3B74D38 /* ViewModel */,
+			);
+			path = LikesPage;
+			sourceTree = "<group>";
+		};
+		9CBB8954EC248342B4200504FDE8C4A5 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				FD4E8284E1DBED7D9718B320DFAC137F /* AddSecondStepPage.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		9D7228B90F971932A3C5075884EC0648 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				304EE2EC06D1E307A779570FA9981C9B /* InputTextView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A3DCF47192BE285652DDCC8CE1AE11D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F39093E698DB597FB2704D7A5FB9412 /* Pods_Evento.framework */,
+				34BB5B1F22161C8FC59FA0E6C9814EB9 /* Pods_EventoTests.framework */,
+				32D48663D21B128F09B3F18CD0F145D2 /* Pods_Evento_EventoUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A48C4BA03038F09B880DE5A59115FFAA /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				E508976D51B5346DF637B02DAF684FED /* CommentsResponseModel.swift */,
+				3322C1362735A235C59E60B8FC429C56 /* EventItemModel.swift */,
+				7008E966E55CFE9B075A30E7EE5D0EDB /* EventResponseModel.swift */,
+				03273E0EE08CCA76AE5518769D9A51EA /* EventsResponseModel.swift */,
+				52F4D3AAB32CA95EEFE80C2DA30E3BC7 /* LikesResponseModel.swift */,
+				BB5F5C37701A802A1BEB0444531CFC7A /* ResultResponseModel.swift */,
+				302BCC132A27B0F3001C1F8B /* MyEventsResponseModel.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
 		A9875F107E40F422FC49F01EADEBB265 /* Page */ = {
 			isa = PBXGroup;
 			children = (
 				670C11E0DAAF30C891AEA66AF038D0D3 /* NewsPage.swift */,
 			);
 			path = Page;
+			sourceTree = "<group>";
+		};
+		AC21776911E168F88F3D8FC16A8331F6 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				85F281EE7C1538BCEC0BF05EB8CED9DF /* CategoriesResponseModel.swift */,
+				BED4233560DD67A61F0F621497ACFA45 /* CategoryModel.swift */,
+				D105B1783703132E6DFB97B5506C6DFD /* CreateEventPayload.swift */,
+				1E93E0CF99E18886F6566763615E8E9D /* EventDataModel.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		AD793DD5FD7A7C12006DA9D3F3B74D38 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1FB8A95AA8A9FE9015C527C1F9E1D29A /* LikesViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B2860240A0A319526A8BBAEB68A064D7 /* ViewModel */ = {
@@ -1138,6 +1101,14 @@
 			path = ArticlePage;
 			sourceTree = "<group>";
 		};
+		DAC4C7407EBF7FE942B1BB0C7A42DBD6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5B0A36B5750626F1B7EFF37F2967043B /* AddSecondStepViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		DF3954B627F76263D8B52373845EAD14 /* PasswordResetPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1171,6 +1142,14 @@
 				DA735A8E917000D4E8B54A4FB037F25B /* UnderlinedTextView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		E4ACF5E934221FCDCC71D95470B89510 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				155DAE8DDC79FF33185119CC24E8183F /* KeychainManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		E967FC27A517B0367102B91B4F2F2EC3 /* Coordinator */ = {
@@ -1219,6 +1198,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		EF97E131FE99B54018E41C7286F1AAA6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				933859DACDC040DA32C69B2766A7DF2D /* AddSuccessViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		EFADCAB735CB90D300085D8D4C757480 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1232,6 +1219,14 @@
 			path = DataModels;
 			sourceTree = "<group>";
 		};
+		F437D7A50CA598B7DF66DE0776FA5E2E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2A1449BFFE0433D5614FACF94DF6DFB5 /* AddForthStepViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F8C479039D99D5593A611AD4AEEDE1DD /* Events */ = {
 			isa = PBXGroup;
 			children = (
@@ -1243,6 +1238,14 @@
 				C44762810E620EC18A4249F50F57A24F /* EventsModuleCoordinator.swift */,
 			);
 			path = Events;
+			sourceTree = "<group>";
+		};
+		FB94FFB833133B3EC39751EF5ACAE00A /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				F21EB4F0DAFD05305FCB28F548E4B40E /* CommentsPage.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		FC02EFCC0BF0EC471D81DCC49245A411 /* Favorites */ = {
@@ -1390,28 +1393,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6C39733E12A4639564ABB7E756C56C90 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Evento-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		18E54C938963E660398AAE54CC5BE2E5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1427,28 +1408,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Evento-EventoUITests/Pods-Evento-EventoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B78A8084B69D6B9939880C20B6D64D44 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EventoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		499AFFDC15D22BEF955D817A2773544A /* [CP] Check Pods Manifest.lock */ = {
@@ -1490,6 +1449,50 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Evento/Pods-Evento-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6C39733E12A4639564ABB7E756C56C90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Evento-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B78A8084B69D6B9939880C20B6D64D44 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EventoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1517,8 +1520,6 @@
 				DFEC2C60E11566E82BF84B4BBD579647 /* AddThirdStepViewModel.swift in Sources */,
 				5BBFA407ED708BDE0AFA4F135B686E83 /* AppCoordinator.swift in Sources */,
 				306EC25F2A236544007E5BFF /* ProfilePage.swift in Sources */,
-				2687713F2A08EC9100210AAC /* AddFirstStepViewModel.swift in Sources */,
-				268338C32A1750FF00B18C7F /* UploadProfileImageResponseModel.swift in Sources */,
 				0CB1001DE7DCA0DC18971226EAFBC2E3 /* AppDelegate.swift in Sources */,
 				8D27956DE7C31D7E8D9F4DB0680FE5A0 /* Application.swift in Sources */,
 				8562A858FD9168751F8526FC3AF5B6FD /* ArticlePage.swift in Sources */,
@@ -1540,15 +1541,10 @@
 				3AABB2DC98CBD6EA0A7F171CDDA60A5F /* CustLinearGradient.swift in Sources */,
 				36095A0D4DAA8BFD969BD06DF25B9406 /* CustMenuView.swift in Sources */,
 				43C3B144CAC47677E4D4CA30A8790539 /* CustText.swift in Sources */,
-				268338C52A18800400B18C7F /* RoundedBorderButton.swift in Sources */,
 				306EC2682A23669F007E5BFF /* ProfileSetViewModel.swift in Sources */,
-				268338D52A1B714C00B18C7F /* CategoryModel.swift in Sources */,
-				2687712E2A06571F00210AAC /* AddFirstStepPage.swift in Sources */,
 				84D38FFDAFC4DEF4362C35D759946D94 /* EmailView.swift in Sources */,
 				B9995CF27D8A049BB58E351E63B1CD12 /* EndLinkText.swift in Sources */,
 				306EC2702A23670B007E5BFF /* ProfileSetPage.swift in Sources */,
-				268338F02A1DB13200B18C7F /* UIScreen+Extensions.swift in Sources */,
-				268771302A0657AB00210AAC /* AddCoordinator.swift in Sources */,
 				F729D4EF82E10F49B3CE59594B053DAE /* Date+Format.swift in Sources */,
 				84D38FFDAFC4DEF4362C35D759946D94 /* EmailView.swift in Sources */,
 				B9995CF27D8A049BB58E351E63B1CD12 /* EndLinkText.swift in Sources */,
@@ -1574,8 +1570,6 @@
 				876037D4E43C1E3E52C21AABC38E3F11 /* FilterPage.swift in Sources */,
 				04C62540C7C5C2483F0B1776D180821B /* FilterViewModel.swift in Sources */,
 				71A2B3381ADD760A37D5592D2FC0C828 /* ForgotPasswordPage.swift in Sources */,
-				268771332A07AE1000210AAC /* AddStepPageTitleView.swift in Sources */,
-				268338F92A1DE06F00B18C7F /* EventHostingController.swift in Sources */,
 				306EC26A2A2366B1007E5BFF /* GeneralViemModel.swift in Sources */,
 				3A771B97825168E60B32E216229998F9 /* ForgotPasswordViewModel.swift in Sources */,
 				788A704B4975EA87E0BCD5ABF7045EDB /* HTTPMethod.swift in Sources */,
@@ -1596,7 +1590,6 @@
 				7769F66D079D473FF0C0B2C0F305E4B2 /* NetworkError.swift in Sources */,
 				39932778270BDCEAE93F585D394CD528 /* NewsApiManager.swift in Sources */,
 				19ED0A8E8FA548238545E1B45A786E5A /* NewsPage.swift in Sources */,
-				268338EC2A1D05A900B18C7F /* EventsResponseModel.swift in Sources */,
 				306EC2652A23661B007E5BFF /* ProfileViewModel.swift in Sources */,
 				97C7B98D2EE4D65F7DB652FDC8F23225 /* NewsPageViewModel.swift in Sources */,
 				F1228887AE0FB7F32950FBFB9BA09A12 /* NewsTarget.swift in Sources */,
@@ -1612,6 +1605,7 @@
 				52DFAB4A4F6548479D02DBDE3D39F18A /* ProfileTarget.swift in Sources */,
 				B3ACA42231BDC3FAAF91E4D573D4BEC7 /* RegisterPayload.swift in Sources */,
 				612AEB1994ABD9E4FB61490319232435 /* RegistrationPage.swift in Sources */,
+				302BCC142A27B0F3001C1F8B /* MyEventsResponseModel.swift in Sources */,
 				47C9CCCD606B9087BBE630AA6821218A /* RegistrationViewModel.swift in Sources */,
 				BF1FDFF91ADCAFA37B4814D80FC6033A /* ResultResponseModel.swift in Sources */,
 				AFDE70B71C2AF9F33B80CEE72F0EBD51 /* RoundedBorderButton.swift in Sources */,
@@ -1629,19 +1623,13 @@
 				323BD54AE3E6BA568C7376F6C3BCCA9B /* UIViewController+Extensions.swift in Sources */,
 				CC78BB92F62D5818D89E6FD5563776CB /* UIWindow+Extensions.swift in Sources */,
 				306EC2622A236593007E5BFF /* ProfileHostingController.swift in Sources */,
-				268338B72A1331EF00B18C7F /* RegisterPayload.swift in Sources */,
 				8CEF37576F9C1C4E8B9CEEBB364BC6C8 /* URLRequest+Extensions.swift in Sources */,
 				25C2DBF1A5BF02A2A892A96937A968C0 /* UnderlinedTextView.swift in Sources */,
 				79DF159C58544EC69CAE358BB0145EBD /* UploadProfileImageResponseModel.swift in Sources */,
 				0209ECBAC395A906A0A037B881537FDB /* UserModel.swift in Sources */,
 				53B296F402B7BC7B91468950A89F1094 /* ViewController.swift in Sources */,
 				306EC26E2A2366F6007E5BFF /* GeneralPage.swift in Sources */,
-				26EA68182A0E606C0014EE94 /* InputView.swift in Sources */,
 				3067EC5C2A23B91400B6F26B /* CustomSegmentController.swift in Sources */,
-				268338D72A1B719600B18C7F /* AddTarget.swift in Sources */,
-				268771492A0A830D00210AAC /* InputTextView.swift in Sources */,
-				268338A02A0F916800B18C7F /* AddForthStepViewModel.swift in Sources */,
-				268338D92A1B733800B18C7F /* AddApiManager.swift in Sources */,
 				B4DB0B4A889D3D57F4ED42209A4378AF /* WebService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

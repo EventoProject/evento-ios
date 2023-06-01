@@ -10,18 +10,29 @@ import SwiftUI
 import Combine
 
 final class ProfileViewModel: ObservableObject{
+    
     private let apiManager: ProfileApiManagerProtocol
+    private let eventApiManager: EventsApiManagerProtocol
     @Published var user : UserModel?
+    @Published var myevents: [EventItemModel] = []
     private var cancellables = Set<AnyCancellable>()
     
-    init(apiManager: ProfileApiManagerProtocol){
+    init(apiManager: ProfileApiManagerProtocol, eventApiManager: EventsApiManagerProtocol){
         self.apiManager = apiManager
-        self.getProfile()
+        self.eventApiManager = eventApiManager
+        self.getMyEvents()
+        self.getMyProfile()
+        
     }
-    func getProfile() {
+
+    func getSubscribers(){
+    
+    }
+    
+    func getMyProfile() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.getProfile().sink(
+            self.apiManager.getMyProfile().sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print("something wrong \(error)")
@@ -29,6 +40,24 @@ final class ProfileViewModel: ObservableObject{
                 },
                 receiveValue: { [weak self] model in
                     self?.user = model
+            
+                }
+            ).store(in: &self.cancellables)
+        }
+    }
+    //
+    private func getMyEvents() {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+//            self.eventApiManager.getMyEvents().sink(
+            self.eventApiManager.getMyEvents().sink(
+                receiveCompletion: { completion in
+                    if case let .failure(error) = completion {
+                        print(error)
+                    }
+                },
+                receiveValue: { [weak self] model in
+                    self?.myevents = model.events
                 }
             ).store(in: &self.cancellables)
         }
@@ -59,12 +88,12 @@ struct ProfileImageView: View {
         ZStack(alignment: .bottomTrailing) {
             if ((viewModel.user?.imageLink.isEmpty) != nil){
                 AsyncImage(
-                    url: URL(string: (viewModel.user?.imageLink)!),
+                    url: URL(string: (viewModel.user!.imageLink)),
                     content: { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 150, height: 150)
+                            .frame(width: 100, height: 100)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
                     },
@@ -72,28 +101,12 @@ struct ProfileImageView: View {
                         Image("person_circle")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 150, height: 150)
+                            .frame(width: 100, height: 100)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
                     }
                 )
             }
-            if let image = selectedImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 150, height: 150)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
-            }
-//            else{
-//                Image("person_circle")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: 150, height: 150)
-//                    .clipShape(Circle())
-//                    .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
-//            }
             Button(action: {
                 showImagePicker = true
             }) {
