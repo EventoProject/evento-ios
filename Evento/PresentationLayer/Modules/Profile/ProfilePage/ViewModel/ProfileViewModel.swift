@@ -50,7 +50,7 @@ final class ProfileViewModel: ObservableObject{
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
 //            self.eventApiManager.getMyEvents().sink(
-            self.eventApiManager.getMyEvents().sink(
+            self.eventApiManager.getEvents().sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
@@ -88,7 +88,7 @@ struct ProfileImageView: View {
         ZStack(alignment: .bottomTrailing) {
             if ((viewModel.user?.imageLink.isEmpty) != nil){
                 AsyncImage(
-                    url: URL(string: (viewModel.user!.imageLink)),
+                    url: URL(string: (viewModel.user?.imageLink)!),
                     content: { image in
                         image
                             .resizable()
@@ -107,6 +107,22 @@ struct ProfileImageView: View {
                     }
                 )
             }
+            if let image = selectedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 100)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
+            }
+//            else{
+//                Image("person_circle")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .frame(width: 150, height: 150)
+//                    .clipShape(Circle())
+//                    .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
+//            }
             Button(action: {
                 showImagePicker = true
             }) {
@@ -129,7 +145,6 @@ struct ProfileImageView: View {
         .padding()
     }
 }
-
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
     @ObservedObject var viewModel: ProfileViewModel
