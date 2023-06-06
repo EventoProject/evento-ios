@@ -12,16 +12,16 @@ struct LikesResponseModel: Decodable {
 }
 
 struct LikeItemModel: Decodable, Hashable {
-    let createdAt: CreatedAtModel
     let id: Int
     let name: String
     let username: String
     let imageLink: ImageLinkModel
+    let isFollowing: Bool
     
     enum CodingKeys: String, CodingKey {
-        case createdAt = "created_at"
         case id, name, username
         case imageLink = "image_link"
+        case isFollowing = "is_following"
     }
 }
 

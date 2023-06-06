@@ -22,6 +22,7 @@ final class EventViewModel: ObservableObject {
     // MARK: - Callbacks
     var showLikesPage: VoidCallback?
     var showCommentsPage: VoidCallback?
+    var showWebPage: Callback<(url: String, title: String)>?
     
     // MARK: - Public parameters
     let event: EventItemModel
@@ -51,6 +52,8 @@ final class EventViewModel: ObservableObject {
     }
     
     func didTapLike(isLiked: Bool) {
+        eventModel?.isLiked.toggle()
+        
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
             self.apiManager.like(isLike: isLiked, eventId: self.event.id).sink(
@@ -71,6 +74,8 @@ final class EventViewModel: ObservableObject {
     }
     
     func didTapSave(isSaved: Bool) {
+        eventModel?.isSaved.toggle()
+        
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
             self.apiManager.save(isSave: isSaved, eventId: self.event.id).sink(
@@ -86,7 +91,7 @@ final class EventViewModel: ObservableObject {
     }
     
     func didTapParticipate() {
-        print("Participate button tapped")
+        showWebPage?((url: eventModel?.websiteLink ?? "", title: eventModel?.name ?? ""))
     }
     
     func didTapShare() {

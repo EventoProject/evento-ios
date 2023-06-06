@@ -9,6 +9,8 @@ import UIKit
 import SwiftUI
 
 final class EventsModuleCoordinator: BaseCoordinator {
+    var onFinish: VoidCallback?
+    
     init(injection: CustInjection, router: Router, navigationController: UINavigationController) {
         super.init(injection: injection, router: router)
         router.set(navigationController: navigationController)
@@ -35,46 +37,18 @@ private extension EventsModuleCoordinator {
     }
     
     func showEventPage(_ event: EventItemModel) {
-        let viewModel = EventViewModel(
-            event: event,
-            apiManager: injection.inject(EventsApiManagerProtocol.self)
-        )
-        
-        viewModel.showLikesPage = { [weak self] in
-            self?.showLikesPage(eventId: event.id)
+        let coordinator = EventCoordinator(event: event, injection: injection, router: router)
+        coordinator.onFinish = { [weak self, weak coordinator] in
+            self?.remove(coordinator)
+            self?.onFinish?()
         }
-        viewModel.showCommentsPage = { [weak self] in
-            self?.showCommentsPage(eventId: event.id)
-        }
-        
-        let page = UIHostingController(rootView: EventPage(viewModel: viewModel))
-        page.title = "Event"
-        router.push(viewController: page, animated: true)
+        add(coordinator)
+        coordinator.start()
     }
     
     func showFilterPage() {
         let viewModel = FilterViewModel(apiManager: injection.inject(AddApiManagerProtocol.self))
         let page = FilterHostingController(viewModel: viewModel)
-        router.push(viewController: page, animated: true)
-    }
-    
-    func showLikesPage(eventId: Int) {
-        let viewModel = LikesViewModel(
-            eventId: eventId,
-            apiManager: injection.inject(EventsApiManagerProtocol.self)
-        )
-        let page = UIHostingController(rootView: LikesPage(viewModel: viewModel))
-        page.title = "Likes"
-        router.push(viewController: page, animated: true)
-    }
-    
-    func showCommentsPage(eventId: Int) {
-        let viewModel = CommentsViewModel(
-            eventId: eventId,
-            apiManager: injection.inject(EventsApiManagerProtocol.self)
-        )
-        let page = UIHostingController(rootView: CommentsPage(viewModel: viewModel))
-        page.title = "Comments"
         router.push(viewController: page, animated: true)
     }
 }

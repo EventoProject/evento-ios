@@ -20,7 +20,8 @@ enum EventsTarget {
     case share(isShare: Bool, eventId: Int)
     case sendComment(text: String, eventId: Int)
     case comments(eventId: Int)
-    
+    case deleteComment(commentId: Int)
+    case likedEvents
 }
 
 extension EventsTarget: EndpointProtocol {
@@ -31,7 +32,7 @@ extension EventsTarget: EndpointProtocol {
     var path: String {
         switch self {
         case .events:
-            return "events"
+            return "auth/events"
         case .myEvents:
             return "auth/my-events"
         case .subscribers:
@@ -41,7 +42,7 @@ extension EventsTarget: EndpointProtocol {
         case let .event(id):
             return "auth/event/\(id)"
         case let .likes(eventId):
-            return "event/\(eventId)/likes"
+            return "auth/event/\(eventId)/likes"
         case let .follow(isFollow, userId):
             return "auth/\(isFollow ? "follow" : "unfollow")/\(userId)"
         case let .like(_, eventId):
@@ -54,12 +55,16 @@ extension EventsTarget: EndpointProtocol {
             return "auth/comment/\(eventId)"
         case let .comments(eventId):
             return "event/\(eventId)/comments"
+        case let .deleteComment(commentId):
+            return "auth/comment/\(commentId)"
+        case .likedEvents:
+            return "auth/liked-events"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .events, .myEvents, .event, .likes, .comments, .subscriptions, .subscribers:
+        case .events, .myEvents, .event, .likes, .comments, .likedEvents, .subscriptions, .subscribers:
             return .get
         case .follow, .sendComment:
             return .post
@@ -69,6 +74,8 @@ extension EventsTarget: EndpointProtocol {
             return isSave ? .post : .delete
         case let .share(isShare, _):
             return isShare ? .post : .delete
+        case .deleteComment:
+            return .delete
         }
     }
     
@@ -84,6 +91,11 @@ extension EventsTarget: EndpointProtocol {
         case let .sendComment(text, _):
             let bodyParams: [String: Any] = [
                 "content": text
+            ]
+            return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
+        case .events:
+            let bodyParams: [String: Any] = [
+                "first_subscriptions_events": false
             ]
             return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
         default:

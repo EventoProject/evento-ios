@@ -18,7 +18,7 @@ final class RegistrationViewModel: ObservableObject {
     @Published var isLoadingButton = false
     
     // MARK: - Callbacks
-    var showSignInPage: VoidCallback?
+    var showSuccessPage: VoidCallback?
     
     // MARK: - Private parameters
     private let apiManager: OnboardingApiManagerProtocol
@@ -48,7 +48,7 @@ final class RegistrationViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] _ in
-                    self?.showSignInPage?()
+                    self?.showSuccessPage?()
                 }
             ).store(in: &self.cancellables)
         }
