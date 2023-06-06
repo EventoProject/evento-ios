@@ -26,7 +26,20 @@ final class ProfileViewModel: ObservableObject{
     }
 
     func getSubscribers(){
-    
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.eventApiManager.().sink(
+                receiveCompletion: { completion in
+                    if case let .failure(error) = completion {
+                        print("something wrong \(error)")
+                    }
+                },
+                receiveValue: { [weak self] model in
+                    self?.user = model
+            
+                }
+            ).store(in: &self.cancellables)
+        }
     }
     
     func getMyProfile() {

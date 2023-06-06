@@ -19,7 +19,7 @@ protocol EventsApiManagerProtocol {
     func sendComment(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError>
     func getMyEvents() -> AnyPublisher<MyEventsResponseModel, NetworkError>
-    
+//    func getSubscriptions() -> AnyPublisher<>
 }
 
 final class EventsApiManager: EventsApiManagerProtocol {
