@@ -12,14 +12,27 @@ final class LikesViewModel: ObservableObject {
     // MARK: - Published parameters
     @Published var likes: [LikeItemModel] = []
     
+    // MARK: - Public parameters
+    lazy var userId: Int? = {
+        if
+            let userIdString = keychainManager.getString(type: .userId),
+            let userId = Int(userIdString) {
+            return userId
+        } else {
+            return nil
+        }
+    }()
+    
     // MARK: - Private parameters
     private let eventId: Int
     private let apiManager: EventsApiManagerProtocol
+    private let keychainManager: KeychainManagerProtocol
     private var cancellables = Set<AnyCancellable>()
     
-    init(eventId: Int, apiManager: EventsApiManagerProtocol) {
+    init(eventId: Int, apiManager: EventsApiManagerProtocol, keychainManager: KeychainManagerProtocol) {
         self.eventId = eventId
         self.apiManager = apiManager
+        self.keychainManager = keychainManager
         
         getLikes()
     }

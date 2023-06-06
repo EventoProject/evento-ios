@@ -16,25 +16,29 @@ struct AddSuccessPage: View {
             Image(uiImage: Images.logoSmileGradient)
                 .padding(.bottom, 28)
             CustText(text: "Thank you!", weight: .semiBold, size: 23)
-            CustText(text: "Event created successfully", weight: .medium, size: 16)
+            CustText(text: viewModel.title, weight: .medium, size: 16)
                 .padding(.bottom, 15)
-            CustText(text: "Your Event has been accepted and will be published in the feed", weight: .regular, size: 16)
+            CustText(text: viewModel.subtitle, weight: .regular, size: 16)
                 .multilineTextAlignment(.center)
-            ButtonView(text: "Back to Events") {
-                viewModel.didTapBackToEventsButton()
+            ButtonView(text: viewModel.buttonTitle) {
+                viewModel.didTapButton()
             }
             .padding(.top, 41)
             .padding(.horizontal, 27)
             Spacer()
         }
         .onDisappear {
-            viewModel.showFirstStep?()
+            viewModel.onDisappear?()
         }
     }
 }
 
 struct AddSuccessPage_Previews: PreviewProvider {
     static var previews: some View {
-        AddSuccessPage(viewModel: AddSuccessViewModel())
+        AddSuccessPage(viewModel: AddSuccessViewModel(
+            title: "Event created successfully",
+            subtitle: "Your Event has been accepted and will be published in the feed",
+            buttonTitle: "Back to events"
+        ))
     }
 }

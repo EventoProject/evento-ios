@@ -85,7 +85,7 @@ private struct EventItemView: View {
                 )
                 .foregroundColor(CustColor.lightGray)
                 Spacer()
-                LikeButton(isLiked: $isLiked, didTapLike: didTapLike)
+                LikeButton(isLiked: isLiked, didTapLike: didTapLike)
             }
             .padding(.bottom, 10)
         }

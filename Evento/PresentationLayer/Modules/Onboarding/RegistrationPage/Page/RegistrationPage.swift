@@ -56,7 +56,9 @@ private struct NicknameView: View {
             title: "Nickname",
             placeholder: "Your nickname",
             leftIcon: Images.personCircle
-        ).padding(.top, 25)
+        )
+        .textInputAutocapitalization(.never)
+        .padding(.top, 25)
     }
 }
 

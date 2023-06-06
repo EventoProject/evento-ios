@@ -17,5 +17,6 @@ struct EmailView: View {
             leftIcon: Images.email
         )
         .keyboardType(.emailAddress)
+        .textInputAutocapitalization(.never)
     }
 }

@@ -87,13 +87,17 @@ private extension AddCoordinator {
     }
     
     func showSuccessPage() {
-        let viewModel = AddSuccessViewModel()
+        let viewModel = AddSuccessViewModel(
+            title: "Event created successfully",
+            subtitle: "Your Event has been accepted and will be published in the feed",
+            buttonTitle: "Back to events"
+        )
         
-        viewModel.openEventsModule = { [weak self] in
+        viewModel.buttonTapped = { [weak self] in
             self?.openEventsModule?()
         }
         
-        viewModel.showFirstStep = { [weak self] in
+        viewModel.onDisappear = { [weak self] in
             self?.showFirstStepPage()
         }
         

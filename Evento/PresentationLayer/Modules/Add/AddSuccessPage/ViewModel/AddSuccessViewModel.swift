@@ -9,10 +9,21 @@ import SwiftUI
 
 final class AddSuccessViewModel: ObservableObject {
     // MARK: - Callbacks
-    var openEventsModule: VoidCallback?
-    var showFirstStep: VoidCallback?
+    var buttonTapped: VoidCallback?
+    var onDisappear: VoidCallback?
     
-    func didTapBackToEventsButton() {
-        openEventsModule?()
+    // MARK: - Public parameters
+    let title: String
+    let subtitle: String
+    let buttonTitle: String
+    
+    init(title: String, subtitle: String, buttonTitle: String) {
+        self.title = title
+        self.subtitle = subtitle
+        self.buttonTitle = buttonTitle
+    }
+    
+    func didTapButton() {
+        buttonTapped?()
     }
 }
