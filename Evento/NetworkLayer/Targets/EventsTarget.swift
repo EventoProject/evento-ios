@@ -18,6 +18,7 @@ enum EventsTarget {
     case sendComment(text: String, eventId: Int)
     case comments(eventId: Int)
     case deleteComment(commentId: Int)
+    case likedEvents
 }
 
 extension EventsTarget: EndpointProtocol {
@@ -28,7 +29,7 @@ extension EventsTarget: EndpointProtocol {
     var path: String {
         switch self {
         case .events:
-            return "events"
+            return "auth/events"
         case let .event(id):
             return "auth/event/\(id)"
         case let .likes(eventId):
@@ -47,12 +48,14 @@ extension EventsTarget: EndpointProtocol {
             return "event/\(eventId)/comments"
         case let .deleteComment(commentId):
             return "auth/comment/\(commentId)"
+        case .likedEvents:
+            return "auth/liked-events"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .events, .event, .likes, .comments:
+        case .events, .event, .likes, .comments, .likedEvents:
             return .get
         case .follow, .sendComment:
             return .post
@@ -79,6 +82,11 @@ extension EventsTarget: EndpointProtocol {
         case let .sendComment(text, _):
             let bodyParams: [String: Any] = [
                 "content": text
+            ]
+            return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
+        case .events:
+            let bodyParams: [String: Any] = [
+                "first_subscriptions_events": false
             ]
             return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
         default:

@@ -1,39 +1,28 @@
 //
-//  EventsModuleCoordinator.swift
+//  EventCoordinator.swift
 //  Evento
 //
-//  Created by Ramir Amrayev on 01.05.2023.
+//  Created by Ramir Amrayev on 05.06.2023.
 //
 
-import UIKit
 import SwiftUI
 
-final class EventsModuleCoordinator: BaseCoordinator {
-    init(injection: CustInjection, router: Router, navigationController: UINavigationController) {
+final class EventCoordinator: BaseCoordinator {
+    var onFinish: VoidCallback?
+    
+    private let event: EventItemModel
+    
+    init(event: EventItemModel, injection: CustInjection, router: Router) {
+        self.event = event
         super.init(injection: injection, router: router)
-        router.set(navigationController: navigationController)
     }
     
     func start() {
-        showEventsPage()
+        showEventPage(event)
     }
 }
 
-private extension EventsModuleCoordinator {
-    func showEventsPage() {
-        let viewModel = EventsViewModel(apiManager: injection.inject(EventsApiManagerProtocol.self))
-        
-        viewModel.showEventDetailPage = { [weak self] event in
-            self?.showEventPage(event)
-        }
-        viewModel.didTapFilter = { [weak self] in
-            self?.showFilterPage()
-        }
-        
-        let page = EventsHostingController(viewModel: viewModel)
-        router.set(viewControllers: [page], animated: true)
-    }
-    
+private extension EventCoordinator {
     func showEventPage(_ event: EventItemModel) {
         let viewModel = EventViewModel(
             event: event,
@@ -46,22 +35,20 @@ private extension EventsModuleCoordinator {
         viewModel.showCommentsPage = { [weak self] in
             self?.showCommentsPage(eventId: event.id)
         }
+        viewModel.showWebPage = { [weak self] args in
+            self?.showWebPage(url: args.url, title: args.title)
+        }
         
         let page = UIHostingController(rootView: EventPage(viewModel: viewModel))
         page.title = "Event"
         router.push(viewController: page, animated: true)
     }
     
-    func showFilterPage() {
-        let viewModel = FilterViewModel(apiManager: injection.inject(AddApiManagerProtocol.self))
-        let page = FilterHostingController(viewModel: viewModel)
-        router.push(viewController: page, animated: true)
-    }
-    
     func showLikesPage(eventId: Int) {
         let viewModel = LikesViewModel(
             eventId: eventId,
-            apiManager: injection.inject(EventsApiManagerProtocol.self)
+            apiManager: injection.inject(EventsApiManagerProtocol.self),
+            keychainManager: injection.inject(KeychainManagerProtocol.self)
         )
         let page = UIHostingController(rootView: LikesPage(viewModel: viewModel))
         page.title = "Likes"
@@ -76,6 +63,13 @@ private extension EventsModuleCoordinator {
         )
         let page = UIHostingController(rootView: CommentsPage(viewModel: viewModel))
         page.title = "Comments"
+        router.push(viewController: page, animated: true)
+    }
+    
+    func showWebPage(url: String, title: String) {
+        guard let url = URL(string: url) else { return }
+        let page = UIHostingController(rootView: WebViewPage(url: url))
+        page.title = title
         router.push(viewController: page, animated: true)
     }
 }

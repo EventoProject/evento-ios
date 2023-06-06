@@ -12,7 +12,10 @@ struct LikesPage: View {
     
     var body: some View {
         List(viewModel.likes, id: \.self) { like in
-            LikeView(like) { follow in
+            LikeView(
+                like: like,
+                isUserLike: viewModel.userId == like.id
+            ) { follow in
                 viewModel.didTapFollow(like: like, follow: follow)
             }
             .listRowSeparator(.hidden)
@@ -23,11 +26,13 @@ struct LikesPage: View {
 
 private struct LikeView: View {
     let like: LikeItemModel
+    let isUserLike: Bool
     let didTapFollow: Callback<Bool>
     @State private var isFollowing: Bool
     
-    init(_ like: LikeItemModel, didTapFollow: @escaping Callback<Bool>) {
+    init(like: LikeItemModel, isUserLike: Bool, didTapFollow: @escaping Callback<Bool>) {
         self.like = like
+        self.isUserLike = isUserLike
         self.didTapFollow = didTapFollow
         isFollowing = like.isFollowing
     }
@@ -37,7 +42,9 @@ private struct LikeView: View {
             AsyncAvatarImage(url: like.imageLink.string, size: 60)
             userNameView
             Spacer()
-            followButton
+            if !isUserLike {
+                followButton
+            }
         }
     }
     
@@ -70,7 +77,8 @@ struct LikesPage_Previews: PreviewProvider {
                     webService: WebService(
                         keychainManager: KeychainManager()
                     )
-                )
+                ),
+                keychainManager: KeychainManager()
             )
         )
     }

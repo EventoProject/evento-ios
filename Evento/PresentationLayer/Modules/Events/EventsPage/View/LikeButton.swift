@@ -13,15 +13,14 @@ enum LikeButtonType {
 }
 
 struct LikeButton: View {
-    @Binding var isLiked: Bool
+    var isLiked: Bool
     var type: LikeButtonType = .like
     let didTapLike: Callback<Bool>
     
     var body: some View {
         Button(
             action: {
-                isLiked.toggle()
-                didTapLike(isLiked)
+                didTapLike(!isLiked)
             },
             label: {
                 Group {

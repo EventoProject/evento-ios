@@ -18,8 +18,8 @@ struct EventPage: View {
             EventItemImage(imageUrl: event.imageLink.string)
             NameLikeView(
                 eventName: event.name,
-                isLiked: false,
-                isSaved: false,
+                isLiked: viewModel.eventModel?.isLiked ?? false,
+                isSaved: viewModel.eventModel?.isSaved ?? false,
                 didTapLike: { isLiked in
                     viewModel.didTapLike(isLiked: isLiked)
                 },
@@ -130,8 +130,8 @@ struct EventPage: View {
 
 private struct NameLikeView: View {
     let eventName: String
-    @State var isLiked: Bool
-    @State var isSaved: Bool
+    var isLiked: Bool
+    var isSaved: Bool
     let didTapLike: Callback<Bool>
     let didTapSave: Callback<Bool>
     
@@ -139,8 +139,8 @@ private struct NameLikeView: View {
         HStack {
             CustText(text: eventName, weight: .semiBold, size: 16)
             Spacer()
-            LikeButton(isLiked: $isLiked, didTapLike: didTapLike)
-            LikeButton(isLiked: $isSaved, type: .save, didTapLike: didTapSave)
+            LikeButton(isLiked: isLiked, didTapLike: didTapLike)
+            LikeButton(isLiked: isSaved, type: .save, didTapLike: didTapSave)
         }
         .padding(.top, 20)
         .padding(.bottom)

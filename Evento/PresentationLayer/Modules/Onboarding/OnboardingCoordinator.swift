@@ -25,7 +25,7 @@ final class OnboardingCoordinator: BaseCoordinator {
 }
 
 private extension OnboardingCoordinator {
-    func showSignInPage() {
+    func showSignInPage(animated: Bool = false) {
         let viewModel = SignInViewModel(
             apiManager: injection.inject(OnboardingApiManagerProtocol.self),
             webService: injection.inject(WebServiceProtocol.self),
@@ -45,7 +45,7 @@ private extension OnboardingCoordinator {
         }
         
         let page = UIHostingController(rootView: SignInPage(viewModel: viewModel))
-        router.set(viewControllers: [page], animated: false)
+        router.set(viewControllers: [page], animated: animated)
     }
     
     func showForgotPasswordPage() {
@@ -70,8 +70,8 @@ private extension OnboardingCoordinator {
     func showRegistrationPage() {
         let viewModel = RegistrationViewModel(apiManager: injection.inject(OnboardingApiManagerProtocol.self))
         
-        viewModel.showSignInPage = { [weak self] in
-            self?.showSignInPage()
+        viewModel.showSuccessPage = { [weak self] in
+            self?.showSuccessPage()
         }
         
         let page = UIHostingController(rootView: RegistrationPage(viewModel: viewModel))
@@ -88,6 +88,21 @@ private extension OnboardingCoordinator {
             navigationController: navigationController
         )
         mainTabCoordinator.start()
+    }
+    
+    func showSuccessPage() {
+        let viewModel = AddSuccessViewModel(
+            title: "Account created successfully",
+            subtitle: "You have successfully created an account, \nclick on the button below to Sign in",
+            buttonTitle: "Back to Sign in"
+        )
+        
+        viewModel.buttonTapped = { [weak self] in
+            self?.showSignInPage(animated: true)
+        }
+        
+        let page = AddSuccessHostingController(rootView: AddSuccessPage(viewModel: viewModel))
+        router.push(viewController: page, animated: true)
     }
     
     func showNewsPage() {
