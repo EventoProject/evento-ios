@@ -51,21 +51,22 @@ struct EventPage: View {
         .background(CustColor.backgroundColor)
         .alert(
             viewModel.alertMainText,
-            isPresented: $viewModel.isAlertPresented,
-            actions: {
-                Button(
-                    action: {
-                    viewModel.isAlertPresented = false
-                    },
-                    label: {
-                        CustText(text: "Ok", weight: .regular, size: 15)
-                    }
-                )
-            },
-            message: {
-                Text(viewModel.alertMessageText)
+            isPresented: $viewModel.isAlertPresented
+        ) {
+            if viewModel.isShareAlert {
+                TextField("Let's go together?", text: $viewModel.shareMessage)
             }
-        )
+            HStack {
+                if viewModel.isShareAlert {
+                    Button("Cancel") {
+                        viewModel.isAlertPresented = false
+                    }
+                }
+                Button(viewModel.alertConfirmButtonText, action: viewModel.didTapAlertConfirmButton)
+            }
+        } message: {
+            Text(viewModel.alertMessageText)
+        }
     }
     
     private var segmentedControlView: some View {
@@ -239,7 +240,8 @@ struct EventPage_Previews: PreviewProvider {
                         string: "https://evento-kz.s3.eu-north-1.amazonaws.com/events/f33d921c-6760-48b2-9d2a-75082410ec4c.jpg",
                         valid: true
                     ),
-                    createdAt: "2023-05-23T14:45:17.24142Z"
+                    createdAt: "2023-05-23T14:45:17.24142Z",
+                    isLiked: false
                 ),
             apiManager: EventsApiManager(
                 webService: WebService(

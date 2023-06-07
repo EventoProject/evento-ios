@@ -18,6 +18,7 @@ final class EventViewModel: ObservableObject {
     @Published var selectedSegmentedControlItem = "Description"
     @Published var isAlertPresented = false
     @Published var commentModel = InputViewModel()
+    @Published var shareMessage = ""
     
     // MARK: - Callbacks
     var showLikesPage: VoidCallback?
@@ -39,6 +40,8 @@ final class EventViewModel: ObservableObject {
     var eventTimeText: String {
         eventDate?.toString(format: .hhmm) ?? ""
     }
+    var isShareAlert = false
+    var alertConfirmButtonText = "OK"
     
     // MARK: - Private parameters
     private let apiManager: EventsApiManagerProtocol
@@ -95,18 +98,7 @@ final class EventViewModel: ObservableObject {
     }
     
     func didTapShare() {
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-            self.apiManager.share(isShare: true, eventId: self.event.id).sink(
-                receiveCompletion: { completion in
-                    if case let .failure(error) = completion {
-                        print(error)
-                    }
-                }, receiveValue: { [weak self] _ in
-                    self?.showAlert(mainText: "Event shared in your profile")
-                }
-            ).store(in: &self.cancellables)
-        }
+        showAlert(mainText: "Enter your share message", isShareAlert: true)
     }
     
     func didTapLikeCountButton() {
@@ -140,6 +132,13 @@ final class EventViewModel: ObservableObject {
             ).store(in: &self.cancellables)
         }
     }
+    
+    func didTapAlertConfirmButton() {
+        if isShareAlert {
+            shareEvent()
+        }
+        isAlertPresented = false
+    }
 }
 
 private extension EventViewModel {
@@ -159,9 +158,30 @@ private extension EventViewModel {
         }
     }
     
-    func showAlert(mainText: String, messageText: String = "") {
+    func showAlert(
+        mainText: String,
+        messageText: String = "",
+        isShareAlert: Bool = false
+    ) {
         alertMainText = mainText
         alertMessageText = messageText
+        self.isShareAlert = isShareAlert
+        alertConfirmButtonText = isShareAlert ? "Share" : "OK"
         isAlertPresented = true
+    }
+    
+    func shareEvent() {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.apiManager.share(text: self.shareMessage, eventId: self.event.id).sink(
+                receiveCompletion: { completion in
+                    if case let .failure(error) = completion {
+                        print(error)
+                    }
+                }, receiveValue: { [weak self] _ in
+                    self?.showAlert(mainText: "Event shared in your profile")
+                }
+            ).store(in: &self.cancellables)
+        }
     }
 }

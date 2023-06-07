@@ -15,19 +15,14 @@ protocol EventsApiManagerProtocol {
     func follow(isFollow: Bool, userId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func like(isLike: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func save(isSave: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
-    func share(isShare: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
+    func share(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func sendComment(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError>
     func deleteComment(commentId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
-    func getMyEvents() -> AnyPublisher<MyEventsResponseModel, NetworkError>
-//    func getSubscriptions() -> AnyPublisher<>
+    func getLikedEvents() -> AnyPublisher<LikedEventsResponseModel, NetworkError>
 }
 
 final class EventsApiManager: EventsApiManagerProtocol {
-    func getMyEvents() -> AnyPublisher<MyEventsResponseModel, NetworkError> {
-        webService.request(EventsTarget.myEvents)
-    }
-    
     private let webService: WebServiceProtocol
     
     init(webService: WebServiceProtocol) {
@@ -58,8 +53,8 @@ final class EventsApiManager: EventsApiManagerProtocol {
         webService.request(EventsTarget.save(isSave: isSave, eventId: eventId))
     }
     
-    func share(isShare: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError> {
-        webService.request(EventsTarget.share(isShare: isShare, eventId: eventId))
+    func share(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError> {
+        webService.request(EventsTarget.share(text: text, eventId: eventId))
     }
     
     func sendComment(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError> {
@@ -72,5 +67,9 @@ final class EventsApiManager: EventsApiManagerProtocol {
     
     func deleteComment(commentId: Int) -> AnyPublisher<ResultResponseModel, NetworkError> {
         webService.request(EventsTarget.deleteComment(commentId: commentId))
+    }
+    
+    func getLikedEvents() -> AnyPublisher<LikedEventsResponseModel, NetworkError> {
+        webService.request(EventsTarget.likedEvents)
     }
 }
