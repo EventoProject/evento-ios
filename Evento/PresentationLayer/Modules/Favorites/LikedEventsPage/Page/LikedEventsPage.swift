@@ -1,14 +1,14 @@
 //
-//  EventsPage.swift
+//  LikedEventsPage.swift
 //  Evento
 //
-//  Created by Ramir Amrayev on 01.05.2023.
+//  Created by Ramir Amrayev on 07.06.2023.
 //
 
 import SwiftUI
 
-struct EventsPage: View {
-    @ObservedObject var viewModel: EventsViewModel
+struct LikedEventsPage: View {
+    @ObservedObject var viewModel: LikedEventsViewModel
     
     var body: some View {
         List(viewModel.events, id: \.self) { event in
@@ -33,14 +33,16 @@ struct EventsPage: View {
     }
 }
 
-struct EventsPage_Previews: PreviewProvider {
+struct LikedEventsPage_Previews: PreviewProvider {
     static var previews: some View {
-        EventsPage(viewModel: EventsViewModel(
-            apiManager: EventsApiManager(
-                webService: WebService(
-                    keychainManager: KeychainManager()
+        LikedEventsPage(
+            viewModel: LikedEventsViewModel(
+                apiManager: EventsApiManager(
+                    webService: WebService(
+                        keychainManager: KeychainManager()
+                    )
                 )
             )
-        ))
+        )
     }
 }

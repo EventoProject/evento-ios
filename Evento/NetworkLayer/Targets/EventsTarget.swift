@@ -14,7 +14,7 @@ enum EventsTarget {
     case follow(isFollow: Bool, userId: Int)
     case like(isLike: Bool, eventId: Int)
     case save(isSave: Bool, eventId: Int)
-    case share(isShare: Bool, eventId: Int)
+    case share(text: String, eventId: Int)
     case sendComment(text: String, eventId: Int)
     case comments(eventId: Int)
     case deleteComment(commentId: Int)
@@ -63,8 +63,8 @@ extension EventsTarget: EndpointProtocol {
             return isLike ? .post : .delete
         case let .save(isSave, _):
             return isSave ? .post : .delete
-        case let .share(isShare, _):
-            return isShare ? .post : .delete
+        case .share:
+            return .post
         case .deleteComment:
             return .delete
         }
@@ -85,8 +85,13 @@ extension EventsTarget: EndpointProtocol {
             ]
             return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
         case .events:
+            let urlParams: [String: Any] = [
+                "firstSubscriptionsEvents": true
+            ]
+            return .requestParameters(bodyParameters: nil, urlParameters: urlParams)
+        case let .share(text, _):
             let bodyParams: [String: Any] = [
-                "first_subscriptions_events": false
+                "description": text
             ]
             return .requestParameters(bodyParameters: bodyParams, urlParameters: nil)
         default:

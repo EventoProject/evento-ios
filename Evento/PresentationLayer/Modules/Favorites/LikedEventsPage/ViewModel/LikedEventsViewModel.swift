@@ -1,20 +1,19 @@
 //
-//  EventsViewModel.swift
+//  LikedEventsViewModel.swift
 //  Evento
 //
-//  Created by Ramir Amrayev on 23.05.2023.
+//  Created by Ramir Amrayev on 07.06.2023.
 //
 
 import SwiftUI
 import Combine
 
-final class EventsViewModel: ObservableObject {
+final class LikedEventsViewModel: ObservableObject {
     // MARK: - Published parameters
     @Published var events: [EventItemModel] = []
     
     // MARK: - Callbacks
     var showEventDetailPage: Callback<EventItemModel>?
-    var didTapFilter: VoidCallback?
     
     // MARK: - Private parameters
     private let apiManager: EventsApiManagerProtocol
@@ -22,7 +21,7 @@ final class EventsViewModel: ObservableObject {
     
     init(apiManager: EventsApiManagerProtocol) {
         self.apiManager = apiManager
-        getEvents()
+        getLikedEvents()
     }
     
     func didTapLike(event: EventItemModel, isLiked: Bool) {
@@ -49,20 +48,20 @@ final class EventsViewModel: ObservableObject {
     }
     
     func refresh() {
-        getEvents()
+        getLikedEvents()
     }
     
-    private func getEvents() {
+    private func getLikedEvents() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.getEvents().sink(
+            self.apiManager.getLikedEvents().sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
                     }
                 },
                 receiveValue: { [weak self] model in
-                    self?.events = model.events
+                    self?.events = model.likedEvents
                 }
             ).store(in: &self.cancellables)
         }
