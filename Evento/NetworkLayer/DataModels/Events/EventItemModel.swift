@@ -18,6 +18,7 @@ struct EventItemModel: Decodable, Hashable {
     let ageLimit: String
     let imageLink: ImageLinkModel
     let createdAt: String
+    var isLiked: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -30,6 +31,7 @@ struct EventItemModel: Decodable, Hashable {
         case ageLimit = "age_limit"
         case imageLink = "image_link"
         case createdAt = "created_at"
+        case isLiked = "is_liked"
     }
 }
 
