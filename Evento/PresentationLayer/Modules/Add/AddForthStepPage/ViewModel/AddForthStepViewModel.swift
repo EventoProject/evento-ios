@@ -70,6 +70,7 @@ private extension AddForthStepViewModel {
             duration: "2 hours",
             ageLimit: addFlowModel.ageLimit,
             websiteLink: addFlowModel.webSiteLink,
+            address: addFlowModel.fullAddress,
             imageBase64: imageBase64
         )
         

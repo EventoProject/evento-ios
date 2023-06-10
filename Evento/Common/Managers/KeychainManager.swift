@@ -10,6 +10,7 @@ import Foundation
 enum KeychainKeys: String, CaseIterable {
     case accessToken
     case userId
+    case username
 }
 
 protocol KeychainManagerProtocol {
