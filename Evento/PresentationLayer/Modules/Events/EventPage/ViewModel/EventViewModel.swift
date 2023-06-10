@@ -55,7 +55,7 @@ final class EventViewModel: ObservableObject {
     }
     
     func didTapLike(isLiked: Bool) {
-        eventModel?.isLiked.toggle()
+        eventModel?.liked.toggle()
         
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
@@ -77,7 +77,7 @@ final class EventViewModel: ObservableObject {
     }
     
     func didTapSave(isSaved: Bool) {
-        eventModel?.isSaved.toggle()
+        eventModel?.saved.toggle()
         
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }

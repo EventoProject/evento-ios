@@ -11,15 +11,14 @@ struct UserModel: Decodable, Hashable {
     let id: Int
     let email: String
     let passwordChangedAt: String
-    let isCommercial: Bool
     let name: String
+    let username: String
     let createdAt: String
     let imageLink: String
     
     enum CodingKeys: String, CodingKey {
-        case id, email, name
+        case id, email, name, username
         case passwordChangedAt = "password_changed_at"
-        case isCommercial = "is_commercial"
         case createdAt = "created_at"
         case imageLink = "image_link"
     }

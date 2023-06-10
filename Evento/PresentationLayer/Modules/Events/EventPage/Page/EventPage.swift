@@ -18,8 +18,8 @@ struct EventPage: View {
             EventItemImage(imageUrl: event.imageLink.string)
             NameLikeView(
                 eventName: event.name,
-                isLiked: viewModel.eventModel?.isLiked ?? false,
-                isSaved: viewModel.eventModel?.isSaved ?? false,
+                isLiked: viewModel.eventModel?.liked ?? false,
+                isSaved: viewModel.eventModel?.saved ?? false,
                 didTapLike: { isLiked in
                     viewModel.didTapLike(isLiked: isLiked)
                 },

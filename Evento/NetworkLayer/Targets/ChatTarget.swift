@@ -1,37 +1,35 @@
 //
-//  AddTarget.swift
+//  ChatTarget.swift
 //  Evento
 //
-//  Created by Ramir Amrayev on 22.05.2023.
+//  Created by Ramir Amrayev on 10.06.2023.
 //
 
-import UIKit
+import Foundation
 
-enum AddTarget {
-    case categories
-    case createEvent(_ payload: CreateEventPayload)
+enum ChatTarget {
+    case chats
+    case chatHistory(chatId: String)
 }
 
-extension AddTarget: EndpointProtocol {
+extension ChatTarget: EndpointProtocol {
     var baseURL: String {
         return "http://localhost:8081/"
     }
     
     var path: String {
         switch self {
-        case .categories:
-            return "categories"
-        case .createEvent:
-            return "auth/event"
+        case .chats:
+            return "auth/chats"
+        case let .chatHistory(chatId):
+            return "auth/chat/\(chatId)/history"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .categories:
+        case .chats, .chatHistory:
             return .get
-        case .createEvent:
-            return .post
         }
     }
     
@@ -44,8 +42,6 @@ extension AddTarget: EndpointProtocol {
     
     var task: HTTPTask {
         switch self {
-        case let .createEvent(payload):
-            return .requestJSONEncodable(payload)
         default:
             return .request
         }
