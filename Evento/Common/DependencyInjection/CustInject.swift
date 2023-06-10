@@ -37,6 +37,10 @@ extension Container {
             EventsApiManager(webService: res.resolve(WebServiceProtocol.self)!)
         }
         
+        register(ChatApiManagerProtocol.self) { res in
+            ChatApiManager(webService: res.resolve(WebServiceProtocol.self)!)
+        }
+        
         return self
     }
     

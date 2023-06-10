@@ -17,6 +17,7 @@ struct CreateEventPayload: Encodable {
     let duration: String
     let ageLimit: String
     let websiteLink: String
+    let address: String
     let imageBase64: String
     
     enum CodingKeys: String, CodingKey {
@@ -27,6 +28,7 @@ struct CreateEventPayload: Encodable {
         case cost
         case date
         case duration
+        case address
         case ageLimit = "age_limit"
         case websiteLink = "website_link"
         case imageBase64 = "image_base64"

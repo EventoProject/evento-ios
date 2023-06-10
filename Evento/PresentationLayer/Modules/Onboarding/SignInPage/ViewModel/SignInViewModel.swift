@@ -60,7 +60,7 @@ final class SignInViewModel: ObservableObject {
                     let user = responseModel.user
                     self.save(accessToken: responseModel.accessToken)
                     self.save(imageUrl: user.imageLink)
-                    self.save(userId: user.id)
+                    self.saveUserInfoToKeychain(user)
                     self.didTapSignIn?()
                 }
             ).store(in: &self.cancellables)
@@ -77,8 +77,9 @@ private extension SignInViewModel {
         UserDefaults.standard.set(imageUrl, forKey: Constants.avatarImageUrlKey)
     }
     
-    func save(userId: Int) {
-        keychainManager.set(value: "\(userId)", type: .userId)
+    func saveUserInfoToKeychain(_ user: UserModel) {
+        keychainManager.set(value: "\(user.id)", type: .userId)
+        keychainManager.set(value: user.username, type: .username)
     }
     
     func isValid() -> Bool {
