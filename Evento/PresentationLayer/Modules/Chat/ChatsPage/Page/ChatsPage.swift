@@ -21,9 +21,8 @@ struct ChatsPage: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(CustColor.backgroundColor)
-        .refreshable {
-            viewModel.refresh()
-        }
+        .refreshable { viewModel.refresh() }
+        .onAppear { viewModel.refresh() }
     }
 }
 

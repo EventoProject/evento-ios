@@ -35,8 +35,10 @@ struct EventPage: View {
                 detailsStackView
                 Spacer()
                 commentsView
-                AddCommentView(
-                    commentModel: $viewModel.commentModel,
+                SendInputView(
+                    inputModel: $viewModel.commentModel,
+                    placeholder: "Add a comment...",
+                    backgroundColor: CustColor.backgroundColor,
                     avatarImageUrl: viewModel.avatarImageUrl
                 ) {
                     viewModel.didTapSendComment()
@@ -202,19 +204,23 @@ private struct LikesCountButton: View {
     }
 }
 
-struct AddCommentView: View {
-    @Binding var commentModel: InputViewModel
-    let avatarImageUrl: String
+struct SendInputView: View {
+    @Binding var inputModel: InputViewModel
+    let placeholder: String
+    let backgroundColor: Color
+    var avatarImageUrl: String? = nil
     var didTapSend: VoidCallback?
     
     var body: some View {
         HStack {
-            AsyncAvatarImage(url: avatarImageUrl, size: 40)
+            if let avatarImageUrl {
+                AsyncAvatarImage(url: avatarImageUrl, size: 40)
+            }
             InputView(
-                model: $commentModel,
-                placeholder: "Add a comment ...",
+                model: $inputModel,
+                placeholder: placeholder,
                 rightIcon: Images.send,
-                backgroundColor: CustColor.backgroundColor,
+                backgroundColor: backgroundColor,
                 didTapRightIcon: {
                     didTapSend?()
                 }
