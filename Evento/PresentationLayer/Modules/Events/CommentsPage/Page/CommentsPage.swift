@@ -24,8 +24,10 @@ struct CommentsPage: View {
             }
             .listStyle(.plain)
             
-            AddCommentView(
-                commentModel: $viewModel.commentModel,
+            SendInputView(
+                inputModel: $viewModel.commentModel,
+                placeholder: "Add a comment...",
+                backgroundColor: CustColor.backgroundColor,
                 avatarImageUrl: viewModel.avatarImageUrl
             ) {
                 viewModel.didTapSendComment()

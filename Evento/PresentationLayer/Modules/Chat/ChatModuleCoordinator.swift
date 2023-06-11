@@ -36,7 +36,8 @@ private extension ChatModuleCoordinator {
         let viewModel = ChatViewModel(
             chatId: chatId,
             apiManager: injection.inject(ChatApiManagerProtocol.self),
-            keychainManager:  injection.inject(KeychainManagerProtocol.self)
+            keychainManager:  injection.inject(KeychainManagerProtocol.self),
+            websocketManager: injection.inject(WebSocketManagerProtocol.self)
         )
         let page = UIHostingController(rootView: ChatPage(viewModel: viewModel))
         page.title = otherUserName
