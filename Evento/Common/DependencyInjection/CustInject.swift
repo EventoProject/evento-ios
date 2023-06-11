@@ -41,6 +41,10 @@ extension Container {
             ChatApiManager(webService: res.resolve(WebServiceProtocol.self)!)
         }
         
+        register(WebSocketManagerProtocol.self) { res in
+            WebSocketManager()
+        }
+        
         return self
     }
     

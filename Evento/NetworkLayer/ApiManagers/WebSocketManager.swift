@@ -7,14 +7,25 @@
 
 import Foundation
 
-final class WebSocketManager {
+protocol WebSocketManagerProtocol {
+    var onMessageReceived: Callback<MessageModel>? { get set }
+    var onConnected: VoidCallback? { get set }
+    var onDisconnected: Callback<Error?>? { get set }
+    
+    func connect(chatId: String, userId: Int, username: String)
+    func disconnect()
+    func sendMessage(_ message: String)
+}
+
+final class WebSocketManager: WebSocketManagerProtocol {
     private var webSocketTask: URLSessionWebSocketTask?
     
-    var onMessageReceived: ((MessageModel) -> Void)?
-    var onConnected: (() -> Void)?
-    var onDisconnected: ((_ error: Error?) -> Void)?
+    var onMessageReceived: Callback<MessageModel>?
+    var onConnected: VoidCallback?
+    var onDisconnected: Callback<Error?>?
     
-    func connect(to url: URL) {
+    func connect(chatId: String, userId: Int, username: String) {
+        guard let url = formURL(chatId: chatId, userId: userId, username: username) else { return }
         let session = URLSession(configuration: .default)
         webSocketTask = session.webSocketTask(with: url)
         
@@ -44,8 +55,10 @@ final class WebSocketManager {
             }
         }
     }
-    
-    private func receiveMessages() {
+}
+
+private extension WebSocketManager {
+    func receiveMessages() {
         guard let webSocketTask = webSocketTask else {
             print("WebSocket task is not initialized")
             return
@@ -62,13 +75,15 @@ final class WebSocketManager {
         }
     }
     
-    private func handleMessage(_ message: URLSessionWebSocketTask.Message) {
+    func handleMessage(_ message: URLSessionWebSocketTask.Message) {
         switch message {
         case .string(let text):
             if let data = text.data(using: .utf8) {
                 do {
                     let messageModel = try JSONDecoder().decode(MessageModel.self, from: data)
-                    onMessageReceived?(messageModel)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.onMessageReceived?(messageModel)
+                    }
                 } catch {
                     print("Failed to decode message: \(error)")
                 }
@@ -80,8 +95,20 @@ final class WebSocketManager {
         }
     }
     
-    private func disconnectWithError(_ error: Error?) {
+    func disconnectWithError(_ error: Error?) {
         webSocketTask = nil
         onDisconnected?(error)
+    }
+    
+    func formURL(chatId: String, userId: Int, username: String) -> URL? {
+        guard var components = URLComponents(string: "ws://localhost:8081/ws/joinRoom/" + chatId) else {
+            return nil
+        }
+        let urlParameters: [String: Any] = [
+            "userId": userId,
+            "username": username
+        ]
+        components.queryItems = urlParameters.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+        return components.url
     }
 }

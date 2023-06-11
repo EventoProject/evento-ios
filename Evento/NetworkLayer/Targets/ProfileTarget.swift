@@ -13,7 +13,7 @@ enum ProfileTarget {
 
 extension ProfileTarget: EndpointProtocol {
     var baseURL: String {
-        return "http://localhost:8081/"
+        return ApiConstants.baseURL
     }
     
     var path: String {

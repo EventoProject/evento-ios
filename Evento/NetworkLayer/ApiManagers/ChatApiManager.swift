@@ -11,6 +11,7 @@ import Combine
 protocol ChatApiManagerProtocol {
     func getChats() -> AnyPublisher<[ChatsResponseItemModel], NetworkError>
     func getChatHistory(chatId: String) -> AnyPublisher<[MessageModel], NetworkError>
+    func getChatDetails(chatId: String) -> AnyPublisher<ChatDetailsResponseModel, NetworkError>
 }
 
 final class ChatApiManager: ChatApiManagerProtocol {
@@ -26,5 +27,9 @@ final class ChatApiManager: ChatApiManagerProtocol {
     
     func getChatHistory(chatId: String) -> AnyPublisher<[MessageModel], NetworkError> {
         webService.request(ChatTarget.chatHistory(chatId: chatId))
+    }
+    
+    func getChatDetails(chatId: String) -> AnyPublisher<ChatDetailsResponseModel, NetworkError> {
+        webService.request(ChatTarget.chatDetails(chatId: chatId))
     }
 }

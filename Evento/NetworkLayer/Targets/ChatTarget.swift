@@ -10,11 +10,12 @@ import Foundation
 enum ChatTarget {
     case chats
     case chatHistory(chatId: String)
+    case chatDetails(chatId: String)
 }
 
 extension ChatTarget: EndpointProtocol {
     var baseURL: String {
-        return "http://localhost:8081/"
+        return ApiConstants.baseURL
     }
     
     var path: String {
@@ -23,12 +24,14 @@ extension ChatTarget: EndpointProtocol {
             return "auth/chats"
         case let .chatHistory(chatId):
             return "auth/chat/\(chatId)/history"
+        case let .chatDetails(chatId):
+            return "auth/chat/\(chatId)"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .chats, .chatHistory:
+        case .chats, .chatHistory, .chatDetails:
             return .get
         }
     }
