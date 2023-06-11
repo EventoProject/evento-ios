@@ -65,6 +65,8 @@ struct UserProfilePage: View {
                         }
                         .background(.white)
                         .cornerRadius(10)
+                        //remove later 
+                        .padding()
                     }
                     HStack(spacing: 5){
                         ButtonView(
