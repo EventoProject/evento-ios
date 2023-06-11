@@ -11,7 +11,7 @@ import Foundation
 struct ProfilePage: View {
     @ObservedObject var profileViewModel: ProfileViewModel
     @State var imagePicker : ProfileImageView
-    @State private var searchText = ""
+    var searchTap: VoidCallback?
 
     init(profileViewModel: ProfileViewModel) {
         self.profileViewModel = profileViewModel
@@ -41,23 +41,29 @@ struct ProfilePage: View {
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    SearchBar(text: $searchText).padding(.horizontal ,10)
+                    
+                    .background(.white)
+                    .cornerRadius(10)
+                    ZStack(alignment: .leading) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                        Text("search")
+                            .padding(.leading, 20)
+                    }
+                    .onTapGesture {
+                        profileViewModel.ShowSearchPage()
+                    }
+                    .padding()
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(15)
+                    .padding()
                 }
             }
             .background(CustColor.backgroundColor)
-            
-            
-            
             VStack{
                 List(profileViewModel.myevents, id: \.self) { event in
                     MyEventItemView(
                         event: event
-                        //                    didTapLike: { isLiked in
-                        //                        viewModel.didTapLike(event: event, isLiked: isLiked)
-                        //                    },
-                        //                    didTap: {
-                        //                        viewModel.didTap(event: event)
-                        //                    }
                     )
                     .listRowSeparator(.hidden)
                     .listRowBackground(CustColor.backgroundColor)
@@ -69,24 +75,24 @@ struct ProfilePage: View {
         }
     }
 }
-struct SearchBar: View {
-    @Binding var text: String
-
-    var body: some View {
-        VStack {
-            ZStack(alignment: .leading) {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                TextField("search", text: $text)
-                    .padding(.leading, 20)
-            }
-            .padding()
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(15)
-            .padding()
-        }
-    }
-}
+//struct SearchBar: View {
+//    @Binding var text: String
+//
+//    var body: some View {
+//        VStack {
+//            ZStack(alignment: .leading) {
+//                Image(systemName: "magnifyingglass")
+//                    .foregroundColor(.gray)
+//                TextField("search", text: $text)
+//                    .padding(.leading, 20)
+//            }
+//            .padding()
+//            .background(Color.gray.opacity(0.2))
+//            .cornerRadius(15)
+//            .padding()
+//        }
+//    }
+//}
 struct MyEventItemView: View {
     let event: EventItemModel
     var body: some View {

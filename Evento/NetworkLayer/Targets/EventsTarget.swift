@@ -13,6 +13,7 @@ enum EventsTarget {
     case subscriptions
     case subscribers
     case event(id: Int)
+    case getUsersSharedEvents(id: Int)
     case likes(eventId: Int)
     case follow(isFollow: Bool, userId: Int)
     case like(isLike: Bool, eventId: Int)
@@ -59,12 +60,14 @@ extension EventsTarget: EndpointProtocol {
             return "auth/comment/\(commentId)"
         case .likedEvents:
             return "auth/liked-events"
+        case let .getUsersSharedEvents(id):
+            return "auth/shares/\(id)"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .events, .myEvents, .event, .likes, .comments, .likedEvents, .subscriptions, .subscribers:
+        case .events, .myEvents, .event, .likes, .comments, .likedEvents, .subscriptions, .subscribers, .getUsersSharedEvents:
             return .get
         case .follow, .sendComment:
             return .post

@@ -9,8 +9,9 @@ import UIKit
 
 enum ProfileTarget {
     case uploadProfileImage(image: UIImage, hasImage: Bool)
-    case getProfile
+    case getProfile(id: Int)
     case getMyProfile
+    case searchUsers
 }
 
 extension ProfileTarget: EndpointProtocol {
@@ -21,11 +22,13 @@ extension ProfileTarget: EndpointProtocol {
     var path: String {
         switch self {
         case .uploadProfileImage:
-            return "auth/profile/upload-image"
-        case .getProfile:
-            return "auth/profile"
+            return "auth/profile/image"
+        case let .getProfile(id):
+            return "auth/profile/\(id)"
         case .getMyProfile:
-            return "auth/my-profile"
+            return "auth/profile"
+        case .searchUsers:
+            return "auth/search/users"
         }
     }
     
@@ -33,7 +36,7 @@ extension ProfileTarget: EndpointProtocol {
         switch self {
         case .uploadProfileImage:
             return .post
-        case .getProfile, .getMyProfile:
+        case .getProfile, .getMyProfile, .searchUsers:
             return .get
         }
     }

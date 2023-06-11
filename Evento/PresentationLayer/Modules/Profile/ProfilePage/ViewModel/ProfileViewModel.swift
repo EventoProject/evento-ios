@@ -16,6 +16,7 @@ final class ProfileViewModel: ObservableObject{
     @Published var user : UserModel?
     @Published var myevents: [EventItemModel] = []
     private var cancellables = Set<AnyCancellable>()
+    var showSearchPage: VoidCallback?
     
     init(apiManager: ProfileApiManagerProtocol, eventApiManager: EventsApiManagerProtocol){
         self.apiManager = apiManager
@@ -25,23 +26,9 @@ final class ProfileViewModel: ObservableObject{
         
     }
 
-    func getSubscribers(){
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-            self.eventApiManager.().sink(
-                receiveCompletion: { completion in
-                    if case let .failure(error) = completion {
-                        print("something wrong \(error)")
-                    }
-                },
-                receiveValue: { [weak self] model in
-                    self?.user = model
-            
-                }
-            ).store(in: &self.cancellables)
-        }
+    func ShowSearchPage(){
+        showSearchPage?()
     }
-    
     func getMyProfile() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
