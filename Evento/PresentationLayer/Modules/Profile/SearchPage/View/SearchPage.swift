@@ -33,7 +33,8 @@ struct SearchPage: View {
             .cornerRadius(8)
             .padding(.horizontal, 20)
         }
-//        .background(.gray)
+        .padding(2)
+        .background(CustColor.backgroundColor)
 
         List(filteredUsers, id: \.self) { user in
             SearchUserView(user: user).onTapGesture {

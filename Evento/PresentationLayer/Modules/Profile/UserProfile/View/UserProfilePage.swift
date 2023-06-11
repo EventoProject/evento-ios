@@ -44,23 +44,29 @@ struct UserProfilePage: View {
                             }
                         )
                     }
-                    CustText(text: viewModel.user?.name ?? "nick name", weight: .regular, size: 20)
-                    HStack(){
-                        CustText(text: "\(String(describing: (viewModel.user?.subscriptions)))\n following", weight: .thin, size: 14)      .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                        CustText(text: "\(String(describing: (viewModel.user?.subscribers)))\n followers", weight: .thin, size: 14)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                        CustText(text: "\(String(describing: (viewModel.user?.events)))\n events", weight: .thin, size: 14)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
+                    if (viewModel.user.self != nil){
+                        CustText(text: viewModel.user!.name , weight: .regular, size: 20)
+                        CustText(text: "@\(viewModel.user!.email)" , weight: .regular, size: 14).padding(.bottom, 5).foregroundColor(.gray)
+                        HStack(spacing: 10){
+                            CustText(text: "\(viewModel.user!.subscriptions) \n following", weight: .thin, size: 14)      .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.black)
+                            CustText(text: "\(viewModel.user!.subscribers)\n followers", weight: .thin, size: 14)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.black)
+                            CustText(text: "\(viewModel.user!.events)\n events", weight: .thin, size: 14)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.black)
+                        }
+                        .background(.white)
+                        .cornerRadius(10)
                     }
-                    .background(.white)
-                    .cornerRadius(10)
-                    HStack{
+                    HStack(spacing: 5){
                         ButtonView(
                             text: viewModel.user?.following ?? false ? "Following" : "Follow",
                             type: .small,
@@ -75,8 +81,8 @@ struct UserProfilePage: View {
                         ) {
                             
                         }
-                    }
-                }
+                    }.padding()
+                }.padding()
             }.background(CustColor.backgroundColor)
             VStack{
                 List(viewModel.events, id: \.self) { event in
@@ -92,6 +98,7 @@ struct UserProfilePage: View {
             }
             
         }
+            
     }
 }
 
