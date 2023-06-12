@@ -136,15 +136,17 @@ final class UserProfileViewModel: ObservableObject{
     }
     
     func didTapFollow() {
+        
         DispatchQueue.global().async { [weak self] in
             guard let self = self, let user = self.user else { return }
-            self.eventApiManager.follow(isFollow: user.following, userId: self.id).sink(
+            self.eventApiManager.follow(isFollow: !user.following, userId: self.id).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
                     }
                 },
                 receiveValue: { _ in
+                    self.getProfile()
                     print("Success")
                 }
             ).store(in: &self.cancellables)
@@ -153,7 +155,8 @@ final class UserProfileViewModel: ObservableObject{
     }
     
     private func getSharedEvents() {
-        DispatchQueue.global().async { [weak self] in
+        // TODO: return to async
+        DispatchQueue.global().sync { [weak self] in
             guard let self = self else { return }
             self.apiManager.getUserSharedEvents(userID: self.id).sink(
                 receiveCompletion: { completion in

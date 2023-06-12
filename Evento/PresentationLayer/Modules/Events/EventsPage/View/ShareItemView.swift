@@ -38,7 +38,7 @@ struct ShareItemView: View {
                 }
                 .foregroundColor(.black)
             }
-        )
+        ).padding()
     }
     
     private var userHeader: some View {

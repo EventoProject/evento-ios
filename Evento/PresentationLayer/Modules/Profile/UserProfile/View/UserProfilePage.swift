@@ -29,7 +29,6 @@ struct UserProfilePage: View {
                                     ShareItemView(
                                         shareModel: viewModel.shares[share],
                                         didTapUser: {
-                        //                    viewModel.didTapShareUser(shareModel: share)
                                         },
                                         didTapEvent: {
                                             viewModel.didTapShareEvent(shareModel: viewModel.shares[share])
