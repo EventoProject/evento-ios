@@ -65,8 +65,6 @@ struct UserProfilePage: View {
                         }
                         .background(.white)
                         .cornerRadius(10)
-                        //remove later 
-                        .padding()
                     }
                     HStack(spacing: 5){
                         ButtonView(
@@ -78,11 +76,12 @@ struct UserProfilePage: View {
                         }
                         ButtonView(
                             text: "Message",
+                            isLoading: $viewModel.isLoadingButton,
                             type: .small,
                             isFilled: false
                         ) {
-                            
-                        }
+                            viewModel.checkChatRoomExists()
+                        }.progressViewStyle(CircularProgressViewStyle(tint: .black))
                     }.padding()
                 }.padding()
             }.background(CustColor.backgroundColor)
@@ -110,6 +109,6 @@ struct UserProfilePage_Previews: PreviewProvider {
         UserProfilePage(viewModel: UserProfileViewModel(
             apiManager: ProfileApiManager(
                 webService: WebService(
-                    keychainManager: KeychainManager())), eventApiManager: EventsApiManager(webService: WebService(keychainManager: KeychainManager())), id: 1))
+                    keychainManager: KeychainManager())), eventApiManager: EventsApiManager(webService: WebService(keychainManager: KeychainManager())), chatApiManager: ChatApiManager(webService: WebService(keychainManager: KeychainManager())), id: 1))
     }
 }

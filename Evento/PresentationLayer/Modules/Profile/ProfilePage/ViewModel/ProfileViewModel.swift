@@ -13,7 +13,7 @@ final class ProfileViewModel: ObservableObject{
     
     private let apiManager: ProfileApiManagerProtocol
     private let eventApiManager: EventsApiManagerProtocol
-    @Published var user : UserModel?
+    @Published var user : MyProfileModel?
     @Published var myevents: [EventItemModel] = []
     private var cancellables = Set<AnyCancellable>()
     var showSearchPage: VoidCallback?
@@ -25,7 +25,10 @@ final class ProfileViewModel: ObservableObject{
         self.getMyProfile()
         
     }
-
+    func refresh(){
+        self.getMyProfile()
+    }
+    
     func ShowSearchPage(){
         showSearchPage?()
     }
@@ -115,14 +118,6 @@ struct ProfileImageView: View {
                     .clipShape(Circle())
                     .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
             }
-//            else{
-//                Image("person_circle")
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: 150, height: 150)
-//                    .clipShape(Circle())
-//                    .overlay(Circle().stroke(CustLinearGradient, lineWidth: 3))
-//            }
             Button(action: {
                 showImagePicker = true
             }) {
@@ -142,7 +137,7 @@ struct ProfileImageView: View {
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(selectedImage: $selectedImage, viewModel: viewModel)
         }
-        .padding()
+        .padding(.top)
     }
 }
 struct ImagePicker: UIViewControllerRepresentable {

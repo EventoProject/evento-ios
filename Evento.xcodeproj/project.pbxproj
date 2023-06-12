@@ -43,6 +43,9 @@
 		2FDC3CDE507F497A5C359F5F51826A8B /* EventoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6CB45F08415F80EE5351A8C72B3006 /* EventoUITests.swift */; };
 		302BCC142A27B0F3001C1F8B /* MyEventsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302BCC132A27B0F3001C1F8B /* MyEventsResponseModel.swift */; };
 		304105862A34BD2A00F88ED9 /* SearchHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304105852A34BD2A00F88ED9 /* SearchHostingController.swift */; };
+		305FA8712A36FA7F00C27FDC /* CheckChatRoomExistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305FA8702A36FA7F00C27FDC /* CheckChatRoomExistsModel.swift */; };
+		305FA8732A36FFE800C27FDC /* CreateRoomResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305FA8722A36FFE800C27FDC /* CreateRoomResponseModel.swift */; };
+		305FA8752A3717DB00C27FDC /* MyProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305FA8742A3717DB00C27FDC /* MyProfileModel.swift */; };
 		3063C3D72A35D04500A5757F /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063C3D62A35D04500A5757F /* UserProfileViewModel.swift */; };
 		3063C3D92A35D1FD00A5757F /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063C3D82A35D1FD00A5757F /* ProfileModel.swift */; };
 		3063C3DD2A35D4D100A5757F /* UserProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063C3DC2A35D4D100A5757F /* UserProfilePage.swift */; };
@@ -228,6 +231,9 @@
 		302BCC132A27B0F3001C1F8B /* MyEventsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsResponseModel.swift; sourceTree = "<group>"; };
 		304105852A34BD2A00F88ED9 /* SearchHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHostingController.swift; sourceTree = "<group>"; };
 		304EE2EC06D1E307A779570FA9981C9B /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		305FA8702A36FA7F00C27FDC /* CheckChatRoomExistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckChatRoomExistsModel.swift; sourceTree = "<group>"; };
+		305FA8722A36FFE800C27FDC /* CreateRoomResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomResponseModel.swift; sourceTree = "<group>"; };
+		305FA8742A3717DB00C27FDC /* MyProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileModel.swift; sourceTree = "<group>"; };
 		3063C3D62A35D04500A5757F /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		3063C3D82A35D1FD00A5757F /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		3063C3DC2A35D4D100A5757F /* UserProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePage.swift; sourceTree = "<group>"; };
@@ -419,6 +425,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		015FFC911EE2BBBF612546C0382CDC88 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CD24312C39BC39E1323E2D7EAE33CC65 /* ChatsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		017B5C0D6A510C8B813FF2A2C6FE5F35 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,8 +440,29 @@
 				30E124932A34B2F10029861A /* SearchUserModel.swift */,
 				30E124972A34B4890029861A /* SearchUsersResponseModel.swift */,
 				3063C3D82A35D1FD00A5757F /* ProfileModel.swift */,
+				305FA8742A3717DB00C27FDC /* MyProfileModel.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		06EBB1A7ED01823866EAB91669E33CE8 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				91E365C72D9C2430AD0D279ED592830A /* ChatDetailsResponseModel.swift */,
+				27E3C076BD7088D0C102A4054B812DF7 /* ChatsResponseItemModel.swift */,
+				7A3E57EF9A0499F8D18F0950C09791CE /* MessageModel.swift */,
+				305FA8702A36FA7F00C27FDC /* CheckChatRoomExistsModel.swift */,
+				305FA8722A36FFE800C27FDC /* CreateRoomResponseModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		08317A9EF48C3814296233DA2991A980 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				F563B93BC85356950D08E3F72BDF99F6 /* ChatsPage.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		08CE8D25897B3460B3413F568A576B5B /* Page */ = {
@@ -510,51 +545,6 @@
 			path = Targets;
 			sourceTree = "<group>";
 		};
-		250348B5B230FC4942D98D18C9032169 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4A8168983B2EF8FAA6F8FDE86339234B /* Evento.app */,
-				834EBEB5AABF1E03B1E8D5C14E3B44CE /* EventoTests.xctest */,
-				98FD8B31C5BE8E2AD3745296704D4F44 /* EventoUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		2AD7DD5801F673EBC0FAC54DDEC3550B /* ChatsPage */ = {
-			isa = PBXGroup;
-			children = (
-				08317A9EF48C3814296233DA2991A980 /* Page */,
-				015FFC911EE2BBBF612546C0382CDC88 /* ViewModel */,
-			);
-			path = ChatsPage;
-			sourceTree = "<group>";
-		};
-		015FFC911EE2BBBF612546C0382CDC88 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CD24312C39BC39E1323E2D7EAE33CC65 /* ChatsViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		06EBB1A7ED01823866EAB91669E33CE8 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				91E365C72D9C2430AD0D279ED592830A /* ChatDetailsResponseModel.swift */,
-				27E3C076BD7088D0C102A4054B812DF7 /* ChatsResponseItemModel.swift */,
-				7A3E57EF9A0499F8D18F0950C09791CE /* MessageModel.swift */,
-			);
-			path = Chat;
-			sourceTree = "<group>";
-		};
-		08317A9EF48C3814296233DA2991A980 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				F563B93BC85356950D08E3F72BDF99F6 /* ChatsPage.swift */,
-			);
-			path = Page;
-			sourceTree = "<group>";
-		};
 		20C2E097B37B8E2EEBA1A8A16F7F3AD8 /* ChatPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,20 +554,14 @@
 			path = ChatPage;
 			sourceTree = "<group>";
 		};
-		2D7AB208579A71BFB1226A9606F420C5 /* ViewModel */ = {
+		250348B5B230FC4942D98D18C9032169 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				40ADA9444CF1AB01C489044E93B78D5C /* ChatViewModel.swift */,
+				4A8168983B2EF8FAA6F8FDE86339234B /* Evento.app */,
+				834EBEB5AABF1E03B1E8D5C14E3B44CE /* EventoTests.xctest */,
+				98FD8B31C5BE8E2AD3745296704D4F44 /* EventoUITests.xctest */,
 			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		413FB1AE3A018EB623683CB573B8F0E8 /* Page */ = {
-			isa = PBXGroup;
-			children = (
-				6537E2218A81540733EC89B5892903B6 /* ChatPage.swift */,
-			);
-			path = Page;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		275D6C0AC8DC0C1F986D38E8CB1AFA15 /* EventPage */ = {
@@ -597,10 +581,27 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		2AD7DD5801F673EBC0FAC54DDEC3550B /* ChatsPage */ = {
+			isa = PBXGroup;
+			children = (
+				08317A9EF48C3814296233DA2991A980 /* Page */,
+				015FFC911EE2BBBF612546C0382CDC88 /* ViewModel */,
+			);
+			path = ChatsPage;
+			sourceTree = "<group>";
+		};
 		2C37928D83F01A7C07344D6DF8B24F0E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				931D7D549270DA23F7A303EFA3C3AD8C /* LikedEventsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2D7AB208579A71BFB1226A9606F420C5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				40ADA9444CF1AB01C489044E93B78D5C /* ChatViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -704,13 +705,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		30E1248D2A34B2110029861A /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		30E1248E2A34B2180029861A /* SearchPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,6 +753,14 @@
 				BB95A7D89608012A2C97D10512E10A44 /* Profile */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		413FB1AE3A018EB623683CB573B8F0E8 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				6537E2218A81540733EC89B5892903B6 /* ChatPage.swift */,
+			);
+			path = Page;
 			sourceTree = "<group>";
 		};
 		50B01632BB41D8FCE4E29F169A274CC7 /* Page */ = {
@@ -1233,7 +1235,6 @@
 			children = (
 				304105872A34C49200F88ED9 /* UserProfile */,
 				30E1248E2A34B2180029861A /* SearchPage */,
-				30E1248D2A34B2110029861A /* New Group */,
 				306EC2632A2365FC007E5BFF /* SettingPage */,
 				306EC25C2A2364E9007E5BFF /* ProfilePage */,
 				306EC25E2A236544007E5BFF /* ProfilePage.swift */,
@@ -1788,8 +1789,10 @@
 				491EA083AC6B303B983E162B382C807C /* EventDataModel.swift in Sources */,
 				E1E92B4BD9DBD6167C7524F22BEC9F06 /* EventHostingController.swift in Sources */,
 				1EFFB0A75A63A8B8037E748C82ECB8B3 /* EventItemImage.swift in Sources */,
+				305FA8732A36FFE800C27FDC /* CreateRoomResponseModel.swift in Sources */,
 				EFABB3CA3B20FDF59127824349822D0F /* EventItemModel.swift in Sources */,
 				63F0128E19566B929A1523037EB93406 /* EventItemView.swift in Sources */,
+				305FA8712A36FA7F00C27FDC /* CheckChatRoomExistsModel.swift in Sources */,
 				3B503FB8E0DEB98BA9CABC5F806B5CB4 /* EventPage.swift in Sources */,
 				1953C57BB096D6FE0DB7BE5F451B66E6 /* EventResponseModel.swift in Sources */,
 				30E124982A34B4890029861A /* SearchUsersResponseModel.swift in Sources */,
@@ -1807,10 +1810,10 @@
 				04C62540C7C5C2483F0B1776D180821B /* FilterViewModel.swift in Sources */,
 				71A2B3381ADD760A37D5592D2FC0C828 /* ForgotPasswordPage.swift in Sources */,
 				306EC26A2A2366B1007E5BFF /* GeneralViemModel.swift in Sources */,
-				26759AFD2A3476D10067CAE2 /* ChatApiManager.swift in Sources */,
 				3A771B97825168E60B32E216229998F9 /* ForgotPasswordViewModel.swift in Sources */,
 				788A704B4975EA87E0BCD5ABF7045EDB /* HTTPMethod.swift in Sources */,
 				221E16972AA55F856CCC2CCE9FB66B26 /* HTTPTask.swift in Sources */,
+				305FA8752A3717DB00C27FDC /* MyProfileModel.swift in Sources */,
 				6FF7544EE0A11F0D0A541A609495C826 /* ImagePickerPage.swift in Sources */,
 				ABCB3F1AB771603E69ADD954DEABDC65 /* Images.swift in Sources */,
 				B3B526492BB2163ED9D5AAC01F9FDF1F /* InputTextView.swift in Sources */,
@@ -1848,8 +1851,6 @@
 				B3ACA42231BDC3FAAF91E4D573D4BEC7 /* RegisterPayload.swift in Sources */,
 				612AEB1994ABD9E4FB61490319232435 /* RegistrationPage.swift in Sources */,
 				302BCC142A27B0F3001C1F8B /* MyEventsResponseModel.swift in Sources */,
-				26759B0A2A3488350067CAE2 /* MessageModel.swift in Sources */,
-				26759B082A3488080067CAE2 /* WebSocketManager.swift in Sources */,
 				47C9CCCD606B9087BBE630AA6821218A /* RegistrationViewModel.swift in Sources */,
 				BF1FDFF91ADCAFA37B4814D80FC6033A /* ResultResponseModel.swift in Sources */,
 				AFDE70B71C2AF9F33B80CEE72F0EBD51 /* RoundedBorderButton.swift in Sources */,

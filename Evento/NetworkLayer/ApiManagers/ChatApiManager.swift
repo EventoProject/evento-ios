@@ -12,9 +12,13 @@ protocol ChatApiManagerProtocol {
     func getChats() -> AnyPublisher<[ChatsResponseItemModel], NetworkError>
     func getChatHistory(chatId: String) -> AnyPublisher<[MessageModel], NetworkError>
     func getChatDetails(chatId: String) -> AnyPublisher<ChatDetailsResponseModel, NetworkError>
+    func checkChatRoomExists(userID: Int) -> AnyPublisher<CheckChatRoomExistsModel, NetworkError>
+    func createRoom(userID: Int) -> AnyPublisher<CreateRoomResponseModel, NetworkError>
+    func restoreRoom(userID: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
 }
 
 final class ChatApiManager: ChatApiManagerProtocol {
+    
     private let webService: WebServiceProtocol
     
     init(webService: WebServiceProtocol) {
@@ -32,4 +36,17 @@ final class ChatApiManager: ChatApiManagerProtocol {
     func getChatDetails(chatId: String) -> AnyPublisher<ChatDetailsResponseModel, NetworkError> {
         webService.request(ChatTarget.chatDetails(chatId: chatId))
     }
+    
+    func checkChatRoomExists(userID: Int) -> AnyPublisher<CheckChatRoomExistsModel, NetworkError> {
+        webService.request(ChatTarget.checkChatRoomExists(userID: userID))
+    }
+    
+    func createRoom(userID: Int) -> AnyPublisher<CreateRoomResponseModel, NetworkError> {
+        webService.request(ChatTarget.createRoom(userID: userID))
+    }
+        
+    func restoreRoom(userID: Int) -> AnyPublisher<ResultResponseModel, NetworkError> {
+        webService.request(ChatTarget.createRoom(userID: userID))
+    }
+    
 }

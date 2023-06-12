@@ -26,24 +26,29 @@ struct ProfilePage: View {
                                 .shadow(color: Color.gray.opacity(0), radius: 4, x: 0, y: 2)
                                 .padding()
                 VStack{
-                    imagePicker
-                    CustText(text: profileViewModel.user?.name ?? "nick name", weight: .regular, size: 20)
-                    HStack(){
-                        CustText(text: "\(String(profileViewModel.myevents.count))\n following", weight: .thin, size: 14)      .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                        CustText(text: "\(String(profileViewModel.myevents.count))\n followers", weight: .thin, size: 14)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
-                        CustText(text: "\(String(profileViewModel.myevents.count))\n events", weight: .thin, size: 14)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
+                    if (profileViewModel.user.self != nil){
+                        imagePicker
+                        CustText(text: profileViewModel.user?.name ?? "nick name", weight: .regular, size: 20)
+                        CustText(text: profileViewModel.user?.username ?? "nick name", weight: .regular, size: 14).foregroundColor(.gray).padding(.bottom, 5)
+                        HStack(){
+                            CustText(text: "\(String(profileViewModel.user!.subscriptions))\n following", weight: .thin, size: 14)      .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.black)
+                            CustText(text: "\(String(profileViewModel.user!.subscribers))\n followers", weight: .thin, size: 14)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.black)
+                            CustText(text: "\(String(profileViewModel.user!.events))\n events", weight: .thin, size: 14)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(.black)
+                        }
+                        .background(.white)
+                        .cornerRadius(10)
                     }
-                    
-                    .background(.white)
-                    .cornerRadius(10)
                     ZStack(alignment: .leading) {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
@@ -72,6 +77,8 @@ struct ProfilePage: View {
                 .scrollContentBackground(.hidden)
                 .background(CustColor.backgroundColor)
             }
+        }.refreshable {
+            profileViewModel.refresh()
         }
     }
 }

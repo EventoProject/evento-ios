@@ -34,7 +34,7 @@ private extension ProfileModuleCoordinator {
         }
         router.set(viewControllers: [page], animated: true)
     }
-    func showSettingPage( ) {
+    func showSettingPage() {
         let viewModel = GeneralViemModel()
         let page = UIHostingController(rootView: SettingPage(viewModel: viewModel))
         
@@ -54,9 +54,23 @@ private extension ProfileModuleCoordinator {
         router.push(viewController: page, animated: true)
     }
     func showUserProfile(id: Int){
-        let viewModel = UserProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self),eventApiManager: injection.inject(EventsApiManagerProtocol.self), id: id)
+        let viewModel = UserProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self),eventApiManager: injection.inject(EventsApiManagerProtocol.self), chatApiManager: injection.inject(ChatApiManagerProtocol.self), id: id)
+        viewModel.showChatPage = { [weak self] room in
+            self?.showChatPage(chatId: room.roomID, otherUserName: room.username)
+        }
         let page = UIHostingController(rootView: UserProfilePage(viewModel: viewModel))
         router.push(viewController: page, animated: true)
-        
+    }
+    
+    func showChatPage(chatId: String, otherUserName: String) {
+        let viewModel = ChatViewModel(
+            chatId: chatId,
+            apiManager: injection.inject(ChatApiManagerProtocol.self),
+            keychainManager:  injection.inject(KeychainManagerProtocol.self),
+            websocketManager: injection.inject(WebSocketManagerProtocol.self)
+        )
+        let page = UIHostingController(rootView: ChatPage(viewModel: viewModel))
+        page.title = otherUserName
+        router.push(viewController: page, animated: true)
     }
 }
