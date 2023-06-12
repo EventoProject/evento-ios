@@ -10,6 +10,7 @@ import SwiftUI
 struct EventItemView: View {
     let event: EventItemModel
     let didTapLike: Callback<Bool>
+    let didTapOrganizer: VoidCallback
     let didTap: VoidCallback
     
     var body: some View {
@@ -17,6 +18,7 @@ struct EventItemView: View {
             action: didTap,
             label: {
                 VStack(alignment: .leading, spacing: 0) {
+                    organizerCreatedTimeView
                     EventItemImage(imageUrl: event.imageLink)
                         .padding(.bottom, 8)
                     CustText(text: event.name, weight: .medium, size: 17)
@@ -61,5 +63,38 @@ struct EventItemView: View {
             }
             .padding(.bottom, 10)
         }
+    }
+    
+    private var organizerCreatedTimeView: some View {
+        HStack {
+            organizerView
+            Spacer()
+            CustText(
+                text: event.createdAt.toDate(with: .yyyyMMddTHHmmssSSSZ)?.timeElapsedString() ?? "",
+                weight: .regular,
+                size: 14
+            ).foregroundColor(CustColor.lightGray)
+        }
+        .padding(.bottom, 24)
+    }
+    
+    private var organizerView: some View {
+        Button(
+            action: didTapOrganizer,
+            label: {
+                HStack {
+                    AsyncAvatarImage(
+                        url: event.userImageLink,
+                        size: 47
+                    )
+                    VStack(alignment: .leading) {
+                        CustText(text: event.userName, weight: .regular, size: 16)
+                        CustText(text: "Organizer", weight: .regular, size: 15.5)
+                            .foregroundColor(CustColor.lightGray)
+                    }
+                }
+                .foregroundColor(.black)
+            }
+        )
     }
 }

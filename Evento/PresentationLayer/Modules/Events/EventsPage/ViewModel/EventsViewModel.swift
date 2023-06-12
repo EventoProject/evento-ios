@@ -55,6 +55,10 @@ final class EventsViewModel: ObservableObject {
         showEventDetailPage?(event.id)
     }
     
+    func didTapOrganizer(event: EventItemModel) {
+        print("Show organizer \(event.userName) profile page")
+    }
+    
     func refreshEvents() {
         getEvents()
     }

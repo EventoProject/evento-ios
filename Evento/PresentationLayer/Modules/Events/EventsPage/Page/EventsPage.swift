@@ -35,6 +35,9 @@ struct EventsPage: View {
                 didTapLike: { isLiked in
                     viewModel.didTapLike(event: event, isLiked: isLiked)
                 },
+                didTapOrganizer: {
+                    viewModel.didTapOrganizer(event: event)
+                },
                 didTap: {
                     viewModel.didTap(event: event)
                 }
