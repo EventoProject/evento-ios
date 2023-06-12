@@ -34,7 +34,7 @@ final class EventsViewModel: ObservableObject {
     
     func didTapLike(event: EventItemModel, isLiked: Bool) {
         guard let eventIndex = events.firstIndex(of: event) else { return }
-        events[eventIndex].isLiked = isLiked
+        events[eventIndex].liked = isLiked
         let eventId = event.id
         
         DispatchQueue.global().async { [weak self] in
