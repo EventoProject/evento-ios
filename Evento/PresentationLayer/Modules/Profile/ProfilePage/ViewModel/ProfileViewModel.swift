@@ -12,18 +12,15 @@ import Combine
 final class ProfileViewModel: ObservableObject{
     
     private let apiManager: ProfileApiManagerProtocol
-    private let eventApiManager: EventsApiManagerProtocol
     @Published var user : MyProfileModel?
     @Published var myevents: [EventItemModel] = []
     private var cancellables = Set<AnyCancellable>()
     var showSearchPage: VoidCallback?
     
-    init(apiManager: ProfileApiManagerProtocol, eventApiManager: EventsApiManagerProtocol){
+    init(apiManager: ProfileApiManagerProtocol){
         self.apiManager = apiManager
-        self.eventApiManager = eventApiManager
-        self.getMyEvents()
+//        self.getMySharedEvents()
         self.getMyProfile()
-        
     }
     func refresh(){
         self.getMyProfile()
@@ -32,6 +29,7 @@ final class ProfileViewModel: ObservableObject{
     func ShowSearchPage(){
         showSearchPage?()
     }
+    
     func getMyProfile() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
@@ -49,27 +47,27 @@ final class ProfileViewModel: ObservableObject{
         }
     }
     //
-    private func getMyEvents() {
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-//            self.eventApiManager.getMyEvents().sink(
-            self.eventApiManager.getEvents().sink(
-                receiveCompletion: { completion in
-                    if case let .failure(error) = completion {
-                        print(error)
-                    }
-                },
-                receiveValue: { [weak self] model in
-                    self?.myevents = model.events
-                }
-            ).store(in: &self.cancellables)
-        }
-    }
-    //
+//    private func getMySharedEvents() {
+//        DispatchQueue.global().async { [weak self] in
+//            guard let self = self else { return }
+////            self.eventApiManager.getMySharedEvents().sink(
+//            self.apiManager.getMySharedEvents().sink(
+//                receiveCompletion: { completion in
+//                    if case let .failure(error) = completion {
+//                        print(error)
+//                    }
+//                },
+//                receiveValue: { [weak self] model in
+//                    self?.myevents = model.events
+//                }
+//            ).store(in: &self.cancellables)
+//        }
+//    }
+    
     func uploadImage(image:UIImage) {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.uploadProfileImage(image: image, hasImage: ((self.user?.imageLink.isEmpty) == nil)).sink(
+            self.apiManager.uploadProfileImage(image: image, hasImage: (self.user?.imageLink.isEmpty)!).sink(
                 receiveCompletion: { [weak self] completion in
                     if case let .failure(error) = completion {
                         print(error)
@@ -135,6 +133,7 @@ struct ProfileImageView: View {
             .padding(2)
         }
         .sheet(isPresented: $showImagePicker) {
+//            ImagePickerPage
             ImagePicker(selectedImage: $selectedImage, viewModel: viewModel)
         }
         .padding(.top)
@@ -175,7 +174,6 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-        // No need to update the view controller
     }
     
 }

@@ -11,6 +11,6 @@ struct SearchUsersResponseModel: Decodable {
     let users: [SearchUserModel]
     
     enum CodingKeys: String, CodingKey {
-        case users = "users"
+        case users
     }
 }

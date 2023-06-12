@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct SearchUserModel: Decodable, Hashable {
     let id: Int
     let name: String
@@ -17,9 +18,3 @@ struct SearchUserModel: Decodable, Hashable {
         case imageLink = "image_link"
     }
 }
-/*
- "id": 1,
-             "name": "User 11 ",
-             "username": "user11nickname",
-             "image_link": ""
- */

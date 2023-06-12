@@ -33,13 +33,10 @@ struct CustomSegmentController: View {
                         .cornerRadius(8)
                         .frame(maxWidth: .infinity, maxHeight: 35)
                         .padding(.maximumMagnitude(0, 2))
-                        
                     }
                 }
-                
             }
-            .frame(height: 50)
-            
+            .frame(height: 50)       
         }
     }
 }

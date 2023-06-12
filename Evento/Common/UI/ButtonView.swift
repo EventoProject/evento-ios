@@ -35,7 +35,6 @@ struct ButtonView: View {
         self.didTap = didTap
         if let isLoading {
             self._isLoading = isLoading
-            
         } else {
             let defaultIsLoading = Binding<Bool>(
                 get: {

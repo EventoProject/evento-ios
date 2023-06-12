@@ -644,6 +644,13 @@
 			path = UserProfile;
 			sourceTree = "<group>";
 		};
+		305FA8762A374B5C00C27FDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		3063C3D42A35D02500A5757F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,6 +678,7 @@
 		306EC25C2A2364E9007E5BFF /* ProfilePage */ = {
 			isa = PBXGroup;
 			children = (
+				305FA8762A374B5C00C27FDC /* View */,
 				306EC25D2A236511007E5BFF /* ViewModel */,
 			);
 			path = ProfilePage;

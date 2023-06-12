@@ -9,11 +9,7 @@ import Foundation
 
 enum EventsTarget {
     case events
-    case myEvents
-    case subscriptions
-    case subscribers
     case event(id: Int)
-    case getUsersSharedEvents(id: Int)
     case likes(eventId: Int)
     case follow(isFollow: Bool, userId: Int)
     case like(isLike: Bool, eventId: Int)
@@ -34,12 +30,6 @@ extension EventsTarget: EndpointProtocol {
         switch self {
         case .events:
             return "auth/events"
-        case .myEvents:
-            return "auth/my-events"
-        case .subscribers:
-            return "auth/subscribers"
-        case .subscriptions:
-            return "auth/subscriptions"
         case let .event(id):
             return "auth/event/\(id)"
         case let .likes(eventId):
@@ -60,14 +50,13 @@ extension EventsTarget: EndpointProtocol {
             return "auth/comment/\(commentId)"
         case .likedEvents:
             return "auth/liked-events"
-        case let .getUsersSharedEvents(id):
-            return "auth/shares/\(id)"
+
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .events, .myEvents, .event, .likes, .comments, .likedEvents, .subscriptions, .subscribers, .getUsersSharedEvents:
+        case .events, .event, .likes, .comments, .likedEvents:
             return .get
         case .follow, .sendComment:
             return .post

@@ -28,19 +28,3 @@ struct MyProfileModel: Decodable, Hashable {
         case imageLink = "image_link"
     }
 }
-/*
- {
-     "id": 3,
-     "email": "user33@gmail.com",
-     "username": "user33nickname",
-     "name": "User 33",
-     "password_changed_at": "2023-06-12T08:52:12.513103Z",
-     "created_at": "2023-06-12T08:52:12.513103Z",
-     "updated_at": "2023-06-12T08:52:12.513103Z",
-     "image_link": "",
-     "subscriptions": 2,
-     "subscribers": 0,
-     "events": 0
- }
- */
-

@@ -12,7 +12,7 @@ protocol ProfileApiManagerProtocol {
     func uploadProfileImage(image: UIImage, hasImage: Bool) -> AnyPublisher<UploadProfileImageResponseModel, NetworkError>
     func getProfile(id: Int) -> AnyPublisher<ProfileModel, NetworkError>
     func getMyProfile() -> AnyPublisher<MyProfileModel, NetworkError>
-    
+//    func getSharedEvents() -> AnyPublisher<  , NetworkError>
     func getUsers() -> AnyPublisher<SearchUsersResponseModel, NetworkError>
 }
 

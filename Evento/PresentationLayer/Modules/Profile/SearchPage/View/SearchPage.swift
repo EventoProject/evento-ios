@@ -10,9 +10,6 @@ import SwiftUI
 struct SearchPage: View {
     @ObservedObject var viewModel: SearchViewModel
     @State var searchText: String = ""
-//    init(searchText: Binding<String>) {
-//        _searchText = searchText
-//    }
     var filteredUsers: [SearchUserModel] {
         if searchText.isEmpty {
             return viewModel.users

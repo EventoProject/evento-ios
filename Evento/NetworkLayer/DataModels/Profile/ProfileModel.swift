@@ -19,7 +19,7 @@ struct ProfileModel: Decodable, Hashable {
     let subscribers: Int
     let events: Int
     let updatedAt: String
-//    let events : Int
+
     enum CodingKeys: String, CodingKey {
         case email, name, subscriptions, subscribers, events, following
         case passwordChangedAt = "password_changed_at"
@@ -29,20 +29,3 @@ struct ProfileModel: Decodable, Hashable {
         case isCommercial = "is_commercial"
     }
 }
-
-
-/*
- {
-     "email": "user11@gmail.com",
-     "name": "User 11",
-     "is_commercial": false,
-     "password_changed_at": "2023-06-11T09:07:38.997187Z",
-     "subscriptions": 0,
-     "subscribers": 0,
-     "events": 0,
-     "created_at": "2023-06-11T09:07:38.997187Z",
-     "updated_at": "2023-06-11T09:07:38.997187Z",
-     "image_link": "",
-     "following": false
- }
- */

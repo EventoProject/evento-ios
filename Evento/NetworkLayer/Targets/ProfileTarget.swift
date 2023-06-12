@@ -10,6 +10,10 @@ import UIKit
 enum ProfileTarget {
     case uploadProfileImage(image: UIImage, hasImage: Bool)
     case getProfile(id: Int)
+    case getUsersSharedEvents(id: Int)
+    case myEvents
+    case subscriptions
+    case subscribers
     case getMyProfile
     case searchUsers
 }
@@ -29,6 +33,14 @@ extension ProfileTarget: EndpointProtocol {
             return "auth/profile"
         case .searchUsers:
             return "auth/search/users"
+        case let .getUsersSharedEvents(id):
+            return "auth/shares/\(id)"
+        case .myEvents:
+            return "auth/my-events"
+        case .subscribers:
+            return "auth/subscribers"
+        case .subscriptions:
+            return "auth/subscriptions"
         }
     }
     
@@ -36,7 +48,7 @@ extension ProfileTarget: EndpointProtocol {
         switch self {
         case .uploadProfileImage:
             return .post
-        case .getProfile, .getMyProfile, .searchUsers:
+        case .getProfile, .getMyProfile, .searchUsers, .myEvents, .subscribers, .subscriptions, .getUsersSharedEvents:
             return .get
         }
     }

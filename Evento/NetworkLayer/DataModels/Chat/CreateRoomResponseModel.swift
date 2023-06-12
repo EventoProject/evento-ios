@@ -12,4 +12,3 @@ struct CreateRoomResponseModel: Decodable, Hashable {
         case chatRoomId = "chat_room_id"
     }
 }
-//"chat_room_id": "1_1"

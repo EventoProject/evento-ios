@@ -24,7 +24,7 @@ final class ProfileModuleCoordinator: BaseCoordinator {
 
 private extension ProfileModuleCoordinator {
     func showProfilePage() {
-        let profileViewModel = ProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self),eventApiManager: injection.inject(EventsApiManagerProtocol.self))
+        let profileViewModel = ProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self))
         let page = ProfileHostingController(rootView: ProfilePage(profileViewModel: profileViewModel))
         page.didBell = {[weak self] in
             self?.showSettingPage()
@@ -50,7 +50,6 @@ private extension ProfileModuleCoordinator {
             self?.showUserProfile(id: id)
         }
         page.title = "Search"
-        //        page.show
         router.push(viewController: page, animated: true)
     }
     func showUserProfile(id: Int){

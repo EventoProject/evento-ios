@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileSetPage: View {
     @ObservedObject var viewModel : ProfileSetViewModel
-//    @Binding var model: InputViewModel
     var body: some View {
         VStack{
             InputTextField(

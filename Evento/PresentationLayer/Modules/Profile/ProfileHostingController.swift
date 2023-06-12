@@ -11,6 +11,7 @@ import Combine
 
 final class ProfileHostingController: UIHostingController<ProfilePage> {
     var didBell: VoidCallback?
+    var didSaveTapped: VoidCallback?
     let settingButton = UIButton(type: .system)
     let saveButton = UIButton(type: .system)
     
@@ -25,7 +26,6 @@ final class ProfileHostingController: UIHostingController<ProfilePage> {
         navigationController?.navigationBar.tintColor = UIColor(cgColor: custCgColor)
         settingButton.setImage(Images.settingImage, for: .normal)
         saveButton.setImage(Images.save, for: .normal)
-        
         settingButton.addTarget(self, action: #selector(settingButtonTapped), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: saveButton), UIBarButtonItem(customView: settingButton)]
@@ -34,7 +34,6 @@ final class ProfileHostingController: UIHostingController<ProfilePage> {
         self.didBell?()
     }
     @objc private func saveButtonTapped() {
-//        self.didBell?()
-        print("save button tapped")
+        self.didSaveTapped?()
     }
 }

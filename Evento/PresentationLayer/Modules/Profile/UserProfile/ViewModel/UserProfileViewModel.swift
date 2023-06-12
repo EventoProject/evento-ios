@@ -59,9 +59,9 @@ final class UserProfileViewModel: ObservableObject{
             }).store(in: &self.cancellables)
         }
     }
+    
     func restoreRoom(id: String){
-        DispatchQueue.global().async {
-            [weak self] in
+        DispatchQueue.global().async { [weak self] in
             guard let self = self else {return}
             self.chatApiManager.restoreRoom(userID: self.id!).sink(receiveCompletion: {
                 completion in
@@ -75,11 +75,13 @@ final class UserProfileViewModel: ObservableObject{
             }).store(in: &self.cancellables)
         }
     }
+    
     func joinRoom(id: String){
         self.isLoadingButton = false
         let roomModel = CreateRoomModel(roomID: id, username: (user!.name))
         showChatPage?(roomModel)
     }
+    
     func checkChatRoomExists(){
         isLoadingButton = true
         print("here")
@@ -104,7 +106,6 @@ final class UserProfileViewModel: ObservableObject{
                 }
             }).store(in: &self.cancellables)
         }
-//        print("me \(myID) /n text to \(id)")
     }
     
     func getProfile() {
@@ -118,7 +119,6 @@ final class UserProfileViewModel: ObservableObject{
                 },
                 receiveValue: { [weak self] model in
                     self?.user = model
-            
                 }
             ).store(in: &self.cancellables)
         }
@@ -140,6 +140,7 @@ final class UserProfileViewModel: ObservableObject{
     func didTapFollow() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
+            guard case self.user = self.user else { return }
             self.eventApiManager.follow(isFollow: !(self.user!.following), userId: self.id!).sink(
                 receiveCompletion: { [weak self] completion in
                     if case let .failure(error) = completion {
@@ -153,11 +154,10 @@ final class UserProfileViewModel: ObservableObject{
         }
         self.getProfile()
     }
-    //
+    
     private func getEvents() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-//            self.eventApiManager.getMyEvents().sink(
             self.eventApiManager.getEvents().sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
