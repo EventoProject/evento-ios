@@ -103,8 +103,8 @@ private extension CommentsViewModel {
                         self?.showAlert(mainText: error.localizedDescription)
                     }
                 },
-                receiveValue: { [weak self] model in
-                    self?.comments = model.comments
+                receiveValue: { [weak self] response in
+                    self?.comments = response
                 }
             ).store(in: &self.cancellables)
         }

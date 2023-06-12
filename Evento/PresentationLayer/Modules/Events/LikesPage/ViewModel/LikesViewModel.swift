@@ -64,8 +64,8 @@ final class LikesViewModel: ObservableObject {
                         print(error)
                     }
                 },
-                receiveValue: { [weak self] model in
-                    self?.likes = model.likes
+                receiveValue: { [weak self] response in
+                    self?.likes = response
                 }
             ).store(in: &self.cancellables)
         }

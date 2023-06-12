@@ -25,8 +25,8 @@ private extension FavoritesModuleCoordinator {
     func showFavoritesPage() {
         let viewModel = LikedEventsViewModel(apiManager: injection.inject(EventsApiManagerProtocol.self))
         
-        viewModel.showEventDetailPage = { [weak self] event in
-            self?.showEventPage(event)
+        viewModel.showEventDetailPage = { [weak self] eventId in
+            self?.showEventPage(eventId: eventId)
         }
         
         let page = UIHostingController(rootView: LikedEventsPage(viewModel: viewModel))
@@ -34,8 +34,8 @@ private extension FavoritesModuleCoordinator {
         router.set(viewControllers: [page], animated: true)
     }
     
-    func showEventPage(_ event: EventItemModel) {
-        let coordinator = EventCoordinator(event: event, injection: injection, router: router)
+    func showEventPage(eventId: Int) {
+        let coordinator = EventCoordinator(eventId: eventId, injection: injection, router: router)
         coordinator.onFinish = { [weak self, weak coordinator] in
             self?.remove(coordinator)
             self?.onFinish?()
