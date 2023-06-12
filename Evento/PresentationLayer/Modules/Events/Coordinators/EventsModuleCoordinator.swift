@@ -31,9 +31,36 @@ private extension EventsModuleCoordinator {
         viewModel.didTapFilter = { [weak self] in
             self?.showFilterPage()
         }
+        viewModel.showUserDetailPage = { [weak self] userID in
+            self?.showUserProfile(id: userID)
+            
+        }
         
         let page = EventsHostingController(viewModel: viewModel)
         router.set(viewControllers: [page], animated: true)
+    }
+    func showUserProfile(id: Int){
+        let viewModel = UserProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self),eventApiManager: injection.inject(EventsApiManagerProtocol.self), chatApiManager: injection.inject(ChatApiManagerProtocol.self), id: id)
+        viewModel.showChatPage = { [weak self] room in
+            self?.showChatPage(chatId: room.roomID, otherUserName: room.username)
+        }
+        viewModel.showEventDetailPage={[weak self] eventId in
+            self?.showEventPage(eventId: eventId)
+        }
+        let page = UIHostingController(rootView: UserProfilePage(viewModel: viewModel))
+        router.push(viewController: page, animated: true)
+    }
+    
+    func showChatPage(chatId: String, otherUserName: String) {
+        let viewModel = ChatViewModel(
+            chatId: chatId,
+            apiManager: injection.inject(ChatApiManagerProtocol.self),
+            keychainManager:  injection.inject(KeychainManagerProtocol.self),
+            websocketManager: injection.inject(WebSocketManagerProtocol.self)
+        )
+        let page = UIHostingController(rootView: ChatPage(viewModel: viewModel))
+        page.title = otherUserName
+        router.push(viewController: page, animated: true)
     }
     
     func showEventPage(eventId: Int) {

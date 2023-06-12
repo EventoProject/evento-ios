@@ -16,6 +16,7 @@ final class EventsViewModel: ObservableObject {
     
     // MARK: - Callbacks
     var showEventDetailPage: Callback<Int>?
+    var showUserDetailPage: Callback<Int>?
     var didTapFilter: VoidCallback?
     
     // MARK: - Public parameters
@@ -68,8 +69,7 @@ final class EventsViewModel: ObservableObject {
     }
     
     func didTapShareUser(shareModel: ShareItemModel) {
-        print("Show \(shareModel.sharedAt) profile page")
-        
+        showUserDetailPage?(shareModel.userId)
     }
     
     func didTapShareEvent(shareModel: ShareItemModel) {

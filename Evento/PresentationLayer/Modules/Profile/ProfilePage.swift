@@ -50,7 +50,13 @@ struct ProfilePage: View {
                             })
                         }
                     }
-            }.background(CustColor.backgroundColor)
+            }
+            .refreshable {
+                profileViewModel.refresh()
+            }
+            .background(CustColor.backgroundColor)
+        }.refreshable {
+            profileViewModel.refresh()
         }
     }
     
@@ -72,9 +78,6 @@ struct ProfilePage: View {
         }
     }
 }
-
-
-
 struct ProfileCardView: View{
     var profileViewModel: ProfileViewModel
     var body: some View {

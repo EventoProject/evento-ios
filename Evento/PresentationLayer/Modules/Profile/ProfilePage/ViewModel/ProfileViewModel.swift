@@ -26,6 +26,7 @@ final class ProfileViewModel: ObservableObject{
     }
     func refresh(){
         getMyProfile()
+        getMySharedEvents()
     }
     
     func showSearchPage(){

@@ -52,7 +52,7 @@ extension EventsTarget: EndpointProtocol {
         case .likedEvents:
             return "auth/liked-events"
         case .sharedEvents:
-            return "auth/shared-events"
+            return "auth/shares"
         }
     }
     
