@@ -17,6 +17,7 @@ protocol OnboardingApiManagerProtocol {
 }
 
 final class OnboardingApiManager: OnboardingApiManagerProtocol {
+    
     private let webService: WebServiceProtocol
     
     init(webService: WebServiceProtocol) {

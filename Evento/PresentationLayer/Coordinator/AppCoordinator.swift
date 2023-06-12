@@ -31,7 +31,6 @@ final class AppCoordinator {
     func reauthorize() {
         navigationController.setNavigationBarHidden(false, animated: false)
         showAuthorizationPage()
-        navigationController.showAlert(message: "Your session has expired please relogin")
     }
 }
 

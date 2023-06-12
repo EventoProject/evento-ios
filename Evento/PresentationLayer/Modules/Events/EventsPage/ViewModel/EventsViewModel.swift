@@ -64,7 +64,8 @@ final class EventsViewModel: ObservableObject {
     }
     
     func didTapShareUser(shareModel: ShareItemModel) {
-        print("Show \(shareModel.userName) profile page")
+        print("Show \(shareModel.sharedAt) profile page")
+        
     }
     
     func didTapShareEvent(shareModel: ShareItemModel) {
