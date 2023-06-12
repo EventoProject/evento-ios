@@ -33,7 +33,6 @@ private extension EventsModuleCoordinator {
         }
         viewModel.showUserDetailPage = { [weak self] userID in
             self?.showUserProfile(id: userID)
-            
         }
         
         let page = EventsHostingController(viewModel: viewModel)

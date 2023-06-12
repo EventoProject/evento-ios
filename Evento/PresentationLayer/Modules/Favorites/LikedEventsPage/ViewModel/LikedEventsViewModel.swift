@@ -14,7 +14,8 @@ final class LikedEventsViewModel: ObservableObject {
     
     // MARK: - Callbacks
     var showEventDetailPage: Callback<Int>?
-    
+    var showUserProfilePage: Callback<Int>?
+
     // MARK: - Private parameters
     private let apiManager: EventsApiManagerProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -44,7 +45,7 @@ final class LikedEventsViewModel: ObservableObject {
     }
     
     func didTapOrganizer(event: EventItemModel) {
-        print("Show organizer \(event.userName) profile page")
+        showUserProfilePage?(event.userId)
     }
     
     func didTap(event: EventItemModel) {

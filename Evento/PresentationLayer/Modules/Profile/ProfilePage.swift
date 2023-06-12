@@ -32,7 +32,6 @@ struct ProfilePage: View {
                                     ShareItemView(
                                         shareModel: profileViewModel.shares[share],
                                         didTapUser: {
-                        //                    viewModel.didTapShareUser(shareModel: share)
                                         },
                                         didTapEvent: {
                                             profileViewModel.didTapShareEvent(shareModel: profileViewModel.shares[share])
@@ -49,6 +48,8 @@ struct ProfilePage: View {
                                 scrollViewProxy.scrollTo(0, anchor: .top)
                             })
                         }
+                    }.refreshable {
+                        profileViewModel.refresh()
                     }
             }
             .refreshable {
