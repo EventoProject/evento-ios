@@ -21,18 +21,24 @@ struct ShareItemView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            userHeader
-            CustText(
-                text: shareModel.shareDescription,
-                weight: .regular,
-                size: 16
-            )
-            HStack(spacing: 15) {
-                lightGrayLineView
-                eventView
+        Button(
+            action: didTapEvent,
+            label: {
+                VStack(alignment: .leading) {
+                    userHeader
+                    CustText(
+                        text: shareModel.shareDescription,
+                        weight: .regular,
+                        size: 16
+                    )
+                    HStack(spacing: 15) {
+                        lightGrayLineView
+                        eventView
+                    }
+                }
+                .foregroundColor(.black)
             }
-        }
+        )
     }
     
     private var userHeader: some View {
@@ -70,24 +76,19 @@ struct ShareItemView: View {
     }
     
     private var eventView: some View {
-        Button(
-            action: didTapEvent,
-            label: {
-                VStack(alignment: .leading) {
-                    EventItemImage(imageUrl: shareModel.imageLink)
-                        .padding(.bottom, 10)
-                    CustText(text: shareModel.name, weight: .regular, size: 16)
-                    CustText(
-                        text: "\(shareModel.format) - \(eventCostText) - \(shareModel.date)",
-                        weight: .regular,
-                        size: 14
-                    )
-                    .foregroundColor(CustColor.lightGray)
-                    .padding(.bottom, 8)
-                    CustText(text:  shareModel.description, weight: .regular, size: 14)
-                        .lineLimit(2)
-                }
-            }
-        )
+        VStack(alignment: .leading) {
+            EventItemImage(imageUrl: shareModel.imageLink)
+                .padding(.bottom, 10)
+            CustText(text: shareModel.name, weight: .regular, size: 16)
+            CustText(
+                text: "\(shareModel.format) - \(eventCostText) - \(shareModel.date)",
+                weight: .regular,
+                size: 14
+            )
+            .foregroundColor(CustColor.lightGray)
+            .padding(.bottom, 8)
+            CustText(text:  shareModel.description, weight: .regular, size: 14)
+                .lineLimit(2)
+        }
     }
 }
