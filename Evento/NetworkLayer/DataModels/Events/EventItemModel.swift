@@ -16,7 +16,7 @@ struct EventItemModel: Decodable, Hashable {
     let date: String
     let imageLink: String
     let createdAt: String
-    var isLiked: Bool
+    var liked: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -25,8 +25,8 @@ struct EventItemModel: Decodable, Hashable {
         case format
         case cost
         case date
+        case liked
         case imageLink = "image_link"
         case createdAt = "created_at"
-        case isLiked = "is_liked"
     }
 }
