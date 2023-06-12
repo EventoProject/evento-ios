@@ -49,4 +49,18 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
+    
+    func timeElapsedString() -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.year, .month, .day, .hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+        formatter.maximumUnitCount = 1
+        formatter.calendar?.locale = Locale(identifier: "kz")
+        
+        guard let timeString = formatter.string(from: self, to: Date()) else {
+            return ""
+        }
+        
+        return "\(timeString) ago"
+    }
 }

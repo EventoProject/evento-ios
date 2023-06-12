@@ -56,8 +56,11 @@ private struct ChatItemView: View {
             CustText(text: chat.userName, weight: .medium, size: 16)
                 .foregroundGradient()
             Spacer()
-            CustText(text: "6 min ago", weight: .regular, size: 14)
-                .foregroundColor(CustColor.lightGray)
+            CustText(
+                text: chat.lastMessageSentAt.toDate(with: .yyyyMMddTHHmmssSSSZ)?.timeElapsedString() ?? "",
+                weight: .regular,
+                size: 14
+            ).foregroundColor(CustColor.lightGray)
         }
     }
 }

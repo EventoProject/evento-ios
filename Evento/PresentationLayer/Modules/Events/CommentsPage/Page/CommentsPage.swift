@@ -65,7 +65,11 @@ private struct CommentView: View {
         VStack(alignment: .leading) {
             HStack{
                 CustText(text: comment.name, weight: .regular, size: 16)
-                CustText(text: "2 hr ago", weight: .regular, size: 14)
+                CustText(
+                    text: comment.createdAt.toDate(with: .yyyyMMddTHHmmssSSSZ)?.timeElapsedString() ?? "",
+                    weight: .regular,
+                    size: 14
+                )
                     .foregroundColor(CustColor.lightGray)
             }
             CustText(text: "@\(comment.username)", weight: .regular, size: 16)
