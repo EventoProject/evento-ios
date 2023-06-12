@@ -20,6 +20,7 @@ enum EventsTarget {
     case deleteComment(commentId: Int)
     case likedEvents
     case sharedEvents
+    case notifications
 }
 
 extension EventsTarget: EndpointProtocol {
@@ -53,12 +54,14 @@ extension EventsTarget: EndpointProtocol {
             return "auth/liked-events"
         case .sharedEvents:
             return "auth/shares"
+        case .notifications:
+            return "auth/notifications"
         }
     }
     
     var method: HttpMethod {
         switch self {
-        case .events, .event, .likes, .comments, .likedEvents, .sharedEvents:
+        case .events, .event, .likes, .comments, .likedEvents, .sharedEvents, .notifications:
             return .get
         case .follow, .sendComment:
             return .post

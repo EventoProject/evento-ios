@@ -21,6 +21,7 @@ protocol EventsApiManagerProtocol {
     func deleteComment(commentId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func getLikedEvents() -> AnyPublisher<[EventItemModel], NetworkError>
     func getSharedEvents() -> AnyPublisher<[ShareItemModel], NetworkError>
+    func getNotifications() -> AnyPublisher<[NotificationItemModel], NetworkError>
 }
 
 final class EventsApiManager: EventsApiManagerProtocol {
@@ -76,5 +77,9 @@ final class EventsApiManager: EventsApiManagerProtocol {
     
     func getSharedEvents() -> AnyPublisher<[ShareItemModel], NetworkError> {
         webService.request(EventsTarget.sharedEvents)
+    }
+    
+    func getNotifications() -> AnyPublisher<[NotificationItemModel], NetworkError> {
+        webService.request(EventsTarget.notifications)
     }
 }

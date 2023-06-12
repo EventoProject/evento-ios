@@ -18,6 +18,7 @@ final class EventsViewModel: ObservableObject {
     var showEventDetailPage: Callback<Int>?
     var showUserDetailPage: Callback<Int>?
     var didTapFilter: VoidCallback?
+    var didTapNotifications: VoidCallback?
     
     // MARK: - Public parameters
     let segmentedControlItems = ["All events", "Shares"]
