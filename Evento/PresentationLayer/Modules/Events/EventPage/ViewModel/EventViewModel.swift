@@ -26,13 +26,12 @@ final class EventViewModel: ObservableObject {
     var showWebPage: Callback<(url: String, title: String)>?
     
     // MARK: - Public parameters
-    let event: EventItemModel
     let segmentedControlItems = ["Description", "Details"]
     var alertMainText = ""
     var alertMessageText = ""
     let avatarImageUrl = UserDefaults.standard.string(forKey: Constants.avatarImageUrlKey) ?? ""
     var eventDate: Date? {
-        event.date.toDate(with: .ddMMyyyyHHmm)
+        eventModel?.date.toDate(with: .ddMMyyyyHHmm)
     }
     var eventDateText: String {
         eventDate?.toString(format: .ddMMyyyy) ?? ""
@@ -44,11 +43,12 @@ final class EventViewModel: ObservableObject {
     var alertConfirmButtonText = "OK"
     
     // MARK: - Private parameters
+    private let eventId: Int
     private let apiManager: EventsApiManagerProtocol
     private var cancellables = Set<AnyCancellable>()
     
-    init(event: EventItemModel, apiManager: EventsApiManagerProtocol) {
-        self.event = event
+    init(eventId: Int, apiManager: EventsApiManagerProtocol) {
+        self.eventId = eventId
         self.apiManager = apiManager
         
         getEvent()
@@ -59,7 +59,7 @@ final class EventViewModel: ObservableObject {
         
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.like(isLike: isLiked, eventId: self.event.id).sink(
+            self.apiManager.like(isLike: isLiked, eventId: self.eventId).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
@@ -81,7 +81,7 @@ final class EventViewModel: ObservableObject {
         
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.save(isSave: isSaved, eventId: self.event.id).sink(
+            self.apiManager.save(isSave: isSaved, eventId: self.eventId).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
@@ -114,7 +114,7 @@ final class EventViewModel: ObservableObject {
             guard let self = self else { return }
             self.apiManager.sendComment(
                 text: self.commentModel.text,
-                eventId: self.event.id
+                eventId: self.eventId
             ).sink(
                 receiveCompletion: { [weak self] completion in
                     if case let .failure(error) = completion {
@@ -145,7 +145,7 @@ private extension EventViewModel {
     func getEvent() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.getEvent(id: self.event.id).sink(
+            self.apiManager.getEvent(id: self.eventId).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
@@ -173,7 +173,7 @@ private extension EventViewModel {
     func shareEvent() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.share(text: self.shareMessage, eventId: self.event.id).sink(
+            self.apiManager.share(text: self.shareMessage, eventId: self.eventId).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)

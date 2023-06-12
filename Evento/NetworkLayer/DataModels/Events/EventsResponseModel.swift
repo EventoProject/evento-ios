@@ -8,5 +8,6 @@
 import Foundation
 
 struct EventsResponseModel: Decodable {
+    let size: Int
     let events: [EventItemModel]
 }

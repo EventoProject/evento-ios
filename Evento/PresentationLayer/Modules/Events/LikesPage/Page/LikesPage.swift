@@ -39,7 +39,7 @@ private struct LikeView: View {
     
     var body: some View {
         HStack(spacing: 13) {
-            AsyncAvatarImage(url: like.imageLink.string, size: 60)
+            AsyncAvatarImage(url: like.imageLink, size: 60)
             userNameView
             Spacer()
             if !isUserLike {
@@ -49,11 +49,7 @@ private struct LikeView: View {
     }
     
     private var userNameView: some View {
-        VStack(alignment: .leading) {
-            CustText(text: like.name, weight: .regular, size: 16)
-            CustText(text: "@\(like.username)", weight: .regular, size: 15.5)
-                .foregroundColor(CustColor.lightGray)
-        }
+        NameUsernameView(name: like.name, username: like.username)
     }
     
     private var followButton: some View {
@@ -65,6 +61,19 @@ private struct LikeView: View {
             isFollowing.toggle()
             didTapFollow(isFollowing)
         }.frame(width: 115)
+    }
+}
+
+struct NameUsernameView: View {
+    let name: String
+    let username: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            CustText(text: name, weight: .regular, size: 16)
+            CustText(text: "@\(username)", weight: .regular, size: 15.5)
+                .foregroundColor(CustColor.lightGray)
+        }
     }
 }
 

@@ -9,15 +9,12 @@ import SwiftUI
 
 struct EventPage: View {
     @ObservedObject var viewModel: EventViewModel
-    private var event: EventItemModel {
-        viewModel.event
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
-            EventItemImage(imageUrl: event.imageLink.string)
+            EventItemImage(imageUrl: viewModel.eventModel?.imageLink ?? "")
             NameLikeView(
-                eventName: event.name,
+                eventName: viewModel.eventModel?.name ?? "",
                 isLiked: viewModel.eventModel?.liked ?? false,
                 isSaved: viewModel.eventModel?.saved ?? false,
                 didTapLike: { isLiked in
@@ -29,7 +26,7 @@ struct EventPage: View {
             )
             segmentedControlView
             if viewModel.selectedSegmentedControlItem == "Description" {
-                CustText(text: event.description, weight: .regular, size: 15)
+                CustText(text: viewModel.eventModel?.description ?? "", weight: .regular, size: 15)
                 participateLikesView
             } else {
                 detailsStackView
@@ -72,13 +69,10 @@ struct EventPage: View {
     }
     
     private var segmentedControlView: some View {
-        Picker("", selection: $viewModel.selectedSegmentedControlItem) {
-            ForEach(viewModel.segmentedControlItems, id: \.self) {
-                Text($0)
-            }
-        }
-        .pickerStyle(.segmented)
-        .padding(.bottom, 20)
+        SegementedControlView(
+            selectedItem: $viewModel.selectedSegmentedControlItem,
+            items: viewModel.segmentedControlItems
+        ).padding(.bottom, 20)
     }
     
     private var participateLikesView: some View {
@@ -119,12 +113,12 @@ struct EventPage: View {
     
     private var detailsStackView: some View {
         VStack(alignment: .leading, spacing: 0.5) {
-            DetailsView(title: "Format", value: event.format)
-            DetailsView(title: "Cost", value: event.cost)
+            DetailsView(title: "Format", value: viewModel.eventModel?.format)
+            DetailsView(title: "Cost", value: viewModel.eventModel?.cost)
             DetailsView(title: "Date", value: viewModel.eventDateText)
             DetailsView(title: "Time", value: viewModel.eventTimeText)
-            DetailsView(title: "Duration", value: event.duration)
-            DetailsView(title: "Age limit", value: event.ageLimit)
+            DetailsView(title: "Duration", value: viewModel.eventModel?.duration)
+            DetailsView(title: "Age limit", value: viewModel.eventModel?.ageLimit)
         }
         .background { Color.gray }
         .padding(.top)
@@ -152,14 +146,14 @@ private struct NameLikeView: View {
 
 private struct DetailsView: View {
     let title: String
-    let value: String
+    let value: String?
     
     var body: some View {
         HStack {
             Text("\(title): ")
                 .font(MontserratFont.createFont(weight: .medium, size: 15))
             Spacer()
-            Text(value)
+            Text(value ?? "")
                 .font(MontserratFont.createFont(weight: .regular, size: 15))
         }
         .padding(5)
@@ -204,51 +198,10 @@ private struct LikesCountButton: View {
     }
 }
 
-struct SendInputView: View {
-    @Binding var inputModel: InputViewModel
-    let placeholder: String
-    let backgroundColor: Color
-    var avatarImageUrl: String? = nil
-    var didTapSend: VoidCallback?
-    
-    var body: some View {
-        HStack {
-            if let avatarImageUrl {
-                AsyncAvatarImage(url: avatarImageUrl, size: 40)
-            }
-            InputView(
-                model: $inputModel,
-                placeholder: placeholder,
-                rightIcon: Images.send,
-                backgroundColor: backgroundColor,
-                didTapRightIcon: {
-                    didTapSend?()
-                }
-            )
-        }
-    }
-}
-
 struct EventPage_Previews: PreviewProvider {
     static var previews: some View {
         EventPage(viewModel: EventViewModel(
-            event:
-                EventItemModel(
-                    id: 3,
-                    name: "IT forum - Digital Almaty",
-                    description: "Beeline Kazakhstan annual IT conference for engineers, developers, product managers, QA specialists, agile coaches, scrum masters and other dev specialists. The Conference is being held for the third time. This year, participants will learn all about the Kazakh code in four streams.",
-                    format: "Offline",
-                    cost: "Free",
-                    date: "23.05.2023 20:44",
-                    duration: "2 hours",
-                    ageLimit: "16+",
-                    imageLink: ImageLinkModel(
-                        string: "https://evento-kz.s3.eu-north-1.amazonaws.com/events/f33d921c-6760-48b2-9d2a-75082410ec4c.jpg",
-                        valid: true
-                    ),
-                    createdAt: "2023-05-23T14:45:17.24142Z",
-                    isLiked: false
-                ),
+            eventId: 3,
             apiManager: EventsApiManager(
                 webService: WebService(
                     keychainManager: KeychainManager()
