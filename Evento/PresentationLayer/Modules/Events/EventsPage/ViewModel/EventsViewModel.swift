@@ -11,10 +11,15 @@ import Combine
 final class EventsViewModel: ObservableObject {
     // MARK: - Published parameters
     @Published var events: [EventItemModel] = []
+    @Published var selectedSegmentedControlItem = "All events"
+    @Published var shares: [ShareItemModel] = []
     
     // MARK: - Callbacks
-    var showEventDetailPage: Callback<EventItemModel>?
+    var showEventDetailPage: Callback<Int>?
     var didTapFilter: VoidCallback?
+    
+    // MARK: - Public parameters
+    let segmentedControlItems = ["All events", "Shares"]
     
     // MARK: - Private parameters
     private let apiManager: EventsApiManagerProtocol
@@ -22,7 +27,9 @@ final class EventsViewModel: ObservableObject {
     
     init(apiManager: EventsApiManagerProtocol) {
         self.apiManager = apiManager
+        
         getEvents()
+        getSharedEvents()
     }
     
     func didTapLike(event: EventItemModel, isLiked: Bool) {
@@ -45,15 +52,30 @@ final class EventsViewModel: ObservableObject {
     }
     
     func didTap(event: EventItemModel) {
-        showEventDetailPage?(event)
+        showEventDetailPage?(event.id)
     }
     
-    func refresh() {
+    func refreshEvents() {
         getEvents()
     }
     
-    private func getEvents() {
-        DispatchQueue.global().async { [weak self] in
+    func refreshShares() {
+        getSharedEvents()
+    }
+    
+    func didTapShareUser(shareModel: ShareItemModel) {
+        print("Show \(shareModel.userName) profile page")
+    }
+    
+    func didTapShareEvent(shareModel: ShareItemModel) {
+        showEventDetailPage?(shareModel.id)
+    }
+}
+
+private extension EventsViewModel {
+    func getEvents() {
+        // TODO: Change to async
+        DispatchQueue.global().sync { [weak self] in
             guard let self = self else { return }
             self.apiManager.getEvents().sink(
                 receiveCompletion: { completion in
@@ -63,6 +85,23 @@ final class EventsViewModel: ObservableObject {
                 },
                 receiveValue: { [weak self] model in
                     self?.events = model.events
+                }
+            ).store(in: &self.cancellables)
+        }
+    }
+    
+    func getSharedEvents() {
+        // TODO: Change to async
+        DispatchQueue.global().sync { [weak self] in
+            guard let self = self else { return }
+            self.apiManager.getSharedEvents().sink(
+                receiveCompletion: { completion in
+                    if case let .failure(error) = completion {
+                        print(error)
+                    }
+                },
+                receiveValue: { [weak self] response in
+                    self?.shares = response
                 }
             ).store(in: &self.cancellables)
         }

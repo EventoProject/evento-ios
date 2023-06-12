@@ -1,21 +1,17 @@
 //
-//  CommentsResponseModel.swift
+//  CommentItemModel.swift
 //  Evento
 //
-//  Created by Ramir Amrayev on 31.05.2023.
+//  Created by Ramir Amrayev on 12.06.2023.
 //
 
 import Foundation
-
-struct CommentsResponseModel: Decodable {
-    let comments: [CommentItemModel]
-}
 
 struct CommentItemModel: Decodable, Hashable {
     let userId: Int
     let name: String
     let username: String
-    let imageLink: ImageLinkModel
+    let imageLink: String
     let commentId: Int
     let createdAt: String
     let content: String

@@ -56,7 +56,7 @@ private struct CommentView: View {
     
     private var avatarNameView: some View {
         HStack {
-            AsyncAvatarImage(url: comment.imageLink.string, size: 40)
+            AsyncAvatarImage(url: comment.imageLink, size: 40)
             fullnameUsernameView
         }.padding(.bottom, 11)
     }

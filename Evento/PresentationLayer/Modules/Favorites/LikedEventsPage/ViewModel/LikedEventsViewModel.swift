@@ -13,7 +13,7 @@ final class LikedEventsViewModel: ObservableObject {
     @Published var events: [EventItemModel] = []
     
     // MARK: - Callbacks
-    var showEventDetailPage: Callback<EventItemModel>?
+    var showEventDetailPage: Callback<Int>?
     
     // MARK: - Private parameters
     private let apiManager: EventsApiManagerProtocol
@@ -44,7 +44,7 @@ final class LikedEventsViewModel: ObservableObject {
     }
     
     func didTap(event: EventItemModel) {
-        showEventDetailPage?(event)
+        showEventDetailPage?(event.id)
     }
     
     func refresh() {
@@ -60,8 +60,8 @@ final class LikedEventsViewModel: ObservableObject {
                         print(error)
                     }
                 },
-                receiveValue: { [weak self] model in
-                    self?.events = model.likedEvents
+                receiveValue: { [weak self] response in
+                    self?.events = response
                 }
             ).store(in: &self.cancellables)
         }

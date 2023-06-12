@@ -25,8 +25,8 @@ private extension EventsModuleCoordinator {
     func showEventsPage() {
         let viewModel = EventsViewModel(apiManager: injection.inject(EventsApiManagerProtocol.self))
         
-        viewModel.showEventDetailPage = { [weak self] event in
-            self?.showEventPage(event)
+        viewModel.showEventDetailPage = { [weak self] eventId in
+            self?.showEventPage(eventId: eventId)
         }
         viewModel.didTapFilter = { [weak self] in
             self?.showFilterPage()
@@ -36,8 +36,8 @@ private extension EventsModuleCoordinator {
         router.set(viewControllers: [page], animated: true)
     }
     
-    func showEventPage(_ event: EventItemModel) {
-        let coordinator = EventCoordinator(event: event, injection: injection, router: router)
+    func showEventPage(eventId: Int) {
+        let coordinator = EventCoordinator(eventId: eventId, injection: injection, router: router)
         coordinator.onFinish = { [weak self, weak coordinator] in
             self?.remove(coordinator)
             self?.onFinish?()

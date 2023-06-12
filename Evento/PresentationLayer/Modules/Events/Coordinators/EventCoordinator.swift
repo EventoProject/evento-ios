@@ -10,30 +10,30 @@ import SwiftUI
 final class EventCoordinator: BaseCoordinator {
     var onFinish: VoidCallback?
     
-    private let event: EventItemModel
+    private let eventId: Int
     
-    init(event: EventItemModel, injection: CustInjection, router: Router) {
-        self.event = event
+    init(eventId: Int, injection: CustInjection, router: Router) {
+        self.eventId = eventId
         super.init(injection: injection, router: router)
     }
     
     func start() {
-        showEventPage(event)
+        showEventPage(eventId: eventId)
     }
 }
 
 private extension EventCoordinator {
-    func showEventPage(_ event: EventItemModel) {
+    func showEventPage(eventId: Int) {
         let viewModel = EventViewModel(
-            event: event,
+            eventId: eventId,
             apiManager: injection.inject(EventsApiManagerProtocol.self)
         )
         
         viewModel.showLikesPage = { [weak self] in
-            self?.showLikesPage(eventId: event.id)
+            self?.showLikesPage(eventId: eventId)
         }
         viewModel.showCommentsPage = { [weak self] in
-            self?.showCommentsPage(eventId: event.id)
+            self?.showCommentsPage(eventId: eventId)
         }
         viewModel.showWebPage = { [weak self] args in
             self?.showWebPage(url: args.url, title: args.title)

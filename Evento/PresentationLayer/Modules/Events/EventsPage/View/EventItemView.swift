@@ -17,7 +17,7 @@ struct EventItemView: View {
             action: didTap,
             label: {
                 VStack(alignment: .leading, spacing: 0) {
-                    EventItemImage(imageUrl: event.imageLink.string)
+                    EventItemImage(imageUrl: event.imageLink)
                         .padding(.bottom, 8)
                     CustText(text: event.name, weight: .medium, size: 17)
                     LikeStackView(event: event, didTapLike: didTapLike)

@@ -11,15 +11,16 @@ import Combine
 protocol EventsApiManagerProtocol {
     func getEvents() -> AnyPublisher<EventsResponseModel, NetworkError>
     func getEvent(id: Int) -> AnyPublisher<EventResponseModel, NetworkError>
-    func getLikes(eventId: Int) -> AnyPublisher<LikesResponseModel, NetworkError>
+    func getLikes(eventId: Int) -> AnyPublisher<[LikeItemModel], NetworkError>
     func follow(isFollow: Bool, userId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func like(isLike: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func save(isSave: Bool, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func share(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
     func sendComment(text: String, eventId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
-    func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError>
+    func getComments(eventId: Int) -> AnyPublisher<[CommentItemModel], NetworkError>
     func deleteComment(commentId: Int) -> AnyPublisher<ResultResponseModel, NetworkError>
-    func getLikedEvents() -> AnyPublisher<LikedEventsResponseModel, NetworkError>
+    func getLikedEvents() -> AnyPublisher<[EventItemModel], NetworkError>
+    func getSharedEvents() -> AnyPublisher<[ShareItemModel], NetworkError>
 }
 
 final class EventsApiManager: EventsApiManagerProtocol {
@@ -37,7 +38,7 @@ final class EventsApiManager: EventsApiManagerProtocol {
         webService.request(EventsTarget.event(id: id))
     }
     
-    func getLikes(eventId: Int) -> AnyPublisher<LikesResponseModel, NetworkError> {
+    func getLikes(eventId: Int) -> AnyPublisher<[LikeItemModel], NetworkError> {
         webService.request(EventsTarget.likes(eventId: eventId))
     }
     
@@ -61,7 +62,7 @@ final class EventsApiManager: EventsApiManagerProtocol {
         webService.request(EventsTarget.sendComment(text: text, eventId: eventId))
     }
     
-    func getComments(eventId: Int) -> AnyPublisher<CommentsResponseModel, NetworkError> {
+    func getComments(eventId: Int) -> AnyPublisher<[CommentItemModel], NetworkError> {
         webService.request(EventsTarget.comments(eventId: eventId))
     }
     
@@ -69,7 +70,11 @@ final class EventsApiManager: EventsApiManagerProtocol {
         webService.request(EventsTarget.deleteComment(commentId: commentId))
     }
     
-    func getLikedEvents() -> AnyPublisher<LikedEventsResponseModel, NetworkError> {
+    func getLikedEvents() -> AnyPublisher<[EventItemModel], NetworkError> {
         webService.request(EventsTarget.likedEvents)
+    }
+    
+    func getSharedEvents() -> AnyPublisher<[ShareItemModel], NetworkError> {
+        webService.request(EventsTarget.sharedEvents)
     }
 }
