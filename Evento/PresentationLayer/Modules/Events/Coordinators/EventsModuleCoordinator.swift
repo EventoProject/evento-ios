@@ -31,6 +31,9 @@ private extension EventsModuleCoordinator {
         viewModel.didTapFilter = { [weak self] in
             self?.showFilterPage()
         }
+        viewModel.didTapNotifications = { [weak self] in
+            self?.showNotificationsPage()
+        }
         viewModel.showUserDetailPage = { [weak self] userID in
             self?.showUserProfile(id: userID)
         }
@@ -75,6 +78,13 @@ private extension EventsModuleCoordinator {
     func showFilterPage() {
         let viewModel = FilterViewModel(apiManager: injection.inject(AddApiManagerProtocol.self))
         let page = FilterHostingController(viewModel: viewModel)
+        router.push(viewController: page, animated: true)
+    }
+    
+    func showNotificationsPage() {
+        let viewModel = NotificationsViewModel(apiManager: injection.inject(EventsApiManagerProtocol.self))
+        let page = UIHostingController(rootView: NotificationsPage(viewModel: viewModel))
+        page.title = "Notifications"
         router.push(viewController: page, animated: true)
     }
 }

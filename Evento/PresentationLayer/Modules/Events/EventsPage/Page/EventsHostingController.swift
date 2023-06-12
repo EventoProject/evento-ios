@@ -87,6 +87,6 @@ private extension EventsHostingController {
     }
     
     @objc func bellButtonTapped() {
-        // Handle bell button tapped
+        viewModel.didTapNotifications?()
     }
 }

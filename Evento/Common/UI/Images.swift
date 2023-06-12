@@ -40,4 +40,5 @@ enum Images {
     static let saveFilled = UIImage(named: "save_filled") ?? UIImage()
     static let share = UIImage(named: "share") ?? UIImage()
     static let send = UIImage(named: "send") ?? UIImage()
+    static let whiteBell = UIImage(named: "white_bell") ?? UIImage()
 }
