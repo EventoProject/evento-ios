@@ -32,7 +32,19 @@ private extension ProfileModuleCoordinator {
         profileViewModel.moveToSearchPage = { [weak self] in
             self?.showSearchPage()
         }
+        profileViewModel.showEventDetailPage = { [weak self] eventId in
+            self?.showEventPage(eventId: eventId)
+        }
         router.set(viewControllers: [page], animated: true)
+    }
+    
+    func showEventPage(eventId: Int) {
+        let coordinator = EventCoordinator(eventId: eventId, injection: injection, router: router)
+        coordinator.onFinish = { [weak self, weak coordinator] in
+            self?.remove(coordinator)
+        }
+        add(coordinator)
+        coordinator.start()
     }
     func showSettingPage() {
         let viewModel = GeneralViemModel()
@@ -56,6 +68,9 @@ private extension ProfileModuleCoordinator {
         let viewModel = UserProfileViewModel(apiManager: injection.inject(ProfileApiManagerProtocol.self),eventApiManager: injection.inject(EventsApiManagerProtocol.self), chatApiManager: injection.inject(ChatApiManagerProtocol.self), id: id)
         viewModel.showChatPage = { [weak self] room in
             self?.showChatPage(chatId: room.roomID, otherUserName: room.username)
+        }
+        viewModel.showEventDetailPage={[weak self] eventId in
+            self?.showEventPage(eventId: eventId)
         }
         let page = UIHostingController(rootView: UserProfilePage(viewModel: viewModel))
         router.push(viewController: page, animated: true)

@@ -12,11 +12,13 @@ protocol ProfileApiManagerProtocol {
     func uploadProfileImage(image: UIImage, hasImage: Bool) -> AnyPublisher<UploadProfileImageResponseModel, NetworkError>
     func getProfile(id: Int) -> AnyPublisher<ProfileModel, NetworkError>
     func getMyProfile() -> AnyPublisher<MyProfileModel, NetworkError>
-//    func getSharedEvents() -> AnyPublisher<  , NetworkError>
+    func getSharedEvents() -> AnyPublisher<[ShareItemModel] , NetworkError>
+    func getUserSharedEvents(userID: Int) -> AnyPublisher<[ShareItemModel], NetworkError>
     func getUsers() -> AnyPublisher<SearchUsersResponseModel, NetworkError>
 }
 
 final class ProfileApiManager: ProfileApiManagerProtocol {
+
     func getUsers() -> AnyPublisher<SearchUsersResponseModel, NetworkError> {
         webService.request(ProfileTarget.searchUsers)
     }
@@ -38,5 +40,14 @@ final class ProfileApiManager: ProfileApiManagerProtocol {
     func getProfile(id: Int) -> AnyPublisher<ProfileModel, NetworkError> {
         webService.request(ProfileTarget.getProfile(id: id))
     }
+    
+    func getSharedEvents() -> AnyPublisher<[ShareItemModel], NetworkError> {
+        webService.request(ProfileTarget.getMySharedEvents)
+    }
+    
+    func getUserSharedEvents(userID: Int) -> AnyPublisher<[ShareItemModel], NetworkError> {
+        webService.request(ProfileTarget.getUsersSharedEvents(id: userID))
+    }
+    
 }
 

@@ -13,13 +13,15 @@ final class ProfileViewModel: ObservableObject{
     
     private let apiManager: ProfileApiManagerProtocol
     @Published var user : MyProfileModel?
-    @Published var myEvents: [EventItemModel] = []
+    @Published var shares: [ShareItemModel] = []
+    var showEventDetailPage: Callback<Int>?
+
     private var cancellables = Set<AnyCancellable>()
     var moveToSearchPage: VoidCallback?
     
     init(apiManager: ProfileApiManagerProtocol){
         self.apiManager = apiManager
-//        self.getMySharedEvents()
+        getMySharedEvents()
         getMyProfile()
     }
     func refresh(){
@@ -41,28 +43,29 @@ final class ProfileViewModel: ObservableObject{
                 },
                 receiveValue: { [weak self] model in
                     self?.user = model
-            
                 }
             ).store(in: &self.cancellables)
         }
     }
     //
-//    private func getMySharedEvents() {
-//        DispatchQueue.global().async { [weak self] in
-//            guard let self = self else { return }
-////            self.eventApiManager.getMySharedEvents().sink(
-//            self.apiManager.getMySharedEvents().sink(
-//                receiveCompletion: { completion in
-//                    if case let .failure(error) = completion {
-//                        print(error)
-//                    }
-//                },
-//                receiveValue: { [weak self] model in
-//                    self?.myevents = model.events
-//                }
-//            ).store(in: &self.cancellables)
-//        }
-//    }
+    private func getMySharedEvents() {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.apiManager.getSharedEvents().sink(
+                receiveCompletion: { completion in
+                    if case let .failure(error) = completion {
+                        print(error)
+                    }
+                },
+                receiveValue: { [weak self] model in
+                    self?.shares = model
+                }
+            ).store(in: &self.cancellables)
+        }
+    }
+    func didTapShareEvent(shareModel: ShareItemModel) {
+        showEventDetailPage?(shareModel.id)
+    }
     
     func uploadImage(image:UIImage) {
         DispatchQueue.global().async { [weak self] in

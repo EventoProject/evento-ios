@@ -22,9 +22,9 @@ final class UserProfileViewModel: ObservableObject{
     private let apiManager: ProfileApiManagerProtocol
     private let eventApiManager: EventsApiManagerProtocol
     private let chatApiManager: ChatApiManagerProtocol
-
+    var showEventDetailPage: Callback<Int>?
+    @Published var shares: [ShareItemModel] = []
     @Published var user : ProfileModel?
-    @Published var events: [EventItemModel] = []
     private var cancellables = Set<AnyCancellable>()
     var showChatPage: Callback<CreateRoomModel>?
     @Published var isLoadingButton = false
@@ -35,7 +35,7 @@ final class UserProfileViewModel: ObservableObject{
         self.id = id
         self.chatApiManager = chatApiManager
         self.eventApiManager = eventApiManager
-        getEvents()
+        getSharedEvents()
         getProfile()
     }
     
@@ -152,19 +152,23 @@ final class UserProfileViewModel: ObservableObject{
         self.getProfile()
     }
     
-    private func getEvents() {
+    private func getSharedEvents() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.eventApiManager.getEvents().sink(
+            self.apiManager.getUserSharedEvents(userID: self.id).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
                     }
                 },
                 receiveValue: { [weak self] model in
-                    self?.events = model.events
+                    self?.shares = model
                 }
             ).store(in: &self.cancellables)
         }
+    }
+    
+    func didTapShareEvent(shareModel: ShareItemModel) {
+        showEventDetailPage?(shareModel.id)
     }
 }

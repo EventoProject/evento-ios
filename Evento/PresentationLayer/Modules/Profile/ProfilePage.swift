@@ -12,53 +12,68 @@ struct ProfilePage: View {
     @ObservedObject var profileViewModel: ProfileViewModel
     @State var imagePicker : ProfileImageView
     var searchTap: VoidCallback?
-    
+    let iist:[Int] = [1,2,3,4]
     init(profileViewModel: ProfileViewModel) {
         self.profileViewModel = profileViewModel
         imagePicker = ProfileImageView(viewModel: profileViewModel)
     }
     
     var body: some View {
+        GeometryReader { geometry in
+            ScrollView {
+                    VStack(spacing: 8) {
+                        profileInfo
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .padding(.horizontal, 10)
+                        ScrollViewReader { scrollViewProxy in
+                            VStack {
+                                ForEach(0..<profileViewModel.shares.count, id: \.self) { share in
+                                    ShareItemView(
+                                        shareModel: profileViewModel.shares[share],
+                                        didTapUser: {
+                        //                    viewModel.didTapShareUser(shareModel: share)
+                                        },
+                                        didTapEvent: {
+                                            profileViewModel.didTapShareEvent(shareModel: profileViewModel.shares[share])
+                                        }
+                                    )
+                                    .foregroundColor(.black)
+                                    .frame(width: geometry.size.width-20, height: 410)
+                                    .background(Color.white)
+                                    .cornerRadius(20)
+                                    .padding(.horizontal, 10)
+                                }
+                            }
+                            .onChange(of: geometry.size, perform: { value in
+                                scrollViewProxy.scrollTo(0, anchor: .top)
+                            })
+                        }
+                    }
+            }.background(CustColor.backgroundColor)
+        }
+    }
+    
+    private var profileInfo: some View {
         VStack{
-            ZStack{
-                RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.white)
-                                .shadow(color: Color.gray.opacity(0), radius: 4, x: 0, y: 2)
-                                .padding()
-                VStack{
-                    if (profileViewModel.user.self != nil){
-                        imagePicker
-                        ProfileCardView(profileViewModel: profileViewModel)
-                    }
-                    SearchView()
-                        .padding(10)
-                        .background(Color.gray.opacity(0.2))
-                        .cornerRadius(15)
-                        .padding()
-                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
-                        .onTapGesture {
-                        profileViewModel.showSearchPage()
-                    }
-                }
+            if (profileViewModel.user.self != nil){
+                imagePicker
+                ProfileCardView(profileViewModel: profileViewModel)
             }
-            .background(CustColor.backgroundColor)
-            VStack{
-                List(profileViewModel.myEvents, id: \.self) { event in
-                    MyEventItemView(
-                        event: event
-                    )
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(CustColor.backgroundColor)
+            SearchView()
+                .padding(10)
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(15)
+                .padding()
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                .onTapGesture {
+                    profileViewModel.showSearchPage()
                 }
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .background(CustColor.backgroundColor)
-            }
-        }.refreshable {
-            profileViewModel.refresh()
         }
     }
 }
+
+
 
 struct ProfileCardView: View{
     var profileViewModel: ProfileViewModel
@@ -81,8 +96,6 @@ struct ProfileCardView: View{
                 .fixedSize(horizontal: false, vertical: true)
                 .foregroundColor(.black)
         }
-        .background(.white)
-        .cornerRadius(10)
     }
 }
 
@@ -104,7 +117,7 @@ struct MyEventItemView: View {
     let event: EventItemModel
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            EventItemImage(imageUrl: event.imageLink.string)
+            EventItemImage(imageUrl: event.imageLink)
                 .padding(.bottom, 8)
             CustText(text: event.name, weight: .medium, size: 17)
         }

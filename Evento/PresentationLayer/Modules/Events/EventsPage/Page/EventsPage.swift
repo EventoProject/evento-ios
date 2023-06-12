@@ -98,7 +98,7 @@ struct ShareItemView: View {
                 lightGrayLineView
                 eventView
             }
-        }
+        }.padding()
     }
     
     private var userHeader: some View {

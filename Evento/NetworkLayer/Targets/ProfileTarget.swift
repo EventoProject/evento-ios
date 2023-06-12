@@ -16,6 +16,7 @@ enum ProfileTarget {
     case subscribers
     case getMyProfile
     case searchUsers
+    case getMySharedEvents
 }
 
 extension ProfileTarget: EndpointProtocol {
@@ -34,13 +35,15 @@ extension ProfileTarget: EndpointProtocol {
         case .searchUsers:
             return "auth/search/users"
         case let .getUsersSharedEvents(id):
-            return "auth/shares/\(id)"
+            return "auth/shared-events/\(id)"
         case .myEvents:
             return "auth/my-events"
         case .subscribers:
             return "auth/subscribers"
         case .subscriptions:
             return "auth/subscriptions"
+        case .getMySharedEvents:
+            return "auth/shared-events"
         }
     }
     
@@ -48,7 +51,7 @@ extension ProfileTarget: EndpointProtocol {
         switch self {
         case .uploadProfileImage:
             return .post
-        case .getProfile, .getMyProfile, .searchUsers, .myEvents, .subscribers, .subscriptions, .getUsersSharedEvents:
+        case .getProfile, .getMyProfile, .searchUsers, .myEvents, .subscribers, .subscriptions, .getUsersSharedEvents, .getMySharedEvents:
             return .get
         }
     }
