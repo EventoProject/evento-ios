@@ -64,19 +64,6 @@ private struct LikeView: View {
     }
 }
 
-struct NameUsernameView: View {
-    let name: String
-    let username: String
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            CustText(text: name, weight: .regular, size: 16)
-            CustText(text: "@\(username)", weight: .regular, size: 15.5)
-                .foregroundColor(CustColor.lightGray)
-        }
-    }
-}
-
 struct LikesPage_Previews: PreviewProvider {
     static var previews: some View {
         LikesPage(

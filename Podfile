@@ -12,7 +12,6 @@ target 'Evento' do
 
   # UI
   pod 'SnapKit', '~> 5.6.0'
-  pod 'SwiftEntryKit', '0.8.2'
 
   target 'EventoTests' do
     inherit! :search_paths

@@ -43,6 +43,10 @@ final class LikedEventsViewModel: ObservableObject {
         }
     }
     
+    func didTapOrganizer(event: EventItemModel) {
+        print("Show organizer \(event.userName) profile page")
+    }
+    
     func didTap(event: EventItemModel) {
         showEventDetailPage?(event.id)
     }
