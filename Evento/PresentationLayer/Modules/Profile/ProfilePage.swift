@@ -37,13 +37,13 @@ struct ProfilePage: View {
                         .padding()
                         .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         .onTapGesture {
-                        profileViewModel.ShowSearchPage()
+                        profileViewModel.showSearchPage()
                     }
                 }
             }
             .background(CustColor.backgroundColor)
             VStack{
-                List(profileViewModel.myevents, id: \.self) { event in
+                List(profileViewModel.myEvents, id: \.self) { event in
                     MyEventItemView(
                         event: event
                     )

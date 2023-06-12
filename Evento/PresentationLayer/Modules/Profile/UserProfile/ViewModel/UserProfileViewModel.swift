@@ -12,16 +12,12 @@ import Combine
 struct CreateRoomModel{
     let roomID: String
     let username: String
-    init(roomID: String, username: String) {
-        self.roomID = roomID
-        self.username = username
-    }
 }
 
 
 final class UserProfileViewModel: ObservableObject{
     
-    let id: Int?
+    private let id: Int
     var myID: Int = 0
     private let apiManager: ProfileApiManagerProtocol
     private let eventApiManager: EventsApiManagerProtocol
@@ -39,22 +35,22 @@ final class UserProfileViewModel: ObservableObject{
         self.id = id
         self.chatApiManager = chatApiManager
         self.eventApiManager = eventApiManager
-        self.getEvents()
-        self.getProfile()
+        getEvents()
+        getProfile()
     }
     
     func createRoom(){
         DispatchQueue.global().async {
             [weak self] in
-            guard let self = self else {return}
-            self.chatApiManager.createRoom(userID: self.id!).sink(receiveCompletion: {
+            guard let self = self, let user = self.user else {return}
+            self.chatApiManager.createRoom(userID: self.id).sink(receiveCompletion: {
                 completion in
                 if case let .failure(error) = completion{
                     print(error)
                 }
                 self.isLoadingButton = false
             }, receiveValue: {[weak self] model in
-                let roomModel = CreateRoomModel(roomID: model.chatRoomId, username: (self?.user!.name)!)
+                let roomModel = CreateRoomModel(roomID: model.chatRoomId, username: user.name)
                 self?.showChatPage?(roomModel)
             }).store(in: &self.cancellables)
         }
@@ -62,15 +58,15 @@ final class UserProfileViewModel: ObservableObject{
     
     func restoreRoom(id: String){
         DispatchQueue.global().async { [weak self] in
-            guard let self = self else {return}
-            self.chatApiManager.restoreRoom(userID: self.id!).sink(receiveCompletion: {
+            guard let self = self, let user = self.user else {return}
+            self.chatApiManager.restoreRoom(userID: self.id).sink(receiveCompletion: {
                 completion in
                 if case let .failure(error) = completion{
                     print(error)
                 }
                 self.isLoadingButton = false
             }, receiveValue: {[weak self] model in
-                let roomModel = CreateRoomModel(roomID: id, username: (self?.user!.name)!)
+                let roomModel = CreateRoomModel(roomID: id, username: user.name)
                 self?.showChatPage?(roomModel)
             }).store(in: &self.cancellables)
         }
@@ -78,7 +74,8 @@ final class UserProfileViewModel: ObservableObject{
     
     func joinRoom(id: String){
         self.isLoadingButton = false
-        let roomModel = CreateRoomModel(roomID: id, username: (user!.name))
+        guard let user = self.user else {return}
+        let roomModel = CreateRoomModel(roomID: id, username: (user.name))
         showChatPage?(roomModel)
     }
     
@@ -89,20 +86,21 @@ final class UserProfileViewModel: ObservableObject{
             guard let self = self else {
                 return
             }
-            self.chatApiManager.checkChatRoomExists(userID: self.id!).sink(receiveCompletion: {
+            self.chatApiManager.checkChatRoomExists(userID: self.id).sink(receiveCompletion: {
                 completion in
+                
                 if case let .failure(error) = completion{
                     print(error)
                 }
             }, receiveValue: {[weak self] model in
-                if model.existsInDb == false && model.existsInWs == false{
+                if model.existsInDb {
+                    if model.existsInWs {
+                        self?.joinRoom(id: model.chatRoomId)
+                    } else {
+                        self?.restoreRoom(id: model.chatRoomId)
+                    }
+                } else {
                     self?.createRoom()
-                }
-                else if model.existsInDb == true && model.existsInWs == false{
-                    self?.restoreRoom(id: model.chatRoomId)
-                }
-                else if model.existsInDb == true && model.existsInWs == true{
-                    self?.joinRoom(id: model.chatRoomId)
                 }
             }).store(in: &self.cancellables)
         }
@@ -111,7 +109,7 @@ final class UserProfileViewModel: ObservableObject{
     func getProfile() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.apiManager.getProfile(id: self.id!).sink(
+            self.apiManager.getProfile(id: self.id).sink(
                 receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print("something wrong \(error)")
@@ -139,10 +137,9 @@ final class UserProfileViewModel: ObservableObject{
     
     func didTapFollow() {
         DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-            guard case self.user = self.user else { return }
-            self.eventApiManager.follow(isFollow: !(self.user!.following), userId: self.id!).sink(
-                receiveCompletion: { [weak self] completion in
+            guard let self = self, let user = self.user else { return }
+            self.eventApiManager.follow(isFollow: user.following, userId: self.id).sink(
+                receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
                     }

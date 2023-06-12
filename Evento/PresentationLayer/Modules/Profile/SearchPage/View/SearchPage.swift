@@ -44,9 +44,6 @@ struct SearchPage: View {
 
 private struct SearchUserView: View {
     let user: SearchUserModel
-    init(user: SearchUserModel) {
-        self.user = user
-    }
     var body: some View {
         HStack(spacing: 13) {
             AsyncAvatarImage(url: user.imageLink, size: 60)

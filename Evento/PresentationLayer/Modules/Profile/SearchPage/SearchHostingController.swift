@@ -29,8 +29,7 @@ final class SearchHostingController: UIHostingController<SearchPage> {
         return searchBar
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
         setup()
     }
 }
@@ -58,15 +57,8 @@ extension SearchHostingController: UISearchBarDelegate {
 
 private extension SearchHostingController {
     func setup() {
-//        navigationController?.navigationBar.prefersLargeTitles = true
         let custCgColor = CustColor.purple.cgColor ?? UIColor.purple.cgColor
         navigationController?.navigationBar.tintColor = UIColor(cgColor: custCgColor)
         navigationController?.navigationBar.backgroundColor = .white
-        // Set the search bar as the title view of the navigation controller
-//        navigationItem.titleView = searchBar
-        
-        // For showing filter button
-//        searchBar.searchTextField.rightViewMode = .always
-        
     }
 }

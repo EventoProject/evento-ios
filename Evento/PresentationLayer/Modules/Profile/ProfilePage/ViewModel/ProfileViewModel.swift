@@ -13,21 +13,21 @@ final class ProfileViewModel: ObservableObject{
     
     private let apiManager: ProfileApiManagerProtocol
     @Published var user : MyProfileModel?
-    @Published var myevents: [EventItemModel] = []
+    @Published var myEvents: [EventItemModel] = []
     private var cancellables = Set<AnyCancellable>()
-    var showSearchPage: VoidCallback?
+    var moveToSearchPage: VoidCallback?
     
     init(apiManager: ProfileApiManagerProtocol){
         self.apiManager = apiManager
 //        self.getMySharedEvents()
-        self.getMyProfile()
+        getMyProfile()
     }
     func refresh(){
-        self.getMyProfile()
+        getMyProfile()
     }
     
-    func ShowSearchPage(){
-        showSearchPage?()
+    func showSearchPage(){
+        moveToSearchPage?()
     }
     
     func getMyProfile() {
@@ -66,9 +66,9 @@ final class ProfileViewModel: ObservableObject{
     
     func uploadImage(image:UIImage) {
         DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-            self.apiManager.uploadProfileImage(image: image, hasImage: (self.user?.imageLink.isEmpty)!).sink(
-                receiveCompletion: { [weak self] completion in
+            guard let self = self, let user = self.user else { return }
+            self.apiManager.uploadProfileImage(image: image, hasImage: !user.imageLink.isEmpty).sink(
+                receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         print(error)
                     }

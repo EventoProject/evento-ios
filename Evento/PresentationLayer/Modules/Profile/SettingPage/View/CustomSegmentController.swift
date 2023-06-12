@@ -21,7 +21,7 @@ struct CustomSegmentController: View {
                             .stroke(CustLinearGradient, lineWidth: 1)
                         )
                 HStack {
-                    ForEach(0..<2) { index in
+                    ForEach(0..<segments.count) { index in
                         Button(action: {
                             selectedSegmentIndex = index
                         }) {

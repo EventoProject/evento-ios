@@ -29,7 +29,7 @@ private extension ProfileModuleCoordinator {
         page.didBell = {[weak self] in
             self?.showSettingPage()
         }
-        profileViewModel.showSearchPage = { [weak self] in
+        profileViewModel.moveToSearchPage = { [weak self] in
             self?.showSearchPage()
         }
         router.set(viewControllers: [page], animated: true)
